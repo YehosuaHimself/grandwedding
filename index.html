@@ -1350,6 +1350,185 @@ img,svg,video,iframe{max-width:100%;height:auto}
   .vc-sn{font-size:1.45rem!important}
 }
 
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ROUND 2 — CONTRAST · PREMIUM POLISH · MOBILE STABILITY
+═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Hard-stop horizontal scroll on every viewport, every section ── */
+html,body{max-width:100vw!important;overflow-x:hidden!important}
+body *{max-width:100%}
+img,svg,video,iframe,canvas{max-width:100%;height:auto}
+section,.cs,.gsec,.gsec-warm,.gsec-light,.gsec-cream,.gsec-dark,.umi,.cnav,.gnav,.cftr{max-width:100vw;overflow-x:clip}
+/* Anything absolutely positioned outside the viewport gets clipped, not scrolled */
+.hero-atm,.hero-atm::before,.hero-atm::after,.gsec-dark::before,.gsec-dark::after,.gsec-light::before,.gsec-cream::before,.g-hero::before,.g-hero::after{contain:layout paint!important}
+/* Lock html during initial layout — eliminates the "shift while loading" effect */
+html{scroll-behavior:smooth}
+
+/* ── 2. UN PICCOLO MIRACOLO interludes — navy on every variant, real weight ── */
+.umi-inner{color:#1F2A47!important;font-weight:400!important;text-shadow:0 1px 0 rgba(255,255,255,.4)}
+.umi.dark .umi-inner{color:#1F2A47!important;text-shadow:0 1px 0 rgba(255,255,255,.5)}
+.umi-tag{color:#8B6914!important;font-weight:600!important;letter-spacing:.42em!important}
+.umi.dark .umi-tag{color:#8B6914!important}
+.umi-mono{color:#C9A84C!important;opacity:1!important}
+/* Subtle decorative frame so the interlude reads as a deliberate quotation, not body copy */
+.umi{position:relative;padding-top:80px!important;padding-bottom:80px!important}
+.umi::before,.umi::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:48px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.55),transparent)}
+.umi::before{top:38px}
+.umi::after{bottom:38px}
+
+/* ── 3. PROGRAMME date strip — premium card, not a bar ── */
+.prog-day{margin:0 auto 56px!important}
+.prog-day:not(:first-child){margin-top:64px!important;margin-bottom:48px!important}
+.prog-day > div{padding:0 18px!important;background:transparent!important}
+.prog-day-l{
+  position:relative;
+  font-family:'Cormorant Garamond',serif!important;
+  font-style:italic!important;
+  text-transform:none!important;
+  font-size:1.15rem!important;
+  letter-spacing:.06em!important;
+  color:#8B6914!important;
+  padding:18px 36px!important;
+  border:none!important;
+  background:linear-gradient(180deg,#FBF8F1 0%,#F4EFE0 100%)!important;
+  box-shadow:0 6px 24px rgba(44,36,22,.08),inset 0 0 0 1px rgba(201,168,76,.28)!important;
+  display:inline-block!important;
+}
+.prog-day-l::before,.prog-day-l::after{
+  content:'';position:absolute;width:14px;height:14px;border:1.5px solid var(--g);
+}
+.prog-day-l::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+.prog-day-l::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+/* Small uppercase eyebrow above the date for hierarchy */
+.prog-day > div::before{
+  content:'The Day';display:block;text-align:center;
+  font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.5em;text-transform:uppercase;
+  color:rgba(139,105,20,.62);margin-bottom:14px
+}
+.prog-day:nth-of-type(2) > div::before{content:'The Morning After'}
+.prog-line{background:linear-gradient(180deg,transparent,rgba(201,168,76,.45) 6%,rgba(201,168,76,.25) 50%,rgba(201,168,76,.45) 94%,transparent)!important}
+@media (max-width:680px){
+  .prog-day-l{font-size:.95rem!important;padding:14px 24px!important;letter-spacing:.04em!important}
+  .prog-day > div::before{font-size:.45rem!important;letter-spacing:.4em!important;margin-bottom:10px!important}
+}
+
+/* ── 4. COLOUR PALETTE SUGGESTION cards (both inline-styled blocks) ── */
+/* Target the visually-thin border + faint label pattern from the dress-code page */
+div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]{
+  border:1px solid rgba(201,168,76,.42)!important;
+  background:linear-gradient(155deg,rgba(255,254,249,.85) 0%,rgba(245,239,224,.65) 100%)!important;
+  box-shadow:0 8px 28px rgba(44,36,22,.08),inset 0 0 0 1px rgba(255,255,255,.5)!important;
+  padding:36px 40px!important;
+  position:relative;
+}
+div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]::before,
+div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]::after{
+  content:'';position:absolute;width:18px;height:18px;border:1.5px solid var(--g);pointer-events:none
+}
+div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+/* Bigger / sharper label */
+div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"] > div > div[style*="font-family:'Cinzel'"]{
+  font-size:.62rem!important;color:#8B6914!important;letter-spacing:.34em!important;font-weight:600!important;
+}
+/* Higher-contrast paragraph */
+div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"] > div > p{
+  color:#1F2A47!important;font-size:.82rem!important;line-height:1.85!important;font-weight:400!important;
+}
+/* Larger swatches with stronger borders */
+div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"] > div:last-child > div{
+  width:38px!important;height:38px!important;border:2px solid rgba(255,255,255,.85)!important;
+  box-shadow:0 4px 14px rgba(44,36,22,.18)!important;
+}
+
+/* ── Vision page palette labels (.vpl) — boost contrast ── */
+.vpl{color:#1F2A47!important;font-weight:600!important;font-size:.58rem!important;letter-spacing:.16em!important}
+
+/* ── 5. NAV ACTIVE STATE polish — precise highlight, no ghost selections ── */
+.gnav ul a{transition:color .35s var(--ease)!important}
+.gnav ul a.active,
+.gnav ul a[aria-current="true"]{color:var(--g)!important;text-shadow:0 0 14px rgba(201,168,76,.45)!important}
+.gnav ul a.active::after,
+.gnav ul a[aria-current="true"]::after{width:100%!important}
+.gnav.sc ul a.active,
+.gnav.sc ul a[aria-current="true"]{color:var(--g)!important}
+/* Kill any inline color set by old scrollspy */
+.gnav ul a:not(.active):not([aria-current="true"]){color:rgba(245,238,210,.88)!important}
+.gnav.sc ul a:not(.active):not([aria-current="true"]){color:var(--mid)!important}
+
+/* ── 6. RSVP BOX — premium upgrade ── */
+.rsvp-box{
+  border:1px solid rgba(201,168,76,.32)!important;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%,rgba(201,168,76,.06) 0%,transparent 60%),
+    radial-gradient(ellipse 80% 40% at 50% 100%,rgba(201,168,76,.04) 0%,transparent 60%),
+    linear-gradient(165deg,#FFFEF9 0%,#FBF7EE 100%)!important;
+  box-shadow:0 30px 90px rgba(44,36,22,.18),0 1px 0 rgba(255,255,255,.7) inset,inset 0 0 100px rgba(201,168,76,.04)!important;
+  position:relative!important;
+}
+/* Gold corner ornaments */
+.rsvp-box::before,.rsvp-box::after,
+.rsvp-tc,.rsvp-bc{content:'';position:absolute;width:32px;height:32px;border-color:rgba(201,168,76,.6);border-style:solid;pointer-events:none;z-index:2}
+.rsvp-box::before{top:-1px;left:-1px;border-width:2px 0 0 2px}
+.rsvp-box::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+/* Inner gold sparkle line at top */
+.rsvp-box .rsvp-step.active::before{
+  content:'';display:block;width:60px;height:1px;margin:0 auto 18px;
+  background:linear-gradient(90deg,transparent,var(--g),transparent);opacity:.7;
+}
+/* Each option card a touch more luxe */
+.rsvp-opt{transition:all .4s var(--ease)!important}
+.rsvp-opt:hover{transform:translateY(-2px)!important;box-shadow:0 8px 22px rgba(201,168,76,.18)!important;border-color:var(--g)!important}
+
+/* ── 7. CLIENT HERO — sharper, less veiled ── */
+.hero-atm.hero-host-bg{
+  background:
+    linear-gradient(170deg,rgba(7,5,3,.32) 0%,rgba(11,9,7,.10) 38%,rgba(14,12,9,.18) 70%,rgba(7,5,3,.55) 100%),
+    url('c115.webp') center 42%/cover no-repeat #0a0805!important;
+  filter:none!important;
+  image-rendering:auto!important;
+}
+.c-hero::after{
+  background:radial-gradient(ellipse 95% 65% at 50% 50%,transparent 0%,rgba(7,5,3,.18) 70%,rgba(7,5,3,.55) 100%)!important
+}
+/* Add a subtle vignette only at the bottom edge for legible text */
+.c-hero::before{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:55%;
+  background:linear-gradient(180deg,transparent 0%,rgba(7,5,3,.55) 100%);
+  z-index:1;pointer-events:none
+}
+
+/* ── 8. YEHOSUA signature — Cinzel caps, not italic Cormorant ── */
+.pi-sig{
+  font-family:'Cinzel',serif!important;
+  font-style:normal!important;
+  font-weight:500!important;
+  letter-spacing:.32em!important;
+  font-size:1.5rem!important;
+  text-transform:uppercase;
+}
+@media (max-width:680px){
+  .pi-sig{font-size:1.15rem!important;letter-spacing:.28em!important}
+}
+
+/* ── 9. MOBILE STABILITY — no layout shift after first paint ── */
+@media (max-width:880px){
+  /* Reserve real estate for the fixed nav so content never jumps under it */
+  body{padding-top:0!important}
+  .c-hero,.g-hero{padding-top:64px!important}
+  /* Star-field pseudo-elements were 2000+ px wide → forced horizontal scroll on phones */
+  .gsec-light::before,.gsec-cream::before,.gsec-dark::before,.gsec-dark::after,
+  .g-hero::before,.g-hero::after{
+    width:1px!important;height:1px!important;
+    box-shadow:none!important;
+    display:none!important
+  }
+  /* The umi gold underline gets in the way of mobile gutters */
+  .umi::before,.umi::after{width:36px}
+}
+
 /* Touch-target hardening — make small buttons/links tappable */
 @media (hover:none) and (pointer:coarse){
   a,button,.gbtn,.pbtn,.lbtn,.inv-act-btn,.map-link,.rsvp-opt,.cno,.gnav-exit,.gnav-burger,.pso{
@@ -4014,22 +4193,38 @@ function initGuest(){
   const gnav = document.getElementById('gnav');
   window.addEventListener('scroll', ()=>{ gnav.classList.toggle('sc', window.scrollY > 60); }, {passive:true});
   
-  // Highlight active nav section
+  // Highlight active nav section — nearest-to-viewport-top wins (deterministic)
   const gSections = ['g-inv','g-concept','g-gallery','g-program','g-culinary','g-dress','g-music','g-travel','g-rsvp'];
   const gNavLinks = document.querySelectorAll('.gnav ul a');
-  const gSecObs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        const id = e.target.id;
-        const idx = gSections.indexOf(id);
-        gNavLinks.forEach((l,i)=>{
-          if(i===idx) l.style.color='var(--g)';
-          else l.style.color='';
-        });
+  let gActiveIdx = -1;
+  function gSyncNav(){
+    const probe = window.innerHeight * 0.30;  // 30% down from the top of the viewport
+    let bestIdx = -1, bestDist = Infinity;
+    gSections.forEach((id, i)=>{
+      const el = document.getElementById(id);
+      if(!el) return;
+      const r = el.getBoundingClientRect();
+      // section must intersect the probe line OR be the closest above it
+      if(r.top <= probe && r.bottom > probe){
+        const dist = Math.abs(r.top - probe);
+        if(dist < bestDist){ bestDist = dist; bestIdx = i; }
       }
     });
-  },{threshold:.35});
-  gSections.forEach(id=>{const el=document.getElementById(id);if(el)gSecObs.observe(el);});
+    if(bestIdx === gActiveIdx) return;
+    gActiveIdx = bestIdx;
+    gNavLinks.forEach((l, i)=>{
+      l.style.color = '';  // wipe any old inline color
+      if(i === bestIdx){ l.classList.add('active'); l.setAttribute('aria-current','true'); }
+      else            { l.classList.remove('active'); l.removeAttribute('aria-current'); }
+    });
+  }
+  let gScrollRaf = 0;
+  window.addEventListener('scroll', ()=>{
+    if(gScrollRaf) return;
+    gScrollRaf = requestAnimationFrame(()=>{ gScrollRaf = 0; gSyncNav(); });
+  }, {passive:true});
+  window.addEventListener('resize', gSyncNav, {passive:true});
+  setTimeout(gSyncNav, 100);
 
   // Guest scroll reveal
   const obs = new IntersectionObserver(entries=>{
