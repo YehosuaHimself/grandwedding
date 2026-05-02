@@ -1529,6 +1529,47 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"] >
   .umi::before,.umi::after{width:36px}
 }
 
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CUSTOM CURSOR — desktop, every page, every element
+   The dot + lagging ring must be the ONLY cursor on hover/fine pointers.
+   This block sits last so it wins the cascade against any earlier
+   cursor:pointer / cursor:text / cursor:auto rule (including inline styles
+   that don't carry !important).
+═══════════════════════════════════════════════════════════════════════ */
+@media (hover:hover) and (pointer:fine){
+  html, body,
+  *, *::before, *::after,
+  a, button, label, summary,
+  input, textarea, select, option,
+  [contenteditable], [contenteditable="true"],
+  [role], [onclick], [tabindex],
+  iframe, video, audio, canvas, svg, img,
+  .gnav ul a, .map-link, .rsvp-opt,
+  input[type="text"], input[type="email"], input[type="password"],
+  input[type="number"], input[type="search"], input[type="tel"],
+  input[type="url"], input[type="date"], input[type="time"],
+  input[type="checkbox"], input[type="radio"], input[type="file"],
+  input[type="submit"], input[type="button"], input[type="reset"]
+  { cursor:none !important }
+
+  /* The dot and ring themselves must always be on top of every overlay
+     (modals, lightbox, login backdrop, planner sidebar, etc.) */
+  #cd, #cr{
+    display:block !important;
+    pointer-events:none !important;
+    z-index:2147483647 !important;       /* max int — beats every modal */
+  }
+  /* Keep the ring above the dot's z-index neighbour but the dot above the ring */
+  #cr{ z-index:2147483646 !important }
+}
+
+/* Touch devices keep the native cursor (no custom one even hidden) */
+@media (hover:none),(pointer:coarse){
+  #cd, #cr{ display:none !important }
+}
+
 /* Touch-target hardening — make small buttons/links tappable */
 @media (hover:none) and (pointer:coarse){
   a,button,.gbtn,.pbtn,.lbtn,.inv-act-btn,.map-link,.rsvp-opt,.cno,.gnav-exit,.gnav-burger,.pso{
