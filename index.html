@@ -15,8 +15,7 @@
   --ease:cubic-bezier(.22,1,.36,1);--ease2:cubic-bezier(.4,0,.2,1);--nb:#1A2744;--nbl:#243660;--nbm:#2E4070;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+html{scroll-behavior:auto} /* Lenis library handles smoothness — native smooth-scroll fights it */
 body{font-family:'Montserrat',sans-serif;background:var(--iv);color:var(--dk2);overflow-x:hidden;cursor:none}
 *,*::before,*::after{cursor:none!important}
 h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
