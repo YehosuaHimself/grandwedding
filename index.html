@@ -1997,6 +1997,54 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]{
   #cnav-backdrop.open{ opacity:1; pointer-events:auto; }
 }
 
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ROUND 9 — particles only in the margins, never on cards/letters
+   The fix: lift every content card to z-index:3, leave canvas at z-index:1.
+   Fixed canvas paints between body background and content. Particles
+   become visible only in the open background space — where they belong.
+═══════════════════════════════════════════════════════════════════════ */
+
+/* Canvas drops to a layer just above body bg, below all content */
+#pc{
+  position:fixed !important;
+  inset:0 !important;
+  z-index:1 !important;
+  pointer-events:none !important;
+  opacity:0;                  /* starts hidden — JS fades in over dark sections */
+  transition:opacity .65s cubic-bezier(.22,1,.36,1) !important;
+}
+#pc.pc-on{ opacity:.9 !important }
+
+/* Lift every actual content surface above the canvas. Sections + every
+   card-like wrapper get position:relative + z-index:3. Particles can no
+   longer land on a letter, an envelope, an RSVP option, a music card. */
+section, footer,
+.inv-wrap, .inv-env,
+.pmsg-box,
+.rsvp-box, .rsvp-opt,
+.sc-card, .mus-card, .trav-card,
+.vc, .cul-course, .wine-card,
+.gal-p, .mc, .vw, .vps,
+.kcard, .map-box,
+.umi, .umi-inner,
+.pi-stats > div,
+.cf-lg, .cf-ct{
+  position:relative;
+  z-index:3;
+}
+
+/* Nav sits above everything (with backdrop above it on mobile) */
+.cnav, .gnav{ z-index:100 !important; }
+
+/* Hero-atm with the photograph background also lifts above canvas so the
+   particles don't draw on top of the castle photo either */
+.hero-atm, .hero-atm.hero-host-bg{ z-index:0; }
+
+/* Modals / lightboxes / login still wrap the canvas */
+#login-page, #glb, .mo, .notif{ z-index:1000; }
+
 /* ═══════════════════════════════════════════════════════════════════════
    CUSTOM CURSOR — desktop, every page, every element
    The dot + lagging ring must be the ONLY cursor on hover/fine pointers.
@@ -4015,6 +4063,37 @@ const _curObs=new MutationObserver(()=>bindCursorHover());
 _curObs.observe(document.body,{childList:true,subtree:true});
 
 
+
+/* ═══════════════ Particle visibility — only over dark sections ═══════════════ */
+(function(){
+  // Sections where the warm gold orbs read beautifully (photo / dark bg)
+  // Light sections (invitation, dress, travel, etc.) keep the canvas transparent
+  // so particles never appear as dust over the cream parchment.
+  const DARK_SEL = [
+    '.c-hero','.g-hero',
+    '.gsec-dark','.gsec-warm',
+    '#g-culinary','#g-chapel','#g-message',
+    'footer',
+  ].join(',');
+  let raf = 0;
+  function syncParticles(){
+    const canvas = document.getElementById('pc');
+    if(!canvas) return;
+    const probe = window.innerHeight * 0.5;
+    let onDark = false;
+    document.querySelectorAll(DARK_SEL).forEach(el=>{
+      const r = el.getBoundingClientRect();
+      if(r.top <= probe && r.bottom >= probe){ onDark = true; }
+    });
+    canvas.classList.toggle('pc-on', onDark);
+  }
+  function tick(){ if(raf) return; raf = requestAnimationFrame(()=>{raf=0; syncParticles();}); }
+  window.addEventListener('scroll', tick, {passive:true});
+  window.addEventListener('resize', tick, {passive:true});
+  document.addEventListener('DOMContentLoaded', ()=>setTimeout(syncParticles,50));
+  setTimeout(syncParticles, 400);  // again after Lenis init
+})();
+
 /* ═══════════════ UMI rule-line injector (round-3) ═══════════════ */
 document.addEventListener('DOMContentLoaded', function(){
   document.querySelectorAll('.umi').forEach(function(u){
@@ -4033,7 +4112,7 @@ let W,H,particles=[],dpr=Math.max(1,Math.min(window.devicePixelRatio||1,2));
 const mouse={x:-9999,y:-9999,active:false};
 const isTouch=window.matchMedia('(hover:none),(pointer:coarse)').matches;
 // fewer particles on touch / smaller screens for performance and elegance
-const N_PARTICLES = isTouch ? 22 : (window.innerWidth < 900 ? 32 : 48);
+const N_PARTICLES = isTouch ? 14 : (window.innerWidth < 900 ? 20 : 32);
 
 function resizeCanvas(){
   W=window.innerWidth; H=window.innerHeight;
@@ -4054,11 +4133,11 @@ class Particle{
     // very gentle ambient drift (was .18 — halved)
     this.vx = (Math.random()-.5)*.08;
     this.vy = (Math.random()-.5)*.08;
-    // size + glow — slightly larger so they read on cream
-    this.r  = Math.random()*1.8 + 1.0;      // 1.0 – 2.8
-    this.glow = this.r * 4 + Math.random()*5;
-    // twinkle
-    this.baseA = Math.random()*.45 + .35;   // 0.35 – 0.80
+    // size + glow — small and elegant, reads as ambient atmosphere
+    this.r  = Math.random()*1.0 + .5;       // 0.5 – 1.5
+    this.glow = this.r * 3 + Math.random()*3;
+    // twinkle (lower base alpha — atmospheric, not eye-catching)
+    this.baseA = Math.random()*.30 + .15;   // 0.15 – 0.45
     this.tw   = Math.random()*Math.PI*2;
     this.tws  = (Math.random()*.5+.35)*.018;
   }
