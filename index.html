@@ -648,6 +648,8 @@ tbody tr:last-child td{border-bottom:none}
 .prog-d{font-size:.7rem;color:var(--lt);line-height:1.7}
 /* Culinary */
 .cul-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:52px}
+@media(max-width:980px){.cul-grid{grid-template-columns:repeat(2,1fr);gap:0}.cul-course{border-right:none!important;border-bottom:1px solid rgba(201,168,76,.1)}.cul-course:nth-child(odd){border-right:1px solid rgba(201,168,76,.1)!important}}
+@media(max-width:560px){.cul-grid{grid-template-columns:1fr}.cul-course:nth-child(odd){border-right:none!important}.cul-course{padding:24px 20px}}
 .cul-course{padding:28px 20px;border-right:1px solid rgba(201,168,76,.1);text-align:center;position:relative;overflow:hidden;transition:background .4s var(--ease)}
 .cul-course:last-child{border-right:none}
 .cul-course::before{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--g);transition:width .4s var(--ease)}
@@ -663,6 +665,8 @@ tbody tr:last-child td{border-bottom:none}
 .wine-card:hover{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.04);transform:translateY(-2px)}
 /* Music */
 .mus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+@media(max-width:880px){.mus-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
+@media(max-width:560px){.mus-grid{grid-template-columns:1fr}}
 .mus-card{padding:28px 24px;border:1px solid rgba(201,168,76,.1);background:rgba(201,168,76,.02);position:relative;overflow:hidden;transition:all .4s var(--ease)}
 .mus-card:hover{border-color:rgba(201,168,76,.28);background:rgba(201,168,76,.035);transform:translateY(-3px);box-shadow:0 12px 40px rgba(44,36,22,.12)}
 .mus-phase{font-size:.52rem;letter-spacing:.36em;text-transform:uppercase;color:var(--g);display:block;margin-bottom:10px}
@@ -674,6 +678,7 @@ tbody tr:last-child td{border-bottom:none}
 .mus-card:hover .wave-bar{background:rgba(201,168,76,.65)}
 /* Travel */
 .trav-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+@media(max-width:880px){.trav-grid{grid-template-columns:1fr;gap:14px}}
 .trav-card{padding:28px 24px;border:1px solid rgba(201,168,76,.09);background:var(--w);transition:all .3s var(--ease)}
 .trav-card:hover{border-color:rgba(201,168,76,.22);transform:translateY(-2px);box-shadow:0 8px 28px rgba(44,36,22,.07)}
 .trav-icon{color:var(--g);margin-bottom:14px}
