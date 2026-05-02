@@ -1527,6 +1527,159 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"] >
 
 
 
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ROUND 3 — readability · premium hovers · particles · image swaps
+═══════════════════════════════════════════════════════════════════════ */
+
+/* 1. Brighten Print / Save invitation buttons (was 50% opacity gold) */
+.inv-act-btn{
+  color:var(--g)!important;
+  border:1.5px solid rgba(201,168,76,.55)!important;
+  background:rgba(201,168,76,.04)!important;
+  font-weight:600!important;
+}
+.inv-act-btn:hover{
+  color:#FFFEF9!important;
+  background:var(--g)!important;
+  border-color:var(--g)!important;
+  box-shadow:0 8px 24px rgba(201,168,76,.30)!important;
+}
+.inv-act-btn svg{stroke:currentColor;color:currentColor}
+
+/* 2. Replace decorative starfield pseudo-elements (the 2700px box-shadow grids)
+      with the cleaner #pc canvas particle system. Hide these on every viewport. */
+.gsec-light::before,.gsec-cream::before,.gsec-dark::before,.gsec-dark::after,
+.g-hero::before,.g-hero::after,
+.umi::before,.umi::after{
+  display:none!important
+}
+/* But keep our deliberate gold rules (added in round 2) above the umi interlude */
+.umi-tag::before, .umi-tag::after{display:none!important}
+/* Make the canvas particle layer subtle — reduce opacity slightly */
+#pc{opacity:.55!important;mix-blend-mode:screen}
+
+/* 3. PREMIUM HOVER — unified luxury treatment for every "card" surface */
+.sc-card,.mus-card,.trav-card,.vc,.vw,.kcard,.mc,.gal-p,.cul-course,.wine-card,.vf,.rsvp-opt,
+.gate-inset,.venue-visual,.pi-stats > div,
+div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]{
+  transition:transform .55s var(--ease),box-shadow .55s var(--ease),
+             border-color .55s var(--ease),background .55s var(--ease)!important;
+  position:relative;
+}
+/* Unified gold-glow hover — works on light cards */
+.sc-card:hover,.mus-card:hover,.trav-card:hover,.vw:hover,
+.vf:hover,.rsvp-opt:hover{
+  transform:translateY(-3px) scale(1.005);
+  box-shadow:0 18px 48px rgba(44,36,22,.12),
+             0 0 0 1px rgba(201,168,76,.45),
+             0 0 24px rgba(201,168,76,.10);
+  border-color:var(--g)!important;
+}
+/* Dark-section cards keep the lift but use a warmer glow */
+#g-culinary .cul-course:hover,
+#g-culinary .wine-card:hover,
+#g-venue .vc:hover,
+.gsec-dark .vw:hover{
+  transform:translateY(-3px);
+  box-shadow:0 18px 48px rgba(0,0,0,.4),
+             0 0 0 1px rgba(201,168,76,.55),
+             0 0 28px rgba(201,168,76,.18);
+}
+/* Gold corner glyphs reveal on hover for the most prominent cards */
+.sc-card::before,.sc-card::after,
+.mus-card::before,.mus-card::after,
+.trav-card::before,.trav-card::after{
+  content:'';position:absolute;width:14px;height:14px;border:1.5px solid var(--g);
+  opacity:0;transition:opacity .4s var(--ease),transform .4s var(--ease);
+  pointer-events:none;
+}
+.sc-card::before,.mus-card::before,.trav-card::before{
+  top:8px;left:8px;border-right:none;border-bottom:none;transform:translate(-4px,-4px);
+}
+.sc-card::after,.mus-card::after,.trav-card::after{
+  bottom:8px;right:8px;border-left:none;border-top:none;transform:translate(4px,4px);
+}
+.sc-card:hover::before,.sc-card:hover::after,
+.mus-card:hover::before,.mus-card:hover::after,
+.trav-card:hover::before,.trav-card:hover::after{
+  opacity:.7;transform:translate(0,0);
+}
+
+/* 4. CULINARY — swap the cellar bg for the frescoed loggia (long-table feel) */
+#g-culinary{background:
+  linear-gradient(155deg,rgba(10,7,4,.74) 0%,rgba(20,12,4,.74) 100%),
+  url('c192.webp') center 38%/cover no-repeat!important}
+
+/* 5. DRESS — same image, but a deeper veil so it contrasts the next section */
+#g-dress{background:
+  linear-gradient(rgba(232,225,210,.72),rgba(218,208,188,.78)),
+  url('c186.webp') center 38%/cover no-repeat!important}
+
+/* 6. MUSIC — fresher hall image (Il Salone moves out, La Loggia mood-piece in) */
+#g-music{background:
+  linear-gradient(rgba(248,244,236,.86),rgba(245,240,228,.92)),
+  url('c168.webp') center 35%/cover no-repeat!important}
+
+/* 7. CLIENT HERO — sharper / more dramatic shot (the great gate) */
+.hero-atm.hero-host-bg{
+  background:
+    linear-gradient(170deg,rgba(7,5,3,.30) 0%,rgba(11,9,7,.10) 35%,rgba(14,12,9,.18) 70%,rgba(7,5,3,.55) 100%),
+    url('c130.webp') center 46%/cover no-repeat #0a0805!important;
+  filter:none!important;
+  image-rendering:auto!important;
+}
+
+/* 8. "More to be Revealed" — match the other music cards visually */
+.mus-card[style*="border-style:dashed"]{
+  border-style:solid!important;
+  opacity:1!important;
+  background:rgba(255,254,249,.55)!important;
+  border-color:rgba(201,168,76,.32)!important;
+}
+.mus-card[style*="border-style:dashed"] .mus-title{
+  font-style:italic;color:#1F2A47!important;
+}
+.mus-card[style*="border-style:dashed"] .mus-artist{
+  color:#6B7895!important;
+}
+
+/* 9. PREMIUM RSVP option buttons — gold corner glyphs always visible,
+      stronger hover, cleaner selected state */
+.rsvp-opt{
+  border:1.5px solid rgba(201,168,76,.45)!important;
+  background:linear-gradient(180deg,#FFFEF9 0%,#FBF7EE 100%)!important;
+  box-shadow:0 4px 14px rgba(44,36,22,.04)!important;
+}
+.rsvp-opt::before,.rsvp-opt::after{
+  display:block!important;content:'';position:absolute;width:12px;height:12px;
+  border:1.5px solid rgba(201,168,76,.45);
+  transition:border-color .35s var(--ease),width .35s var(--ease),height .35s var(--ease);
+  pointer-events:none;opacity:1;background:transparent;
+}
+.rsvp-opt::before{top:6px;left:6px;border-right:none;border-bottom:none}
+.rsvp-opt::after{bottom:6px;right:6px;border-left:none;border-top:none}
+.rsvp-opt:hover::before,.rsvp-opt:hover::after,
+.rsvp-opt.sel::before,.rsvp-opt.sel::after{
+  border-color:var(--g);width:16px;height:16px;
+}
+.rsvp-opt.sel{
+  background:linear-gradient(180deg,#FFFEF9 0%,#FAEFD5 100%)!important;
+  box-shadow:0 0 0 2px var(--g) inset,0 12px 32px rgba(201,168,76,.20)!important;
+}
+
+/* 10. Bring back our round-2 umi gold separator lines (we hid them at #2 above
+       to nuke the broken starfield duplicates — restore the deliberate ones) */
+.umi{position:relative;padding-top:80px!important;padding-bottom:80px!important}
+.umi > .umi-rule-top, .umi > .umi-rule-bot{
+  position:absolute;left:50%;transform:translateX(-50%);
+  width:48px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,168,76,.55),transparent);
+}
+.umi > .umi-rule-top{top:38px}
+.umi > .umi-rule-bot{bottom:38px}
+
 /* ═══════════════════════════════════════════════════════════════════════
    CUSTOM CURSOR — desktop, every page, every element
    The dot + lagging ring must be the ONLY cursor on hover/fine pointers.
@@ -1875,7 +2028,7 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"] >
   <section class="nsbg" id="next">
     <div style="text-align:center;margin-bottom:52px">
       <span class="s-eye rv s1">Next Steps</span>
-      <h2 class="s-title rv s2">Ready to Begin <em>Your</em> Story?</h2>
+      <h2 class="s-title rv s2">The <em>Journey</em> continues.</h2>
       <div class="s-rule rv s3"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L13.6 9.2C13.8 10.0 14.4 10.6 15.2 10.8L22 12L15.2 13.2C14.4 13.4 13.8 14.0 13.6 14.8L12 22L10.4 14.8C10.2 14.0 9.6 13.4 8.8 13.2L2 12L8.8 10.8C9.6 10.6 10.2 10.0 10.4 9.2Z" stroke-width="1.2"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></div>
     </div>
     <div class="sg">
@@ -3312,27 +3465,30 @@ function _buildLetterDocument(){
 <title>Invitation — Toni &amp; Cote · ${recipient}</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@400;500;600;700&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  @page{size:A4 portrait;margin:14mm 14mm}
+  @page{size:A4 portrait;margin:10mm 12mm}
   *{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  html,body{background:#FBF8F1;font-family:'Cormorant Garamond',serif;color:#1F2A47;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-  .page{width:100%;max-width:720px;margin:0 auto}
+  html,body{background:#FBF8F1;font-family:'Cormorant Garamond',serif;color:#1F2A47;padding:0;margin:0}
+  body{padding:0}
+  .page{width:100%;max-width:720px;margin:0 auto;page-break-inside:avoid;break-inside:avoid}
   .env{position:relative;background:linear-gradient(158deg,#FBF8F1 0%,#F7F2E6 25%,#FAF6EC 55%,#F4EFE0 80%,#F8F4E8 100%);
-    border:1px solid rgba(139,110,60,.32);padding:48px 54px;text-align:center;
-    box-shadow:0 18px 60px rgba(44,36,22,.14)}
+    border:1px solid rgba(139,110,60,.32);padding:30px 38px;text-align:center;
+    box-shadow:0 8px 30px rgba(44,36,22,.10);
+    page-break-inside:avoid;break-inside:avoid}
   .env::before,.env::after,.tc,.bc{content:'';position:absolute;width:32px;height:32px;border-color:rgba(201,168,76,.6);border-style:solid}
   .env::before{top:-1px;left:-1px;border-width:2px 0 0 2px}
   .env::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
   .tc{top:-1px;right:-1px;border-width:2px 2px 0 0}
   .bc{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
-  .seal{margin:0 auto 18px;display:flex;justify-content:center}
-  .dear{font-style:italic;font-size:.74rem;color:rgba(160,125,50,.85);letter-spacing:.22em;text-transform:lowercase;margin-bottom:8px}
-  .recip{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:2.4rem;color:#C9A84C;line-height:1;margin-bottom:22px}
-  .div{display:flex;align-items:center;gap:14px;margin:14px auto;max-width:280px;justify-content:center}
+  .seal{margin:0 auto 12px;display:flex;justify-content:center}
+  .seal svg{width:64px;height:auto}
+  .dear{font-style:italic;font-size:.7rem;color:rgba(160,125,50,.85);letter-spacing:.22em;text-transform:lowercase;margin-bottom:6px}
+  .recip{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:2rem;color:#C9A84C;line-height:1;margin-bottom:14px}
+  .div{display:flex;align-items:center;gap:14px;margin:10px auto;max-width:240px;justify-content:center}
   .div::before,.div::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.5),transparent)}
   .div svg{color:rgba(201,168,76,.6)}
-  .body{font-style:italic;font-size:.98rem;line-height:1.78;color:#1F2A47;margin-bottom:14px;font-weight:400}
-  .sig{font-style:italic;font-weight:300;font-size:2rem;color:#C9A84C;margin-top:18px;letter-spacing:.02em}
-  .sigsub{font-size:.55rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(160,125,50,.78);margin-top:6px;font-family:'Montserrat',sans-serif;font-weight:500}
+  .body{font-style:italic;font-size:.88rem;line-height:1.55;color:#1F2A47;margin-bottom:10px;font-weight:400}
+  .sig{font-style:italic;font-weight:300;font-size:1.7rem;color:#C9A84C;margin-top:12px;letter-spacing:.02em}
+  .sigsub{font-size:.5rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(160,125,50,.78);margin-top:5px;font-family:'Montserrat',sans-serif;font-weight:500}
 </style></head><body><div class="page"><div class="env"><span class="tc"></span><span class="bc"></span>
 <div class="seal"><svg width="84" height="60" viewBox="0 0 110 68" xmlns="http://www.w3.org/2000/svg"><circle cx="38" cy="34" r="26" fill="none" stroke="#C9A84C" stroke-width="2.2"/><circle cx="72" cy="34" r="26" fill="none" stroke="#C9A84C" stroke-width="2.2"/></svg></div>
 <div class="dear">To the honoured guest</div>
@@ -3387,8 +3543,10 @@ function savePDF(){
     document.head.appendChild(s);
   });
   // Build a hidden visible container with the letter (html2canvas needs a rendered DOM)
-  const guestName = (document.getElementById('inv-name')||{}).textContent || 'Guest';
-  const filename = `Invitation - ${guestName} - Toni and Cote.pdf`;
+  const guestNameRaw = (document.getElementById('inv-name')||{}).textContent || 'Guest';
+  // Chrome marks downloads with non-ASCII / punctuation as "unconfirmed". Strip aggressively.
+  const guestName = guestNameRaw.replace(/[^A-Za-z0-9 ]/g,'').replace(/\s+/g,'-').slice(0,32) || 'Guest';
+  const filename = `Toni-and-Cote-Invitation-${guestName}.pdf`;
   const wrap = document.createElement('div');
   wrap.id = '_pdf-stage';
   // off-screen but rendered (not display:none — html2canvas needs layout)
@@ -3491,6 +3649,18 @@ function bindCursorHover(){
 bindCursorHover();
 const _curObs=new MutationObserver(()=>bindCursorHover());
 _curObs.observe(document.body,{childList:true,subtree:true});
+
+
+/* ═══════════════ UMI rule-line injector (round-3) ═══════════════ */
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.umi').forEach(function(u){
+    if(u.querySelector('.umi-rule-top')) return;
+    var top = document.createElement('span');  top.className='umi-rule-top';
+    var bot = document.createElement('span');  bot.className='umi-rule-bot';
+    u.insertBefore(top, u.firstChild);
+    u.appendChild(bot);
+  });
+});
 
 /* ═══════════════ PARTICLES ═══════════════ */
 const canvas=document.getElementById('pc');
