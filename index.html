@@ -1558,7 +1558,7 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"] >
 /* But keep our deliberate gold rules (added in round 2) above the umi interlude */
 .umi-tag::before, .umi-tag::after{display:none!important}
 /* Make the canvas particle layer subtle — reduce opacity slightly */
-#pc{opacity:.55!important;mix-blend-mode:screen}
+#pc{opacity:1!important;mix-blend-mode:normal;pointer-events:none}
 
 /* 3. PREMIUM HOVER — unified luxury treatment for every "card" surface */
 .sc-card,.mus-card,.trav-card,.vc,.vw,.kcard,.mc,.gal-p,.cul-course,.wine-card,.vf,.rsvp-opt,
@@ -1861,6 +1861,25 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]{
      should never push the page wide */
   .c-hero *, .g-hero *, #pc{max-width:100vw}
 }
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ROUND 7 — final polish: all pseudo-element starfields off, canvas owns it
+═══════════════════════════════════════════════════════════════════════ */
+/* Hide every CSS-driven star-field so only the new canvas particle system shows */
+.gsec-light::before, .gsec-light::after,
+.gsec-cream::before, .gsec-cream::after,
+.gsec-dark::before, .gsec-dark::after,
+.g-hero::before, .g-hero::after,
+.umi::before, .umi::after,
+.c-hero::after{ box-shadow:none!important }
+
+/* Belt-and-braces: any element with the box-shadow starfield trick gets nuked */
+[style*="box-shadow:"][style*="rgba(201,168,76"]{box-shadow:none!important}
+
+/* Canvas should sit between background images and content */
+#pc{position:fixed!important; inset:0!important; z-index:2!important; pointer-events:none!important}
 
 /* ═══════════════════════════════════════════════════════════════════════
    CUSTOM CURSOR — desktop, every page, every element
@@ -3852,53 +3871,90 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 
-/* ═══════════════ PARTICLES ═══════════════ */
+/* ═══════════════ PARTICLES — premium luminous orbs, cursor-responsive ═══════════════ */
 const canvas=document.getElementById('pc');
-const ctx=canvas.getContext('2d');
-let W,H,particles=[];
-const N_PARTICLES=60;
-const mouse={x:-9999,y:-9999};
+const ctx=canvas.getContext('2d',{alpha:true});
+let W,H,particles=[],dpr=Math.max(1,Math.min(window.devicePixelRatio||1,2));
+const mouse={x:-9999,y:-9999,active:false};
+const isTouch=window.matchMedia('(hover:none),(pointer:coarse)').matches;
+// fewer particles on touch / smaller screens for performance and elegance
+const N_PARTICLES = isTouch ? 22 : (window.innerWidth < 900 ? 32 : 48);
 
-function resizeCanvas(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+function resizeCanvas(){
+  W=window.innerWidth; H=window.innerHeight;
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  canvas.style.width=W+'px'; canvas.style.height=H+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
 resizeCanvas();
 window.addEventListener('resize',resizeCanvas);
-document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;},{passive:true});
+window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;mouse.active=true;},{passive:true});
+window.addEventListener('mouseleave',()=>{mouse.active=false;},{passive:true});
 
 class Particle{
-  constructor(){this.reset(true);}
-  reset(rand){
-    this.x=rand?Math.random()*W:(Math.random()<.5?-5:W+5);
-    this.y=rand?Math.random()*H:Math.random()*H;
-    this.vx=(Math.random()-.5)*.35;
-    this.vy=(Math.random()-.5)*.35;
-    this.r=Math.random()*1.5+.5;
-    this.a=Math.random()*.55+.12;
+  constructor(){this.spawn(true);}
+  spawn(initial){
+    this.x = initial ? Math.random()*W : (Math.random()<.5 ? -8 : W+8);
+    this.y = initial ? Math.random()*H : Math.random()*H;
+    // gentle drift — true ambient motion
+    this.vx = (Math.random()-.5)*.18;
+    this.vy = (Math.random()-.5)*.18;
+    // size + glow
+    this.r  = Math.random()*1.6 + .8;       // 0.8 – 2.4
+    this.glow = this.r * 4 + Math.random()*4;
+    // twinkle
+    this.baseA = Math.random()*.45 + .25;   // 0.25 – 0.70
+    this.tw   = Math.random()*Math.PI*2;
+    this.tws  = (Math.random()*.6+.4)*.025;
   }
-  update(){
-    const dx=this.x-mouse.x,dy=this.y-mouse.y,dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist<120){const f=(120-dist)/120;this.vx+=dx/dist*f*.6;this.vy+=dy/dist*f*.6;}
-    this.vx*=.97;this.vy*=.97;
-    this.x+=this.vx;this.y+=this.vy;
-    if(this.x<-10||this.x>W+10||this.y<-10||this.y>H+10)this.reset(false);
+  step(){
+    // cursor-responsive: gentle ATTRACT (not repel) — particles drift toward cursor like fireflies
+    if(mouse.active){
+      const dx=mouse.x-this.x, dy=mouse.y-this.y, d2=dx*dx+dy*dy;
+      if(d2 < 38000){            // ~195px radius of influence
+        const d = Math.sqrt(d2)||1;
+        const f = (1 - d/195) * .035;
+        this.vx += (dx/d) * f;
+        this.vy += (dy/d) * f;
+      }
+    }
+    // damping (light) so particles always drift gently
+    this.vx *= .985; this.vy *= .985;
+    this.x += this.vx; this.y += this.vy;
+    // wrap to opposite side instead of respawning — feels continuous
+    if(this.x < -10) this.x = W+10;
+    else if(this.x > W+10) this.x = -10;
+    if(this.y < -10) this.y = H+10;
+    else if(this.y > H+10) this.y = -10;
+    // twinkle
+    this.tw += this.tws;
   }
   draw(){
-    ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(201,168,76,${this.a})`;ctx.fill();
+    const a = this.baseA * (.65 + .35*Math.sin(this.tw));
+    // outer halo
+    const grad = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.glow);
+    grad.addColorStop(0,    `rgba(232,213,163,${a*.85})`);
+    grad.addColorStop(.35,  `rgba(201,168,76,${a*.55})`);
+    grad.addColorStop(1,    'rgba(201,168,76,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath(); ctx.arc(this.x,this.y,this.glow,0,Math.PI*2); ctx.fill();
+    // crisp core
+    ctx.fillStyle = `rgba(245,232,200,${Math.min(1,a*1.6)})`;
+    ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fill();
   }
 }
 
-for(let i=0;i<N_PARTICLES;i++)particles.push(new Particle());
+for(let i=0;i<N_PARTICLES;i++) particles.push(new Particle());
 
 function animParticles(){
   ctx.clearRect(0,0,W,H);
+  // Use 'lighter' compositing so overlapping particles glow brighter (premium feel)
+  ctx.globalCompositeOperation = 'lighter';
   for(let i=0;i<particles.length;i++){
-    particles[i].update();particles[i].draw();
-    for(let j=i+1;j<particles.length;j++){
-      const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
-      const d2=dx*dx+dy*dy;
-      if(d2<16900){const d=Math.sqrt(d2),a=(1-d/130)*.18;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle=`rgba(201,168,76,${a})`;ctx.lineWidth=.6;ctx.stroke();}
-    }
+    particles[i].step();
+    particles[i].draw();
   }
+  ctx.globalCompositeOperation = 'source-over';
   requestAnimationFrame(animParticles);
 }
 animParticles();
