@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>La Cerimonia Perfetta</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1680,6 +1680,142 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]{
 .umi > .umi-rule-top{top:38px}
 .umi > .umi-rule-bot{bottom:38px}
 
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ROUND 4 — mobile viewport · hamburger · premium reveals · centring
+═══════════════════════════════════════════════════════════════════════ */
+
+/* 1. INITIAL VIEWPORT — first paint is dead-centred, no zoom-out needed.
+      Containers (not html/body — that broke Lenis) hold horizontal overflow. */
+#client-page, #guest-page, #pp, #login-page, footer{
+  max-width:100vw; overflow-x:clip;
+}
+@supports not (overflow-x: clip){
+  #client-page, #guest-page, #pp, #login-page, footer{overflow-x:hidden}
+}
+/* The hero-atm sits behind hero with negative inset — clip so it never
+   pushes the page horizontally on first paint */
+.c-hero, .g-hero{overflow:hidden}
+
+/* 2. HAMBURGER MENU — proper open/close, backdrop, body lock */
+@media (max-width:980px){
+  /* Backdrop — invisible click-target that dismisses the menu */
+  #gnav-backdrop{
+    position:fixed; inset:0; z-index:98;
+    background:rgba(7,5,3,.55);
+    backdrop-filter:blur(2px);
+    opacity:0; pointer-events:none;
+    transition:opacity .35s var(--ease);
+  }
+  #gnav-backdrop.open{opacity:1; pointer-events:auto}
+  /* Lock body scroll while menu open */
+  body.gnav-locked{overflow:hidden!important; touch-action:none}
+  /* Burger needs to FLOAT ABOVE the menu so user can tap it to close */
+  .gnav-burger{
+    z-index:101!important; position:relative;
+    transition:color .25s, border-color .25s, transform .35s var(--ease);
+  }
+  .gnav-burger.is-open{
+    transform:rotate(90deg);
+    color:var(--g)!important; border-color:var(--g)!important;
+    background:rgba(201,168,76,.08)!important;
+  }
+  /* Make sure the menu panel sits below burger but above backdrop */
+  .gnav ul{z-index:100!important}
+  /* Close-on-tap hint: link tap closes (handled in JS) */
+}
+
+/* 3. PREMIUM REVEAL ANIMATIONS — boxes assemble with blur+lift+scale */
+.rv{
+  opacity:0;
+  transform:translateY(40px) scale(.985);
+  filter:blur(6px);
+  transition:
+    opacity 1s cubic-bezier(.22,1,.36,1),
+    transform 1.1s cubic-bezier(.22,1,.36,1),
+    filter .9s cubic-bezier(.22,1,.36,1);
+  will-change:opacity,transform,filter;
+}
+.rv.vis{opacity:1; transform:none; filter:none}
+.rv.fl{transform:translateX(-40px) scale(.985)}
+.rv.rr{transform:translateX(40px) scale(.985)}
+.rv.fl.vis,.rv.rr.vis{transform:none}
+/* Stagger via existing s1..s4 delays */
+.s1{transition-delay:.05s}.s2{transition-delay:.18s}.s3{transition-delay:.32s}.s4{transition-delay:.46s}
+/* Cards lift in with a deeper offset for theatre */
+.sc-card.rv,.mus-card.rv,.trav-card.rv,.vc.rv,.cul-course.rv,.wine-card.rv,
+.gal-p.rv,.mc.rv,.rsvp-opt.rv,.vw.rv,.kcard.rv,.umi.rv,.pmsg-box.rv{
+  transform:translateY(56px) scale(.96);
+}
+.sc-card.rv.vis,.mus-card.rv.vis,.trav-card.rv.vis,.vc.rv.vis,
+.cul-course.rv.vis,.wine-card.rv.vis,.gal-p.rv.vis,.mc.rv.vis,
+.rsvp-opt.rv.vis,.vw.rv.vis,.kcard.rv.vis,.umi.rv.vis,.pmsg-box.rv.vis{
+  transform:none;
+}
+/* Respect users who prefer no motion */
+@media (prefers-reduced-motion: reduce){
+  .rv, .rv.vis{opacity:1!important; transform:none!important; filter:none!important; transition:none!important}
+}
+
+/* 4. GETTING THERE — fully centred copy + CTAs on mobile */
+@media (max-width:680px){
+  #g-travel .trav-card{text-align:center!important}
+  #g-travel .trav-icon{margin:0 auto 14px!important; display:block!important}
+  #g-travel .trav-t{text-align:center!important}
+  #g-travel .trav-steps{padding:0!important; text-align:center!important}
+  #g-travel .trav-steps li{
+    justify-content:center!important;
+    text-align:center!important;
+    border-bottom:1px solid rgba(201,168,76,.06)!important;
+    padding:8px 0!important;
+  }
+  #g-travel .trav-steps li::before{display:none!important}
+  #g-travel .map-box{text-align:center!important; align-items:center!important}
+  #g-travel .map-loc{text-align:center!important}
+  #g-travel .map-box > div:last-child{
+    justify-content:center!important; width:100%!important;
+  }
+  #g-travel .map-link{justify-content:center!important; min-width:200px!important}
+}
+
+/* 5. FROM THE HEARTS — fit single screen on mobile */
+@media (max-width:680px){
+  #g-message{
+    padding:48px 18px!important;
+    min-height:100svh!important;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  #g-message > div{margin:0 auto!important; width:100%!important}
+  #g-message > div > div:first-child{margin-bottom:18px!important}
+  #g-message .s-title{font-size:1.85rem!important; line-height:1.1!important}
+  #g-message .s-eye{font-size:.48rem!important; letter-spacing:.42em!important; margin-bottom:6px!important}
+  #g-message .s-rule{margin:10px auto!important}
+  .pmsg-box{
+    padding:24px 18px!important;
+    max-width:100%!important;
+    background:rgba(10,8,4,.55)!important;
+    box-shadow:0 16px 48px rgba(0,0,0,.45)!important;
+  }
+  .pmsg-q{
+    font-size:.95rem!important;
+    line-height:1.5!important;
+    padding:0!important;
+    margin:14px 0 12px!important;
+  }
+  .pmsg-q::before{font-size:4rem!important; top:-22px!important}
+  .pmsg-from{font-size:1.85rem!important; margin-top:6px!important; line-height:1.1!important}
+  .pmsg-sub{font-size:.46rem!important; letter-spacing:.24em!important}
+  .pmsg-footer-stars{margin:14px 0 0!important; gap:6px!important}
+  .pmsg-footer-stars svg{width:12px!important; height:12px!important}
+  .pmsg-footer-stars svg:nth-child(3){width:16px!important; height:16px!important}
+  .pmsg-footer-stars svg:nth-child(2),.pmsg-footer-stars svg:nth-child(4){width:14px!important; height:14px!important}
+}
+@media (max-width:420px){
+  .pmsg-q{font-size:.88rem!important; margin:10px 0 8px!important}
+  .pmsg-from{font-size:1.65rem!important}
+}
+
 /* ═══════════════════════════════════════════════════════════════════════
    CUSTOM CURSOR — desktop, every page, every element
    The dot + lagging ring must be the ONLY cursor on hover/fine pointers.
@@ -2452,7 +2588,7 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]{
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
         Exit
       </button>
-      <button class="gnav-burger" id="gnav-burger" aria-label="Toggle menu" onclick="document.getElementById('gnav-ul').classList.toggle('open')">
+      <button class="gnav-burger" id="gnav-burger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleGnav(this)">
         <svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="0" y1="2" x2="20" y2="2"/><line x1="0" y1="7" x2="20" y2="7"/><line x1="0" y1="12" x2="20" y2="12"/></svg>
       </button>
     </div>
@@ -4400,6 +4536,42 @@ function initGuest(){
   const gnav = document.getElementById('gnav');
   window.addEventListener('scroll', ()=>{ gnav.classList.toggle('sc', window.scrollY > 60); }, {passive:true});
   
+  // ── Hamburger menu (open / close / dismiss-on-tap-outside) ──
+  function ensureGnavBackdrop(){
+    let bd = document.getElementById('gnav-backdrop');
+    if(bd) return bd;
+    bd = document.createElement('div');
+    bd.id = 'gnav-backdrop';
+    bd.addEventListener('click', closeGnav);
+    document.body.appendChild(bd);
+    return bd;
+  }
+  function openGnav(burger){
+    const ul = document.getElementById('gnav-ul'); if(!ul) return;
+    ul.classList.add('open');
+    if(burger) burger.classList.add('is-open'), burger.setAttribute('aria-expanded','true');
+    ensureGnavBackdrop().classList.add('open');
+    document.body.classList.add('gnav-locked');
+  }
+  function closeGnav(){
+    const ul = document.getElementById('gnav-ul'); if(!ul) return;
+    ul.classList.remove('open');
+    const burger = document.getElementById('gnav-burger');
+    if(burger) burger.classList.remove('is-open'), burger.setAttribute('aria-expanded','false');
+    const bd = document.getElementById('gnav-backdrop'); if(bd) bd.classList.remove('open');
+    document.body.classList.remove('gnav-locked');
+  }
+  window.toggleGnav = function(burger){
+    const ul = document.getElementById('gnav-ul');
+    if(ul && ul.classList.contains('open')) closeGnav(); else openGnav(burger);
+  };
+  // Auto-close when a nav link is tapped
+  document.querySelectorAll('#gnav-ul a').forEach(a=>{
+    a.addEventListener('click', ()=>setTimeout(closeGnav, 60));
+  });
+  // Esc to dismiss
+  window.addEventListener('keydown', e=>{ if(e.key==='Escape') closeGnav(); });
+
   // Highlight active nav section — nearest-to-viewport-top wins (deterministic)
   const gSections = ['g-inv','g-concept','g-gallery','g-program','g-culinary','g-dress','g-music','g-travel','g-rsvp'];
   const gNavLinks = document.querySelectorAll('.gnav ul a');
