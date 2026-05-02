@@ -1622,13 +1622,9 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]{
   linear-gradient(rgba(248,244,236,.86),rgba(245,240,228,.92)),
   url('c168.webp') center 35%/cover no-repeat!important}
 
-/* 7. CLIENT HERO — actual venue photograph with deeper veil for legible gold type */
+/* 7. CLIENT HERO — base rule (atmospheric blur + tone applied in round 12 below) */
 .hero-atm.hero-host-bg{
-  background:
-    linear-gradient(170deg,rgba(7,5,3,.55) 0%,rgba(11,9,7,.30) 38%,rgba(14,12,9,.42) 72%,rgba(7,5,3,.78) 100%),
-    url('hero-castle.webp') center 50%/cover no-repeat #0a0805!important;
-  filter:none!important;
-  image-rendering:auto!important;
+  background:url('hero-castle.webp') center 50%/cover no-repeat #0a0805!important;
 }
 
 /* 8. "More to be Revealed" — match the other music cards visually */
@@ -1915,14 +1911,51 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]{
   100% { transform: translate3d(-1.2%, -.8%, 0); }
 }
 .hero-atm.hero-host-bg{
-  /* User-provided venue photograph + deeper veil so gold typography reads */
+  /* The photograph — soft on purpose, treated like a cinematic memory */
+  background: url('hero-castle.webp') center 50%/cover no-repeat #0a0805 !important;
+  filter:
+    blur(3px)
+    saturate(1.18)
+    contrast(1.12)
+    brightness(.94)
+    sepia(.14) !important;
+  image-rendering: auto !important;
+  animation: heroPan 70s ease-in-out infinite alternate !important;
+  transform: scale(1.06);    /* hide the blur edge */
+}
+/* Cinematic colour grade + radial vignette — pulls the eye to the centre */
+.c-hero::after{
   background:
-    linear-gradient(170deg,rgba(7,5,3,.55) 0%,rgba(11,9,7,.30) 38%,rgba(14,12,9,.42) 72%,rgba(7,5,3,.78) 100%),
-    url('hero-castle.webp') center 50%/cover no-repeat #0a0805 !important;
-  filter: contrast(1.08) saturate(1.04) brightness(1.02) !important;
-  image-rendering: -webkit-optimize-contrast !important;
-  animation: heroPan 60s ease-in-out infinite alternate !important;
-  transform: none;
+    radial-gradient(ellipse 80% 55% at 50% 48%,
+      transparent 0%,
+      rgba(7,5,3,.10) 45%,
+      rgba(7,5,3,.55) 75%,
+      rgba(7,5,3,.92) 100%),
+    linear-gradient(180deg,
+      rgba(7,5,3,.30) 0%,
+      transparent 28%,
+      transparent 60%,
+      rgba(7,5,3,.55) 100%) !important;
+  z-index:1 !important;
+  pointer-events:none !important;
+}
+/* Warm gold floor glow — atmospheric, "castle rising from candle light" */
+.c-hero::before{
+  content:'';position:absolute;left:0;right:0;bottom:0;
+  height:42% !important;
+  background:radial-gradient(ellipse 90% 100% at 50% 100%,
+    rgba(201,168,76,.16) 0%,
+    rgba(155,112,28,.08) 40%,
+    transparent 75%) !important;
+  z-index:1;pointer-events:none;mix-blend-mode:screen;
+}
+/* Film-grain layer — pure SVG noise data URI, no extra request */
+.c-hero{position:relative;}
+.c-hero .grain{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  opacity:.12;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.78  0 0 0 0 0.66  0 0 0 0 0.30  0 0 0 0.7 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size:240px 240px;
 }
 
 
@@ -4062,6 +4095,17 @@ const _curObs=new MutationObserver(()=>bindCursorHover());
 _curObs.observe(document.body,{childList:true,subtree:true});
 
 
+
+
+/* ═══════════════ Hero film-grain layer (round-12) ═══════════════ */
+document.addEventListener('DOMContentLoaded', function(){
+  const hero = document.querySelector('.c-hero');
+  if(hero && !hero.querySelector('.grain')){
+    const g = document.createElement('div');
+    g.className = 'grain';
+    hero.appendChild(g);
+  }
+});
 
 /* ═══════════════ Particle visibility — only over dark sections ═══════════════ */
 (function(){
