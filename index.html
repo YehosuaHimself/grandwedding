@@ -1622,11 +1622,11 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]{
   linear-gradient(rgba(248,244,236,.86),rgba(245,240,228,.92)),
   url('c168.webp') center 35%/cover no-repeat!important}
 
-/* 7. CLIENT HERO — sweeping aerial of the castello in its hills (La Vista) */
+/* 7. CLIENT HERO — actual venue photograph with deeper veil for legible gold type */
 .hero-atm.hero-host-bg{
   background:
-    linear-gradient(170deg,rgba(7,5,3,.32) 0%,rgba(11,9,7,.12) 35%,rgba(14,12,9,.20) 70%,rgba(7,5,3,.62) 100%),
-    url('c111.webp') center 50%/cover no-repeat #0a0805!important;
+    linear-gradient(170deg,rgba(7,5,3,.55) 0%,rgba(11,9,7,.30) 38%,rgba(14,12,9,.42) 72%,rgba(7,5,3,.78) 100%),
+    url('hero-castle.webp') center 50%/cover no-repeat #0a0805!important;
   filter:none!important;
   image-rendering:auto!important;
 }
@@ -1915,14 +1915,13 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]{
   100% { transform: translate3d(-1.2%, -.8%, 0); }
 }
 .hero-atm.hero-host-bg{
-  /* Largest webp in the set + slight contrast boost = sharpest perceptible hero */
+  /* User-provided venue photograph + deeper veil so gold typography reads */
   background:
-    linear-gradient(170deg,rgba(7,5,3,.30) 0%,rgba(11,9,7,.10) 38%,rgba(14,12,9,.20) 70%,rgba(7,5,3,.60) 100%),
-    url('c130.webp') center 42%/cover no-repeat #0a0805 !important;
-  filter: contrast(1.10) saturate(1.05) brightness(1.02) !important;
+    linear-gradient(170deg,rgba(7,5,3,.55) 0%,rgba(11,9,7,.30) 38%,rgba(14,12,9,.42) 72%,rgba(7,5,3,.78) 100%),
+    url('hero-castle.webp') center 50%/cover no-repeat #0a0805 !important;
+  filter: contrast(1.08) saturate(1.04) brightness(1.02) !important;
   image-rendering: -webkit-optimize-contrast !important;
   animation: heroPan 60s ease-in-out infinite alternate !important;
-  /* Disable any inherited transform-scale from heroKB */
   transform: none;
 }
 
