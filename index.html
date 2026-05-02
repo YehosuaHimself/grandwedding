@@ -1816,6 +1816,25 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]{
   .pmsg-from{font-size:1.65rem!important}
 }
 
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ROUND 5 — single Print-or-Save CTA + centred letter
+═══════════════════════════════════════════════════════════════════════ */
+.inv-actions{justify-content:center}
+.inv-act-btn--single{
+  min-width:280px; padding:14px 36px!important;
+  font-size:.62rem!important; letter-spacing:.36em!important; gap:12px!important;
+  border-width:1.5px!important;
+}
+@media (max-width:680px){
+  .inv-act-btn--single{
+    width:100%!important; min-width:0!important;
+    padding:14px 18px!important; font-size:.58rem!important;
+    letter-spacing:.28em!important;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════════════
    CUSTOM CURSOR — desktop, every page, every element
    The dot + lagging ring must be the ONLY cursor on hover/fine pointers.
@@ -2670,15 +2689,11 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]{
         <div class="inv-sigsub">With all our love · September 2026</div>
       </div>
     </div>
-    <!-- Print / Save PDF -->
+    <!-- Print or Save Invitation -->
     <div class="inv-actions">
-      <button class="inv-act-btn" onclick="printInvitation()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-        Print Invitation
-      </button>
-      <button class="inv-act-btn" onclick="savePDF()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Save as PDF
+      <button class="inv-act-btn inv-act-btn--single" onclick="printInvitation()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print or Save Invitation
       </button>
     </div>
 
@@ -3604,7 +3619,19 @@ function _buildLetterDocument(){
   @page{size:A4 portrait;margin:10mm 12mm}
   *{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   html,body{background:#FBF8F1;font-family:'Cormorant Garamond',serif;color:#1F2A47;padding:0;margin:0}
-  body{padding:0}
+  /* On screen + in the print preview, vertically centre the envelope on the page */
+  body{
+    min-height:277mm;            /* A4 portrait minus 10mm top+bottom margins */
+    display:flex;align-items:center;justify-content:center;
+    padding:0;
+  }
+  @media print{
+    body{min-height:auto;display:block}
+    .page{margin-top:auto!important;margin-bottom:auto!important}
+    /* Use a flex parent on the printed page too so the letter sits in the middle */
+    html{height:100%}
+    body{height:100%;display:flex;align-items:center;justify-content:center}
+  }
   .page{width:100%;max-width:720px;margin:0 auto;page-break-inside:avoid;break-inside:avoid}
   .env{position:relative;background:linear-gradient(158deg,#FBF8F1 0%,#F7F2E6 25%,#FAF6EC 55%,#F4EFE0 80%,#F8F4E8 100%);
     border:1px solid rgba(139,110,60,.32);padding:30px 38px;text-align:center;
