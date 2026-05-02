@@ -11,13 +11,19 @@
 :root{
   --g:#C9A84C;--gl:#E8D5A3;--gd:#8B6914;--gs:#F5E8A3;
   --iv:#FAF8F3;--ivd:#F0EAD6;--w:#FFFEF9;
-  --dk:#1A1410;--dk2:#2C2416;--mid:#5C4A2A;--lt:#8C7355;
+  /* Dark text is now NAVY BLUE (replaces warm browns). Backgrounds stay warm dark. */
+  --dk:#0F1729;        /* darkest navy — for headlines & strong text */
+  --dk2:#1F2A47;       /* main dark text — was warm brown #2C2416 */
+  --mid:#3D4B6E;       /* body text — was #5C4A2A */
+  --lt:#6B7895;        /* light text/subtle labels — was #8C7355 */
+  --bgdk:#1A1410;      /* original warm-dark for SECTION BACKGROUNDS — preserved */
+  --bgdk2:#2C2416;     /* original warm-dark2 for backgrounds — preserved */
   --ease:cubic-bezier(.22,1,.36,1);--ease2:cubic-bezier(.4,0,.2,1);--nb:#1A2744;--nbl:#243660;--nbm:#2E4070;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:auto} /* Lenis library handles smoothness — native smooth-scroll fights it */
-body{font-family:'Montserrat',sans-serif;background:var(--iv);color:var(--dk2);overflow-x:hidden;cursor:none}
-*,*::before,*::after{cursor:none!important}
+body{font-family:'Montserrat',sans-serif;background:var(--iv);color:var(--dk2);overflow-x:hidden}
+@media (hover:hover) and (pointer:fine) { *,*::before,*::after{cursor:none!important} }
 h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
 a{text-decoration:none;color:inherit}
 ::-webkit-scrollbar{width:4px}
@@ -26,14 +32,24 @@ a{text-decoration:none;color:inherit}
 .hidden{display:none!important}
 
 /* ── CURSOR ─────────────────────────────────── */
-html,body{cursor:none!important}
-#cd,#cr{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;will-change:transform;transition:width .22s var(--ease),height .22s var(--ease),border-color .3s}
-#cd{width:8px;height:8px;background:var(--g);z-index:10000}
-#cr{width:44px;height:44px;border:2px solid rgba(201,168,76,.7);z-index:9999;box-shadow:0 0 10px rgba(201,168,76,.22),0 0 22px rgba(201,168,76,.09)}
-body.ch #cd{width:10px;height:10px;background:var(--g)}
-body.ch #cr{width:62px;height:62px;border-color:var(--g);box-shadow:0 0 16px rgba(201,168,76,.38),0 0 32px rgba(201,168,76,.16)}
-body.cc #cd{width:4px;height:4px}
-body.cc #cr{width:24px;height:24px}
+/* Custom cursor only on devices with a real pointer (desktop). NEVER on touch. */
+@media (hover:hover) and (pointer:fine) {
+  html,body{cursor:none!important}
+  #cd,#cr{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;will-change:transform;transition:width .22s var(--ease),height .22s var(--ease),border-color .3s;display:block}
+  #cd{width:8px;height:8px;background:var(--g);z-index:10000}
+  #cr{width:44px;height:44px;border:2px solid rgba(201,168,76,.7);z-index:9999;box-shadow:0 0 10px rgba(201,168,76,.22),0 0 22px rgba(201,168,76,.09)}
+  body.ch #cd{width:10px;height:10px;background:var(--g)}
+  body.ch #cr{width:62px;height:62px;border-color:var(--g);box-shadow:0 0 16px rgba(201,168,76,.38),0 0 32px rgba(201,168,76,.16)}
+  body.cc #cd{width:4px;height:4px}
+  body.cc #cr{width:24px;height:24px}
+}
+@media (hover:none), (pointer:coarse) {
+  /* TOUCH DEVICES — native cursor everywhere, custom cursor totally hidden */
+  html,body, *, *::before, *::after{cursor:auto!important}
+  a, button, [role="button"], [onclick], .gal-p, .mc, .lbtn, .pbtn, .gbtn, .inv-act-btn, .gnav-burger, .rsvp-opt{cursor:pointer!important}
+  input, textarea, select{cursor:text!important}
+  #cd, #cr{display:none!important}
+}
 
 /* ── PARTICLE CANVAS ────────────────────────── */
 #pc{position:fixed;inset:0;z-index:2;pointer-events:none;transition:opacity .6s}
@@ -71,20 +87,22 @@ body.cc #cr{width:24px;height:24px}
 .inv-act-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 26px;border:1px solid rgba(201,168,76,.22);background:transparent;font-family:'Montserrat',sans-serif;font-size:.55rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:rgba(201,168,76,.5);transition:border-color .3s var(--ease),color .3s var(--ease);cursor:none}
 .inv-act-btn:hover{border-color:rgba(201,168,76,.55);color:rgba(201,168,76,.82)}
 @media print{
-  @page{size:A4 portrait;margin:12mm 14mm}
-  *,body{cursor:auto!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-  html,body{background:#FAF6EF!important;margin:0!important;padding:0!important}
-  #login-page,#client-page,#pp,#cd,#cr,#pc,.gnav,
-  #g-concept,#g-gallery,#g-program,#g-culinary,#g-music,
-  #g-travel,#g-rsvp,#g-questions,#g-message,footer,
-  .g-hero,.inv-actions,.g-section-hd,.s-eye,.s-rule{display:none!important}
-  #guest-page,#g-inv{display:block!important;background:#FAF6EF!important}
-  #g-inv{padding:0!important}
-  .inv-wrap{max-width:100%!important;margin:0!important;padding:0!important;background:#FAF6EF!important}
+  @page{size:A4 portrait;margin:14mm 16mm}
+  *{cursor:auto!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;animation:none!important;transition:none!important}
+  html,body{background:#FAF8F1!important;margin:0!important;padding:0!important;overflow:visible!important;height:auto!important}
+  /* Hide EVERYTHING except the invitation letter wrapper */
+  body > *{display:none!important}
+  body > #guest-page{display:block!important}
+  #guest-page > *{display:none!important}
+  #guest-page > #g-inv{display:block!important;background:#FAF8F1!important;padding:0!important;min-height:auto!important}
+  #g-inv > *{display:none!important}
+  #g-inv > .inv-wrap{display:block!important}
+  .inv-wrap{max-width:100%!important;margin:0!important;padding:0!important;background:#FAF8F1!important}
+  .inv-actions{display:none!important}
   .inv-env{
     box-shadow:none!important;
     border:1px solid rgba(201,168,76,.45)!important;
-    background:#FAF6EF!important;
+    background:linear-gradient(158deg,#FBF8F1 0%,#F7F2E6 25%,#FAF6EC 55%,#F4EFE0 80%,#F8F4E8 100%)!important;
     padding:28px 36px!important;
     margin:0!important;
     page-break-inside:avoid!important;
@@ -93,10 +111,12 @@ body.cc #cr{width:24px;height:24px}
   .inv-seal svg{display:block!important}
   .inv-dear{font-size:.62rem!important}
   .inv-recipient{font-size:1.6rem!important}
-  .inv-body{font-size:.78rem!important;line-height:1.65!important}
+  .inv-body{font-size:.78rem!important;line-height:1.65!important;color:#3D4B6E!important}
   .inv-sig{font-size:2rem!important}
   .inv-sigsub{font-size:.52rem!important}
   .rv{opacity:1!important;transform:none!important}
+  /* Override any cursor:none from custom cursor */
+  *,*::before,*::after{cursor:auto!important}
 }
 /* ── PASSWORD TOGGLE ────────────────────────── */
 .pw-wrap{position:relative}
@@ -547,14 +567,16 @@ tbody tr:last-child td{border-bottom:none}
 .inv-wrap{max-width:720px;margin:0 auto;position:relative}
 .inv-env{
   background:
-    radial-gradient(ellipse 50% 30% at 90% 8%,rgba(160,100,40,.07) 0%,transparent 60%),
-    radial-gradient(ellipse 35% 25% at 8% 92%,rgba(140,85,30,.05) 0%,transparent 55%),
-    radial-gradient(ellipse 20% 15% at 55% 50%,rgba(160,100,40,.02) 0%,transparent 50%),
-    repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(140,90,40,.012) 3px,rgba(140,90,40,.012) 4px),
-    linear-gradient(158deg,#f6eccf 0%,#ede0b8 20%,#f2e8cc 50%,#e9dab8 75%,#f1e6ca 100%);
-  border:1px solid rgba(139,90,43,.32);
+    /* very subtle aged paper texture - far less saturated than before */
+    radial-gradient(ellipse 60% 30% at 88% 10%,rgba(180,150,90,.04) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 30% at 12% 90%,rgba(180,150,90,.03) 0%,transparent 60%),
+    radial-gradient(ellipse 25% 18% at 50% 50%,rgba(200,170,110,.012) 0%,transparent 55%),
+    repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(160,130,80,.008) 3px,rgba(160,130,80,.008) 4px),
+    /* creamy white base — premium hot-press ivory, not yellow */
+    linear-gradient(158deg,#FBF8F1 0%,#F7F2E6 25%,#FAF6EC 55%,#F4EFE0 80%,#F8F4E8 100%);
+  border:1px solid rgba(139,110,60,.22);
   padding:60px 64px;position:relative;text-align:center;
-  box-shadow:0 30px 90px rgba(44,36,22,.18),inset 0 0 80px rgba(139,90,43,.025);
+  box-shadow:0 30px 90px rgba(44,36,22,.16),0 1px 0 rgba(255,255,255,.6) inset,inset 0 0 80px rgba(160,130,80,.02);
 }
 .inv-env::before,.inv-env::after{content:'';position:absolute;width:36px;height:36px;border-color:rgba(201,168,76,.55);border-style:solid}
 .inv-env::before{top:-1px;left:-1px;border-width:2px 0 0 2px}
@@ -606,7 +628,12 @@ tbody tr:last-child td{border-bottom:none}
 .castle-svg{position:absolute;bottom:27%;left:50%;transform:translateX(-50%);width:600px}
 /* Program timeline */
 .prog-wrap{max-width:760px;margin:52px auto 0;position:relative}
-.prog-line{position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,rgba(201,168,76,.35) 10%,rgba(201,168,76,.35) 90%,transparent);transform:translateX(-50%)}
+.prog-line{position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,rgba(201,168,76,.35) 6%,rgba(201,168,76,.35) 94%,transparent);transform:translateX(-50%)}
+.prog-day{text-align:center;margin:0 auto 38px;position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:18px}
+.prog-day::before,.prog-day::after{content:'';flex:1;height:1px;max-width:160px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.45),transparent)}
+.prog-day-l{font-family:'Cinzel',serif;font-size:.74rem;letter-spacing:.5em;text-transform:uppercase;color:var(--g);background:var(--iv);padding:6px 22px;border:1px solid rgba(201,168,76,.32)}
+.prog-day-d{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;color:var(--mid);letter-spacing:.04em;margin-top:4px;text-transform:none}
+.prog-day:not(:first-child){margin-top:60px}
 .prog-item{display:grid;grid-template-columns:1fr 26px 1fr;gap:28px;align-items:center;margin-bottom:48px}
 .prog-item:nth-child(odd) .prog-c{grid-column:1;text-align:right}
 .prog-item:nth-child(odd) .prog-e{grid-column:3}
@@ -761,17 +788,17 @@ tbody tr:last-child td{border-bottom:none}
   url('c130.webp') center 30%/cover no-repeat!important;
   position:relative}
 #g-venue .s-body{color:rgba(248,238,210,.96)!important;text-shadow:0 2px 16px rgba(0,0,0,.85),0 0 32px rgba(0,0,0,.5)}
-#g-venue [style*="grid-template-columns:repeat(4,1fr)"] > div{
+#g-venue .venue-stats > div{
   background:rgba(10,8,4,.62)!important;
   border-color:rgba(201,168,76,.32)!important;
   backdrop-filter:blur(8px)}
-#g-venue [style*="grid-template-columns:repeat(4,1fr)"] > div > div:last-child{
+#g-venue .venue-stats > div > div:last-child{
   color:rgba(232,213,163,.78)!important}
 .vhist-l{color:rgba(232,213,163,.92)!important;text-shadow:0 1px 8px rgba(0,0,0,.7)}
 .vhist-y{color:var(--gl)!important;text-shadow:0 1px 12px rgba(0,0,0,.7)}
-#g-venue [style*="grid-template-columns:repeat(4,1fr)"] > div > div:nth-child(2){
+#g-venue .venue-stats > div > div:nth-child(2){
   color:var(--gl)!important;text-shadow:0 1px 8px rgba(0,0,0,.55)}
-#g-venue [style*="grid-template-columns:repeat(4,1fr)"] > div > div:last-child{
+#g-venue .venue-stats > div > div:last-child{
   color:rgba(232,213,163,.88)!important;text-shadow:0 1px 6px rgba(0,0,0,.5)}
 
 /* CHAPEL — own section, deep atmospheric backdrop using the chapel ceiling */
@@ -810,6 +837,11 @@ tbody tr:last-child td{border-bottom:none}
   color:rgba(250,248,243,.92);
   background:linear-gradient(180deg,transparent 0%,rgba(7,5,3,.85) 100%)}
 @media(max-width:840px){.chapel-block{grid-template-columns:1fr;gap:28px}.chapel-asides{grid-template-columns:1fr}}
+
+/* Venue stat-card grid — responsive: 4 cols desktop, 2 cols tablet, 1 col phone */
+.venue-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+@media (max-width:880px){.venue-stats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.venue-stats{grid-template-columns:1fr}}
 
 /* HISTORY TIMELINE strip in venue */
 .vhist{max-width:1080px;margin:74px auto 0;padding:0 16px}
@@ -933,22 +965,13 @@ tbody tr:last-child td{border-bottom:none}
 /* RSVP (dark section) — same family overrides for any text using dk colors */
 #g-rsvp [style*="color:var(--lt)"], #g-rsvp [style*="color:var(--dk2)"]{color:rgba(245,232,200,.85)!important}
 
-/* ── PARALLAX ── taste-restrained, fixed-attachment on full-bleed sections.
-   Mobile devices ignore fixed-attachment per spec; we explicitly fall back. */
-@media (min-width:980px) and (hover:hover) {
-  #g-venue, #g-chapel, #g-culinary, #g-rsvp, #g-message,
-  #g-dress, #g-music, #g-travel, #g-program, #g-questions,
-  #g-inv, #g-concept{ background-attachment: fixed, fixed !important; }
-  /* Host sections that use background images via CSS */
-  .vbg, .pibg{ background-attachment: fixed !important; }
-}
-@media (max-width:979px), (hover:none) {
-  /* explicit mobile/touch fallback: scroll with the page */
-  #g-venue, #g-chapel, #g-culinary, #g-rsvp, #g-message,
-  #g-dress, #g-music, #g-travel, #g-program, #g-questions,
-  #g-inv, #g-concept,
-  .vbg, .pibg{ background-attachment: scroll, scroll !important; }
-}
+/* All eyebrow labels in dark sections need stronger presence */
+.gsec-dark .s-eye, #g-rsvp .s-eye, #g-message .s-eye, #g-concept .s-eye, #g-culinary .s-eye, #g-chapel .s-eye, #g-venue .s-eye{
+  color:var(--gl)!important;font-weight:500;text-shadow:0 1px 12px rgba(0,0,0,.7)}
+
+/* Backgrounds scroll naturally with the page. background-attachment:fixed was causing
+   severe scroll jank on all platforms (full-viewport repaint per tick) — removed.
+   Visual depth is now handled by Lenis smoothness + Ken Burns hero + JS parallax on hero atm. */
 
 /* Gallery cursor hint */
 .gal-p{cursor:none}
@@ -967,15 +990,41 @@ tbody tr:last-child td{border-bottom:none}
 
 /* HOST PAGE — 4-image mood gallery in Aesthetic & Atmosphere */
 .mood4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:56px}
-.mood4 .mc{position:relative;height:280px;overflow:hidden;border:1px solid rgba(201,168,76,.12)}
+.mood4 .mc{position:relative;height:280px;overflow:hidden;border:1px solid rgba(201,168,76,.12);cursor:none}
 .mood4 .mc img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
 .mood4 .mc:hover img{transform:scale(1.06)}
 .mood4 .mc::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 50%,rgba(7,5,3,.85) 100%)}
+  background:linear-gradient(180deg,transparent 50%,rgba(7,5,3,.85) 100%);transition:background .3s var(--ease);pointer-events:none}
+.mood4 .mc:hover::after{background:linear-gradient(180deg,rgba(7,5,3,.15) 0%,transparent 30%,rgba(7,5,3,.85) 100%)}
+.mood4 .mc::before{content:'⊕';position:absolute;top:14px;right:14px;
+  font-size:1rem;color:rgba(201,168,76,.7);z-index:3;
+  transition:opacity .3s,transform .3s;opacity:0;transform:scale(.8)}
+.mood4 .mc:hover::before{opacity:1;transform:scale(1)}
 .mood4 .mc-cap{position:absolute;left:0;right:0;bottom:14px;text-align:center;
   font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;
-  color:rgba(250,248,243,.92);z-index:2;letter-spacing:.04em;padding:0 8px}
+  color:rgba(250,248,243,.92);z-index:2;letter-spacing:.04em;padding:0 8px;pointer-events:none}
 @media(max-width:880px){.mood4{grid-template-columns:1fr 1fr}}
+
+/* Aerial image filling empty space below the venue card stats (host page) */
+.vc-img-wrap{margin-top:28px;position:relative;overflow:hidden;border:1px solid rgba(201,168,76,.16);box-shadow:0 18px 50px rgba(0,0,0,.35)}
+.vc-img-wrap img{display:block;width:100%;height:auto}
+.vc-img-cap{position:absolute;left:0;right:0;bottom:0;padding:14px 18px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.92rem;color:rgba(232,213,163,.94);background:linear-gradient(180deg,transparent 0%,rgba(7,5,3,.85) 100%);letter-spacing:.02em}
+
+/* GUEST page countdown — placed below the personal letter */
+.g-countdown{max-width:760px;margin:48px auto 0;text-align:center;padding:36px 24px;border-top:1px solid rgba(201,168,76,.18);border-bottom:1px solid rgba(201,168,76,.18)}
+.g-cd-eye{display:block;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.5em;text-transform:uppercase;color:var(--g);margin-bottom:24px}
+.g-cd-grid{display:flex;gap:32px;justify-content:center;align-items:flex-start;flex-wrap:wrap}
+.g-cd-u{text-align:center;min-width:78px}
+.g-cd-n{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(2.4rem,4vw,3.4rem);color:var(--g);line-height:1;text-shadow:0 0 32px rgba(201,168,76,.32)}
+.g-cd-l{display:block;font-size:.5rem;letter-spacing:.34em;text-transform:uppercase;color:var(--lt);margin-top:8px;font-family:'Montserrat',sans-serif}
+.g-cd-sep{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:rgba(201,168,76,.32);align-self:flex-start;padding-top:8px}
+.g-cd-when{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;color:var(--mid);margin-top:22px;letter-spacing:.04em}
+@media(max-width:600px){
+  .g-cd-grid{gap:16px}
+  .g-cd-u{min-width:60px}
+  .g-cd-sep{font-size:1.6rem;padding-top:6px}
+  .g-cd-when{font-size:.85rem}
+}
 
 /* HOST gate inset in Personal Mastery */
 .gate-inset{margin:48px auto 0;max-width:760px;position:relative;overflow:hidden;
@@ -1041,7 +1090,7 @@ tbody tr:last-child td{border-bottom:none}
         <line x1="38" y1="6" x2="60" y2="6" stroke="rgba(201,168,76,.35)" stroke-width=".7"/>
       </svg>
     </div>
-    <div class="lsub">Destination Wedding Atelier</div>
+    <div class="lsub">DESTINATION WEDDING ATELIER</div>
     <div class="lf">
       <label>Name</label>
       <input type="text" id="lu" placeholder="Your name" autocomplete="off">
@@ -1106,7 +1155,7 @@ tbody tr:last-child td{border-bottom:none}
     <div class="hero-atm hero-host-bg" id="hero-atm"></div>
     <div class="hero-content">
       <span class="h-eye">An Exclusive Proposal — Il Castello di Piacenza, Emilia Romagna</span>
-      <div class="h-names">Toni <span class="amp">&amp;</span> Eva</div>
+      <div class="h-names">Toni <span class="amp">&amp;</span> Cote</div>
       <div class="h-venue">Piacenza Hills · September 2026</div>
       <div class="h-rule">
         <svg class="miracle-mono" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.2"><path d="M12 2L13.6 9.2C13.8 10.0 14.4 10.6 15.2 10.8L22 12L15.2 13.2C14.4 13.4 13.8 14.0 13.6 14.8L12 22L10.4 14.8C10.2 14.0 9.6 13.4 8.8 13.2L2 12L8.8 10.8C9.6 10.6 10.2 10.0 10.4 9.2Z"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
@@ -1222,7 +1271,7 @@ tbody tr:last-child td{border-bottom:none}
         </div>
         <div style="padding:22px 20px;border:1px solid rgba(201,168,76,.1);background:rgba(201,168,76,.02)">
           <div style="font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.28em;color:var(--g);text-transform:uppercase;margin-bottom:10px">The History</div>
-          <p style="font-size:.7rem;color:rgba(250,248,243,.48);line-height:1.8;margin:0">Documented since 1001 A.D. · Benedictine monks → Gerolamini → Guelph/Ghibelline struggles → Emilian noble families → WWII use → Cultural centre 1980s → Exclusive private estate · Now yours</p>
+          <p style="font-size:.7rem;color:rgba(250,248,243,.48);line-height:1.8;margin:0">Documented since 1001 A.D. · Benedictine monks → Gerolamini → Guelph/Ghibelline struggles → Emilian noble families → Cultural centre 1980s → Exclusive private estate · Now yours</p>
         </div>
       </div>
       <div class="vc rv rr s3" id="venue-card">
@@ -1234,6 +1283,11 @@ tbody tr:last-child td{border-bottom:none}
           <div><span class="vc-sn">X</span><span class="vc-sl">Century · Est. 1001</span></div>
           <div><span class="vc-sn">8,000</span><span class="vc-sl">sqm Interiors</span></div>
           <div><span class="vc-sn">7 ha</span><span class="vc-sl">Park &amp; Grounds</span></div>
+        </div>
+        <!-- Aerial image fills the empty space below stats -->
+        <div class="vc-img-wrap rv s4">
+          <img src="c111.webp" alt="Aerial view of Il Castello di Piacenza" loading="lazy">
+          <div class="vc-img-cap">From above · The castello in its hills</div>
         </div>
       </div>
     </div>
@@ -1270,10 +1324,10 @@ tbody tr:last-child td{border-bottom:none}
 
       <!-- ── 4-image mood gallery (the four moods you're selling) ── -->
       <div class="mood4 rv s2">
-        <div class="mc"><img src="c157.webp" alt="Terracotta inner courtyard with the ancient well"><div class="mc-cap">Il Cortile</div></div>
-        <div class="mc"><img src="c192.webp" alt="Frescoed loggia with medieval mural"><div class="mc-cap">La Loggia</div></div>
-        <div class="mc"><img src="c141.webp" alt="Centuries-old fountain in the park"><div class="mc-cap">La Fontana</div></div>
-        <div class="mc"><img src="c169.webp" alt="The private chapel with Resurrection fresco"><div class="mc-cap">La Cappella</div></div>
+        <div class="mc" onclick="openGLB('c157.webp','Il Cortile · Terracotta Courtyard with Ancient Well')" role="button" tabindex="0"><img src="c157.webp" alt="Terracotta inner courtyard with the ancient well"><div class="mc-cap">Il Cortile</div></div>
+        <div class="mc" onclick="openGLB('c192.webp','La Loggia · Frescoed Hall with Medieval Mural')" role="button" tabindex="0"><img src="c192.webp" alt="Frescoed loggia with medieval mural"><div class="mc-cap">La Loggia</div></div>
+        <div class="mc" onclick="openGLB('c141.webp','La Fontana · Centuries-Old Fountain in the Park')" role="button" tabindex="0"><img src="c141.webp" alt="Centuries-old fountain in the park"><div class="mc-cap">La Fontana</div></div>
+        <div class="mc" onclick="openGLB('c169.webp','La Cappella · The Private Chapel with the Resurrection Fresco')" role="button" tabindex="0"><img src="c169.webp" alt="The private chapel with Resurrection fresco"><div class="mc-cap">La Cappella</div></div>
       </div>
     </div>
   </section>
@@ -1289,7 +1343,7 @@ tbody tr:last-child td{border-bottom:none}
       <!-- ── Gate inset · the threshold ── -->
       <div class="gate-inset rv s4">
         <img src="c130.webp" alt="The great gate of Il Castello di Piacenza, flanked by guardian statues">
-        <div class="gi-cap">Your guests see them through this gate. The first 60 seconds set the entire weekend.</div>
+        <div class="gi-cap">Ready to walk through.</div>
       </div>
     </div>
   </section>
@@ -1335,8 +1389,8 @@ tbody tr:last-child td{border-bottom:none}
   <!-- FOOTER -->
   <footer style="background:var(--dk);padding:38px 64px;text-align:center;border-top:1px solid rgba(201,168,76,.08)">
     <div class="cnav-logo" style="margin-bottom:10px">YH GRAND WEDDING</div>
-    <div class="cf-tg">Destination Wedding Atelier</div>
-    <div style="font-size:.57rem;color:rgba(201,168,76,.2);margin-top:18px;letter-spacing:.1em">© 2026 · Crafted with love for Toni &amp; Eva</div>
+    <div class="cf-tg">DESTINATION WEDDING ATELIER</div>
+    <div style="font-size:.57rem;color:rgba(201,168,76,.2);margin-top:18px;letter-spacing:.1em">© 2026 · Crafted with love for Toni &amp; Cote</div>
   </footer>
 
 </div><!-- /#client-page -->
@@ -1414,7 +1468,7 @@ tbody tr:last-child td{border-bottom:none}
     <div class="ptb">
       <div>
         <div class="ptb-t" id="ptb-title">Dashboard</div>
-        <div style="font-size:.6rem;color:var(--lt)">Toni &amp; Eva · Il Castello di Piacenza · Sep 11–13, 2026</div>
+        <div style="font-size:.6rem;color:var(--lt)">Toni &amp; Cote · Il Castello di Piacenza · Sep 11–13, 2026</div>
         <div style="margin-top:8px;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.32em;color:rgba(201,168,76,.45);text-transform:uppercase">Miracle Wedding</div>
         <div style="margin-top:12px;overflow:hidden;border:1px solid rgba(201,168,76,.12)"><img src="c111.webp" class="pven-img" alt="Castello Piacenza" style="height:130px;width:100%;object-fit:cover;object-position:center 38%"></div>
       </div>
@@ -1609,7 +1663,7 @@ tbody tr:last-child td{border-bottom:none}
           <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.4rem);color:var(--dk2);font-style:italic;margin-bottom:8px">Black Tie</div>
           <div style="font-size:.7rem;color:var(--lt);letter-spacing:.18em;text-transform:uppercase;margin-bottom:28px">Formal Evening Dress</div>
           <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--g),transparent);margin:0 auto 28px"></div>
-          <p style="font-size:.78rem;color:var(--mid);line-height:1.9;max-width:460px;margin:0 auto">The ceremony takes place within the stone halls and ancient courtyard of a 10th-century castello. The reception unfolds beneath the stars of the Piacenza hills. Dress as you would for the most beautiful evening of the year — because it will be.</p>
+          <p style="font-size:.78rem;color:var(--mid);line-height:1.9;max-width:460px;margin:0 auto">The ceremony takes place within the stone halls and ancient courtyard of a 10th-century castello. The reception unfolds beneath the stars of the Piacenza hills.</p>
         </div>
       </div>
 
@@ -1735,7 +1789,7 @@ tbody tr:last-child td{border-bottom:none}
     <div class="hero-atm" id="g-hero-atm"></div>
     <div class="hero-content" style="max-width:820px">
       <span class="g-eye">With Great Love & Joy — You Are Invited</span>
-      <div class="g-couple">Toni <span class="amp">&amp;</span> Eva</div>
+      <div class="g-couple">Toni <span class="amp">&amp;</span> Cote</div>
       <div class="h-rule" style="animation:hfade 1.4s var(--ease) .85s both;margin-bottom:28px">
         <svg class="miracle-mono" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.2"><path d="M12 2L13.6 9.2C13.8 10.0 14.4 10.6 15.2 10.8L22 12L15.2 13.2C14.4 13.4 13.8 14.0 13.6 14.8L12 22L10.4 14.8C10.2 14.0 9.6 13.4 8.8 13.2L2 12L8.8 10.8C9.6 10.6 10.2 10.0 10.4 9.2Z"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
       </div>
@@ -1796,17 +1850,17 @@ tbody tr:last-child td{border-bottom:none}
         <div class="inv-dear">To the honoured guest</div>
         <div class="inv-recipient" id="inv-name">Joschua B.</div>
         <div class="inv-divider"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="color:rgba(201,168,76,.5)"><path d="M12 2L13.6 9.2C13.8 10.0 14.4 10.6 15.2 10.8L22 12L15.2 13.2C14.4 13.4 13.8 14.0 13.6 14.8L12 22L10.4 14.8C10.2 14.0 9.6 13.4 8.8 13.2L2 12L8.8 10.8C9.6 10.6 10.2 10.0 10.4 9.2Z" stroke-width="1.2"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></div>
-        <p class="inv-body">You hold in your hands — or rather, on your screen — something rare: an invitation to witness love in its most magnificent form. Toni and Eva have chosen to celebrate the greatest chapter of their story at one of Italy's most breathtaking castles, surrounded only by those who matter most.</p>
+        <p class="inv-body">You hold in your hands — or rather, on your screen — something rare: an invitation to witness love in its most magnificent form. Toni and Cote have chosen to celebrate the greatest chapter of their story at one of Italy's most breathtaking castles, surrounded only by those who&nbsp;matter&nbsp;most.</p>
         <p class="inv-body" style="margin-top:0">That circle includes you. Not by accident. By choice. By love.</p>
         <p class="inv-body" style="margin-top:0">We invite you to join us for a weekend unlike any you have experienced — where every detail has been obsessed over, every moment curated, and where the only thing that matters is the joy of being present for something truly extraordinary.</p>
         <div class="inv-divider" style="margin-top:32px"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="color:rgba(201,168,76,.5)"><path d="M12 2L13.6 9.2C13.8 10.0 14.4 10.6 15.2 10.8L22 12L15.2 13.2C14.4 13.4 13.8 14.0 13.6 14.8L12 22L10.4 14.8C10.2 14.0 9.6 13.4 8.8 13.2L2 12L8.8 10.8C9.6 10.6 10.2 10.0 10.4 9.2Z" stroke-width="1.2"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></div>
-        <div class="inv-sig">Toni &amp; Eva</div>
+        <div class="inv-sig">Toni &amp; Cote</div>
         <div class="inv-sigsub">With all our love · September 2026</div>
       </div>
     </div>
     <!-- Print / Save PDF -->
     <div class="inv-actions">
-      <button class="inv-act-btn" onclick="window.print()">
+      <button class="inv-act-btn" onclick="printInvitation()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
         Print Invitation
       </button>
@@ -1814,6 +1868,21 @@ tbody tr:last-child td{border-bottom:none}
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Save as PDF
       </button>
+    </div>
+
+    <!-- Countdown to the wedding -->
+    <div class="g-countdown rv s2">
+      <span class="g-cd-eye">Counting Down to the Sacred Day</span>
+      <div class="g-cd-grid">
+        <div class="g-cd-u"><span class="g-cd-n" id="gcd-d">--</span><span class="g-cd-l">Days</span></div>
+        <span class="g-cd-sep">·</span>
+        <div class="g-cd-u"><span class="g-cd-n" id="gcd-h">--</span><span class="g-cd-l">Hours</span></div>
+        <span class="g-cd-sep">·</span>
+        <div class="g-cd-u"><span class="g-cd-n" id="gcd-m">--</span><span class="g-cd-l">Minutes</span></div>
+        <span class="g-cd-sep">·</span>
+        <div class="g-cd-u"><span class="g-cd-n" id="gcd-s">--</span><span class="g-cd-l">Seconds</span></div>
+      </div>
+      <div class="g-cd-when">12 September 2026 · 12:00 · The Chapel · Il Castello di Piacenza</div>
     </div>
   </section>
 
@@ -1826,7 +1895,7 @@ tbody tr:last-child td{border-bottom:none}
         <h2 class="s-title" style="color:var(--gl)"><em>Miracle</em><br>Wedding</h2>
         <div class="s-rule" style="margin:22px 0"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L13.6 9.2C13.8 10.0 14.4 10.6 15.2 10.8L22 12L15.2 13.2C14.4 13.4 13.8 14.0 13.6 14.8L12 22L10.4 14.8C10.2 14.0 9.6 13.4 8.8 13.2L2 12L8.8 10.8C9.6 10.6 10.2 10.0 10.4 9.2Z" stroke-width="1.2"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></div>
         <p class="s-body" style="color:rgba(245,232,200,.85);margin-bottom:20px">Some events are merely beautiful. Others change the way you see the world. This is the second kind.</p>
-        <p class="s-body" style="color:rgba(245,232,200,.78);margin-bottom:32px">Toni and Eva met in Milano on an ordinary Tuesday and made it extraordinary. Three years later, they have chosen a fortress born in the year 1001 — rising from the Benedictine monks to the noble families of Emilia, surviving Guelphs and Ghibellines, overlooking the Luretta valley from the hills of Piacenza — to declare to the world what they have known since that Tuesday: this love is a miracle.</p>
+        <p class="s-body" style="color:rgba(245,232,200,.78);margin-bottom:32px">Toni and Cote met in Milano on an ordinary Tuesday and made it extraordinary. Three years later, they have chosen a fortress born in the year 1001 — rising from the Benedictine monks to the noble families of Emilia, surviving Guelphs and Ghibellines, overlooking the Luretta valley from the hills of Piacenza — to declare to the world what they have known since that Tuesday: this love is a miracle.</p>
         <div class="concept-words">
           <span class="cw-tag">Il Castello di Piacenza</span>
           <span class="cw-tag">16th Century</span>
@@ -1864,7 +1933,7 @@ tbody tr:last-child td{border-bottom:none}
   <div class="umi rv">
     <div class="umi-inner">
       <span class="umi-tag">Un piccolo miracolo —</span>
-      the stones beneath your feet have been listening to vows since the year 1001. <span class="umi-mono">⁂</span> They are listening again.
+      The stones beneath your feet have been listening to vows since the year 1001. <span class="umi-mono">⁂</span> They are listening again.
     </div>
   </div>
 
@@ -2008,7 +2077,7 @@ tbody tr:last-child td{border-bottom:none}
         <div class="s-rule rv s3"><svg class="miracle-mono" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="1.2"><path d="M12 2L13.6 9.2C13.8 10.0 14.4 10.6 15.2 10.8L22 12L15.2 13.2C14.4 13.4 13.8 14.0 13.6 14.8L12 22L10.4 14.8C10.2 14.0 9.6 13.4 8.8 13.2L2 12L8.8 10.8C9.6 10.6 10.2 10.0 10.4 9.2Z"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></div>
         <p class="s-body rv s4" style="max-width:680px;margin:0 auto;color:rgba(250,248,243,.66);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.08rem;line-height:1.85">Eight thousand square metres of fortified stone, four turreted towers, a 17th-century church, a private chapel painted with the Resurrection, frescoed halls and vaulted cellars — wrapped in seven hectares of park with two lakes, a natural spring, statues, and a centuries-old fountain. The castello rises from the slopes of Monte Bissago, looking down on the Luretta valley exactly as it has since the year 1001. For three days in September it is yours.</p>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px" class="rv s3">
+      <div class="venue-stats rv s3">
         <div style="padding:28px 22px;border:1px solid rgba(201,168,76,.12);background:rgba(201,168,76,.028);text-align:center">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="color:var(--g);margin-bottom:14px"><rect x="3" y="9" width="18" height="13" rx="1"/><path d="M8 22V12h8v10M1 9l11-7 11 7"/></svg>
           <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gl);margin-bottom:5px">The Estate</div>
@@ -2069,7 +2138,7 @@ tbody tr:last-child td{border-bottom:none}
         </div>
         <div class="chapel-text">
           <span class="chapel-eye">La Cappella · The Private Chapel</span>
-          <h3 class="chapel-title">Where Toni and Eva will <em>say yes</em></h3>
+          <h3 class="chapel-title">Where Toni and Cote will <em>say yes</em></h3>
           <div class="chapel-rule"></div>
           <p>Inside the castle, painted in the 18th century, lives a chapel whose walls hold a Resurrection — Christ rising in tempera and gold leaf — beside the crucifix that has presided over seven centuries of prayer. The vaulted ceiling is a sky in pigment: cobalt blue and cartouches of gold.</p>
           <p>This is where the ceremony takes place.</p>
@@ -2089,6 +2158,9 @@ tbody tr:last-child td{border-bottom:none}
     </div>
     <div class="prog-wrap">
       <div class="prog-line"></div>
+
+      <div class="prog-day rv s1"><div><span class="prog-day-l">Saturday · 12 September</span><span class="prog-day-d">The wedding day</span></div></div>
+
       <div class="prog-item rv s1">
         <div class="prog-c">
           <span class="prog-t">11:30</span>
@@ -2104,7 +2176,7 @@ tbody tr:last-child td{border-bottom:none}
         <div class="prog-e">
           <span class="prog-t">12:00</span>
           <div class="prog-n">The Ceremony</div>
-          <div class="prog-d">String quartet, frescoed archway, tears of joy. The moment it all becomes real.</div>
+          <div class="prog-d">String quartet, the chapel painted with the Resurrection, tears of joy. The moment it all becomes real.</div>
         </div>
       </div>
       <div class="prog-item rv s1">
@@ -2142,6 +2214,18 @@ tbody tr:last-child td{border-bottom:none}
           <div class="prog-n">La Notte</div>
           <div class="prog-d">Full band. Dancing. Late-night pizzette. Stories told that will last a lifetime.</div>
         </div>
+      </div>
+
+      <div class="prog-day rv s1"><div><span class="prog-day-l">Sunday · 13 September</span><span class="prog-day-d">A gentle goodbye</span></div></div>
+
+      <div class="prog-item rv s2">
+        <div class="prog-c">
+          <span class="prog-t">10:00 — 13:00</span>
+          <div class="prog-n">Farewell Brunch</div>
+          <div class="prog-d">Italian pastries, fresh espresso, last embraces in the castello gardens. Take your time. There is no rush.</div>
+        </div>
+        <div class="prog-dot"></div>
+        <div class="prog-e"></div>
       </div>
     </div>
   </section>
@@ -2232,7 +2316,7 @@ tbody tr:last-child td{border-bottom:none}
           <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.4rem);color:var(--dk2);font-style:italic;margin-bottom:8px">Black Tie</div>
           <div style="font-size:.7rem;color:var(--lt);letter-spacing:.18em;text-transform:uppercase;margin-bottom:28px">Formal Evening Dress</div>
           <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--g),transparent);margin:0 auto 28px"></div>
-          <p style="font-size:.78rem;color:var(--mid);line-height:1.9;max-width:460px;margin:0 auto">The ceremony takes place within the stone halls and ancient courtyard of a 10th-century castello. The reception unfolds beneath the stars of the Piacenza hills. Dress as you would for the most beautiful evening of the year — because it will be.</p>
+          <p style="font-size:.78rem;color:var(--mid);line-height:1.9;max-width:460px;margin:0 auto">The ceremony takes place within the stone halls and ancient courtyard of a 10th-century castello. The reception unfolds beneath the stars of the Piacenza hills.</p>
         </div>
       </div>
 
@@ -2461,7 +2545,7 @@ tbody tr:last-child td{border-bottom:none}
         <div class="rsvp-step" id="rs3">
           <div style="text-align:center;margin-bottom:20px">
             <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--dk2)">A personal message?</div>
-            <div style="font-size:.7rem;color:var(--lt);margin-top:6px">Optional — Toni &amp; Eva will treasure every word</div>
+            <div style="font-size:.7rem;color:var(--lt);margin-top:6px">Optional — Toni &amp; Cote will treasure every word</div>
           </div>
           <textarea class="rsvp-ta" id="rsvp-msg" placeholder="Write something from the heart…"></textarea>
           <div style="display:flex;justify-content:space-between;margin-top:18px">
@@ -2475,7 +2559,7 @@ tbody tr:last-child td{border-bottom:none}
             <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" style="color:var(--g);margin-bottom:20px"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:3.2rem;color:var(--g);margin-bottom:10px">Grazie Mille</div>
             <div style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--dk2);margin-bottom:8px" id="rsvp-confirm-msg">Your response has been received.</div>
-            <div style="font-size:.7rem;color:var(--lt)">Toni &amp; Eva will be in touch. With so much love.</div>
+            <div style="font-size:.7rem;color:var(--lt)">Toni &amp; Cote will be in touch. With so much love.</div>
           </div>
         </div>
       </div>
@@ -2508,7 +2592,7 @@ tbody tr:last-child td{border-bottom:none}
   <div class="umi dark rv">
     <div class="umi-inner">
       <span class="umi-tag">Un piccolo miracolo —</span>
-      of every face in every photograph from this weekend, <span class="umi-mono">⁂</span> yours will be among the ones Toni and Eva look for first.
+      Of every face in every photograph from this weekend, <span class="umi-mono">⁂</span> yours will be among the ones Toni and Cote look for first.
     </div>
   </div>
 
@@ -2516,12 +2600,12 @@ tbody tr:last-child td{border-bottom:none}
     <div style="max-width:1060px;margin:0 auto">
       <div style="text-align:center;margin-bottom:48px">
         <span class="s-eye rv s1">From the Hearts of</span>
-        <h2 class="s-title rv s2" style="color:var(--gl);text-shadow:0 0 60px rgba(201,168,76,.25)">Toni <em>&amp;</em> Eva</h2>
+        <h2 class="s-title rv s2" style="color:var(--gl);text-shadow:0 0 60px rgba(201,168,76,.25)">Toni <em>&amp;</em> Cote</h2>
         <div class="s-rule rv s3"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L13.6 9.2C13.8 10.0 14.4 10.6 15.2 10.8L22 12L15.2 13.2C14.4 13.4 13.8 14.0 13.6 14.8L12 22L10.4 14.8C10.2 14.0 9.6 13.4 8.8 13.2L2 12L8.8 10.8C9.6 10.6 10.2 10.0 10.4 9.2Z" stroke-width="1.2"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></div>
       </div>
       <div class="pmsg-box rv s2">
         <div class="pmsg-q" id="g-personal-msg">You have been part of our story in ways you may not even know. Your presence at our wedding is not a formality — it is a gift. We cannot wait to look across that castello garden and see your face among the faces of those we love most. Thank you for being in our life. Thank you for coming to witness this miracle with us.</div>
-        <div class="pmsg-from">Toni &amp; Eva</div>
+        <div class="pmsg-from">Toni &amp; Cote</div>
         <div class="pmsg-sub" style="margin-top:4px">With infinite love · Piacenza Hills · September 2026</div>
         <div class="pmsg-footer-stars">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L13.6 9.2C13.8 10.0 14.4 10.6 15.2 10.8L22 12L15.2 13.2C14.4 13.4 13.8 14.0 13.6 14.8L12 22L10.4 14.8C10.2 14.0 9.6 13.4 8.8 13.2L2 12L8.8 10.8C9.6 10.6 10.2 10.0 10.4 9.2Z" stroke-width="1.2"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
@@ -2537,7 +2621,7 @@ tbody tr:last-child td{border-bottom:none}
   <!-- FOOTER -->
   <footer style="background:rgba(4,3,2,1);padding:38px 64px;text-align:center;border-top:1px solid rgba(201,168,76,.07)">
     <div style="font-family:'Cinzel',serif;font-size:1.05rem;letter-spacing:.28em;color:rgba(201,168,76,.72);margin-bottom:10px">YH GRAND WEDDING</div>
-    <div style="font-size:.52rem;color:rgba(201,168,76,.25);margin-top:12px;letter-spacing:.2em;font-family:'Montserrat',sans-serif">Destination Wedding Atelier</div>
+    <div style="font-size:.52rem;color:rgba(201,168,76,.25);margin-top:12px;letter-spacing:.2em;font-family:'Montserrat',sans-serif">DESTINATION WEDDING ATELIER</div>
   </footer>
 
 </div><!-- /#guest-page -->
@@ -2672,7 +2756,7 @@ let musicItems = [
   {id:5,phase:'Recessional',piece:'Handel — Water Music Suite',artist:'String Quartet',duration:'4 min',notes:'Couple exit'},
   {id:6,phase:'Cocktail Hour',piece:'Jazz Standards Medley',artist:'Trio',duration:'90 min',notes:'Background ambience'},
   {id:7,phase:'Dinner',piece:'Italian Classics Selection',artist:'Full Band',duration:'2 hrs',notes:'Soft background during dinner'},
-  {id:8,phase:'First Dance',piece:'La Vie en Rose — Édith Piaf',artist:'Full Band',duration:'4 min',notes:'Toni & Eva special request'},
+  {id:8,phase:'First Dance',piece:'La Vie en Rose — Édith Piaf',artist:'Full Band',duration:'4 min',notes:'Toni & Cote special request'},
   {id:9,phase:'Evening',piece:'Dance Floor Set',artist:'Full Band',duration:'4 hrs',notes:'Mixed contemporary & classics'}
 ];
 
@@ -2694,11 +2778,66 @@ let editMode = null;
 let editId = null;
 
 /* ═══════════════ AUTH ═══════════════ */
-function savePDF(){
+function printInvitation(){
   const t=document.title;
-  document.title='Invitation — Toni & Eva Wedding · Il Castello di Piacenza';
+  document.title='Invitation — Toni & Cote Wedding · Il Castello di Piacenza';
   window.print();
   setTimeout(()=>document.title=t,1000);
+}
+function savePDF(){
+  // Build the standalone letter HTML and download as PDF via html2pdf
+  const letterHTML = document.querySelector('#g-inv .inv-wrap').outerHTML;
+  // Lazy-load html2pdf only when needed
+  const ensure = () => new Promise((resolve, reject) => {
+    if (window.html2pdf) return resolve();
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+    s.onload = resolve; s.onerror = reject;
+    document.head.appendChild(s);
+  });
+  ensure().then(() => {
+    // Render in a hidden container with print-style overrides so output matches the print version
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'position:fixed;left:-9999px;top:0;width:794px;background:#FAF8F1;padding:30px;font-family:"Cormorant Garamond",serif';
+    wrap.innerHTML = `<style>
+      .inv-wrap{max-width:100%;margin:0;padding:0}
+      .inv-actions{display:none}
+      .inv-env{background:linear-gradient(158deg,#FBF8F1 0%,#F7F2E6 25%,#FAF6EC 55%,#F4EFE0 80%,#F8F4E8 100%);
+        border:1px solid rgba(201,168,76,.45);padding:42px 48px;text-align:center;position:relative}
+      .inv-env::before{content:'';position:absolute;top:0;left:0;width:36px;height:36px;border-top:2px solid rgba(201,168,76,.55);border-left:2px solid rgba(201,168,76,.55)}
+      .inv-env::after{content:'';position:absolute;bottom:0;right:0;width:36px;height:36px;border-bottom:2px solid rgba(201,168,76,.55);border-right:2px solid rgba(201,168,76,.55)}
+      .inv-tc{position:absolute;top:0;right:0;width:36px;height:36px;border-top:2px solid rgba(201,168,76,.55);border-right:2px solid rgba(201,168,76,.55)}
+      .inv-bc{position:absolute;bottom:0;left:0;width:36px;height:36px;border-bottom:2px solid rgba(201,168,76,.55);border-left:2px solid rgba(201,168,76,.55)}
+      .inv-seal{margin:0 auto 22px;display:flex;align-items:center;justify-content:center}
+      .inv-dear{font-style:italic;font-size:.78rem;color:rgba(180,140,55,.7);letter-spacing:.18em;margin-bottom:8px;font-family:'Cormorant Garamond',serif}
+      .inv-recipient{font-style:italic;font-weight:300;font-size:2.4rem;color:#C9A84C;line-height:1;margin-bottom:20px;font-family:'Cormorant Garamond',serif}
+      .inv-divider{display:flex;align-items:center;gap:16px;margin:18px auto;max-width:280px}
+      .inv-divider::before,.inv-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent)}
+      .inv-body{font-style:italic;font-size:.95rem;line-height:1.75;color:#3D4B6E;margin-bottom:16px;font-family:'Cormorant Garamond',serif;text-align:center}
+      .inv-sig{font-style:italic;font-weight:300;font-size:2rem;color:#C9A84C;margin-top:18px;font-family:'Cormorant Garamond',serif}
+      .inv-sigsub{font-size:.55rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(201,168,76,.65);margin-top:6px;font-family:'Montserrat',sans-serif;font-weight:500}
+    </style>` + letterHTML;
+    document.body.appendChild(wrap);
+    const guestName = (document.getElementById('inv-name')||{}).textContent || 'Guest';
+    const filename = `Invitation - ${guestName} - Toni & Cote Wedding.pdf`;
+    html2pdf().set({
+      margin: [10, 10, 10, 10],
+      filename,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2.4, useCORS: true, backgroundColor: '#FAF8F1' },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    }).from(wrap).save().then(() => {
+      document.body.removeChild(wrap);
+    }).catch(err => {
+      console.error('PDF generation failed:', err);
+      document.body.removeChild(wrap);
+      // Fallback: trigger print dialog instead
+      printInvitation();
+    });
+  }).catch(() => {
+    // Network failed — fall back to print dialog
+    printInvitation();
+  });
 }
 function togglePwVis(){
   const inp = document.getElementById('lp');
@@ -2748,23 +2887,27 @@ function logout(){
 document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 document.getElementById('lu').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 
-/* ═══════════════ CURSOR ═══════════════ */
+/* ═══════════════ CURSOR — desktop only, never on touch ═══════════════ */
+const IS_DESKTOP = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
 const $dot=document.getElementById('cd');
 const $ring=document.getElementById('cr');
-let mx=-300,my=-300,rx=-300,ry=-300;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});
-(function cursorRAF(){
-  $dot.style.transform='translate('+(mx-4)+'px,'+(my-4)+'px)';
-  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
-  $ring.style.transform='translate('+(rx-22)+'px,'+(ry-22)+'px)';
-  requestAnimationFrame(cursorRAF);
-})();
-document.addEventListener('mousedown',()=>{$dot.style.width='5px';$dot.style.height='5px';$ring.style.width='46px';$ring.style.height='46px';});
-document.addEventListener('mouseup',()=>{$dot.style.width='8px';$dot.style.height='8px';$ring.style.width='32px';$ring.style.height='32px';});
+if (IS_DESKTOP && $dot && $ring) {
+  let mx=-300,my=-300,rx=-300,ry=-300;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});
+  (function cursorRAF(){
+    $dot.style.transform='translate('+(mx-4)+'px,'+(my-4)+'px)';
+    rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+    $ring.style.transform='translate('+(rx-22)+'px,'+(ry-22)+'px)';
+    requestAnimationFrame(cursorRAF);
+  })();
+  document.addEventListener('mousedown',()=>{$dot.style.width='5px';$dot.style.height='5px';$ring.style.width='46px';$ring.style.height='46px';});
+  document.addEventListener('mouseup',()=>{$dot.style.width='8px';$dot.style.height='8px';$ring.style.width='32px';$ring.style.height='32px';});
+}
 
 /* Cursor hover state — attach once and via MutationObserver for dynamic DOM */
 function bindCursorHover(){
-  document.querySelectorAll('a,button,input,select,textarea,label,[role="button"],[onclick],[draggable],.kcard,.sel,.psi,.map-link,.diet-tag,.rsvp-opt,.vw,.gal-p,.lbtn,.pbtn,.gbtn,.ab,.gnav-exit,.cno,.pso,.mhx').forEach(el=>{
+  if (!IS_DESKTOP) return;
+  document.querySelectorAll('a,button,input,select,textarea,label,[role="button"],[onclick],[draggable],.kcard,.sel,.psi,.map-link,.diet-tag,.rsvp-opt,.vw,.gal-p,.lbtn,.pbtn,.gbtn,.ab,.gnav-exit,.cno,.pso,.mhx,.mc').forEach(el=>{
     if(el._curHov) return;
     el._curHov=true;
     el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
@@ -2833,29 +2976,12 @@ function initClient(){
   window.scrollTo(0,0);
   document.getElementById('pc').classList.remove('off');
   startCountdown();
-  // Guest countdown
-  function guestCountdown(){
-    const target=new Date('2026-09-11T15:00:00');
-    const now=new Date();
-    const diff=target-now;
-    if(diff<=0){['gcd-d','gcd-h','gcd-m','gcd-s'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='0';});return;}
-    const d=Math.floor(diff/86400000);
-    const h=Math.floor((diff%86400000)/3600000);
-    const m=Math.floor((diff%3600000)/60000);
-    const s=Math.floor((diff%60000)/1000);
-    ['gcd-d','gcd-h','gcd-m','gcd-s'].forEach((id,i)=>{
-      const el=document.getElementById(id);
-      if(el)el.textContent=String([d,h,m,s][i]).padStart(2,'0');
-    });
-    setTimeout(guestCountdown,1000);
-  }
-  guestCountdown();
   initScrollReveal();
   initCardEffects();
   initMagneticButtons();
   
   if(typeof Lenis!=='undefined'){
-    lenis=new Lenis({duration:1.05,easing:t=>1-Math.pow(1-t,4),smoothWheel:true,wheelMultiplier:0.82,touchMultiplier:1.4,infinite:false});
+    lenis=new Lenis({duration:0.85,easing:t=>1-Math.pow(1-t,3.5),smoothWheel:true,wheelMultiplier:1.0,touchMultiplier:1.6,infinite:false,lerp:0.12});
     const heroEl=document.getElementById('hero-atm');
     lenis.on('scroll',({scroll})=>{
       if(heroEl)heroEl.style.transform=`translateY(${scroll*.38}px)`;
@@ -3477,6 +3603,23 @@ let rsvpStep = 1;
 
 function initGuest(){
   window.scrollTo(0,0);
+  // Guest countdown — wedding 12 Sep 2026, ceremony at 12:00
+  function guestCountdown(){
+    const target=new Date('2026-09-12T12:00:00');
+    const now=new Date();
+    const diff=target-now;
+    if(diff<=0){['gcd-d','gcd-h','gcd-m','gcd-s'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='00';});return;}
+    const d=Math.floor(diff/86400000);
+    const h=Math.floor((diff%86400000)/3600000);
+    const m=Math.floor((diff%3600000)/60000);
+    const s=Math.floor((diff%60000)/1000);
+    ['gcd-d','gcd-h','gcd-m','gcd-s'].forEach((id,i)=>{
+      const el=document.getElementById(id);
+      if(el)el.textContent=String([d,h,m,s][i]).padStart(2,'0');
+    });
+    setTimeout(guestCountdown,1000);
+  }
+  guestCountdown();
   // Personalize with guest name
   const fn = currentUser.firstName || 'Guest';
   const dn = currentUser.displayName || 'Guest';
@@ -3496,7 +3639,7 @@ function initGuest(){
 
   // Init Lenis for guest
   if(typeof Lenis !== 'undefined'){
-    guestLenis = new Lenis({duration:1.05,easing:t=>1-Math.pow(1-t,4),smoothWheel:true,wheelMultiplier:0.82,touchMultiplier:1.4,infinite:false});
+    guestLenis = new Lenis({duration:0.85,easing:t=>1-Math.pow(1-t,3.5),smoothWheel:true,wheelMultiplier:1.0,touchMultiplier:1.6,infinite:false,lerp:0.12});
     const gHeroEl = document.getElementById('g-hero-atm');
     guestLenis.on('scroll',({scroll})=>{
       if(gHeroEl) gHeroEl.style.transform = 'translateY(' + (scroll * .38) + 'px)';
@@ -3694,7 +3837,7 @@ function submitQuestion(){
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
     body: JSON.stringify({
       name, email, message: msg,
-      _subject: 'Guest Question — Toni & Eva Wedding · Il Castello di Piacenza'
+      _subject: 'Guest Question — Toni & Cote Wedding · Il Castello di Piacenza'
     })
   }).then(r => {
     if(r.ok){
@@ -3736,17 +3879,27 @@ function closeGLB() {
   document.getElementById('glb-img').src = '';
   document.body.style.overflow = '';
   if (guestLenis) guestLenis.start();
+  if (typeof lenis !== 'undefined' && lenis) lenis.start();
+}
+function glbBackdropClick(e) {
+  // Only close when clicking actual backdrop (not the image, title, desc, or close button)
+  const img = document.getElementById('glb-img');
+  const meta = document.getElementById('glb-meta');
+  const closeBtn = document.getElementById('glb-close');
+  if (e.target === img || e.target === closeBtn) return;
+  if (meta && (e.target === meta || meta.contains(e.target))) return;
+  closeGLB();
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGLB(); });
 
 </script>
 
 <!-- ── GALLERY LIGHTBOX ── -->
-<div id="glb" onclick="if(event.target===this)closeGLB()">
+<div id="glb" onclick="glbBackdropClick(event)">
   <button id="glb-close" onclick="closeGLB()" aria-label="Close">✕ Close</button>
-  <div id="glb-stage">
-    <div id="glb-img-wrap"><img id="glb-img" src="" alt=""></div>
-    <div id="glb-meta">
+  <div id="glb-stage" onclick="glbBackdropClick(event)">
+    <div id="glb-img-wrap"><img id="glb-img" src="" alt="" onclick="event.stopPropagation()"></div>
+    <div id="glb-meta" onclick="event.stopPropagation()">
       <div id="glb-title"></div>
       <div id="glb-desc"></div>
     </div>
