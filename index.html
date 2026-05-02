@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
 <title>La Cerimonia Perfetta</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1622,11 +1622,11 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]{
   linear-gradient(rgba(248,244,236,.86),rgba(245,240,228,.92)),
   url('c168.webp') center 35%/cover no-repeat!important}
 
-/* 7. CLIENT HERO — sharper / more dramatic shot (the great gate) */
+/* 7. CLIENT HERO — sweeping aerial of the castello in its hills (La Vista) */
 .hero-atm.hero-host-bg{
   background:
-    linear-gradient(170deg,rgba(7,5,3,.30) 0%,rgba(11,9,7,.10) 35%,rgba(14,12,9,.18) 70%,rgba(7,5,3,.55) 100%),
-    url('c130.webp') center 46%/cover no-repeat #0a0805!important;
+    linear-gradient(170deg,rgba(7,5,3,.32) 0%,rgba(11,9,7,.12) 35%,rgba(14,12,9,.20) 70%,rgba(7,5,3,.62) 100%),
+    url('c111.webp') center 50%/cover no-repeat #0a0805!important;
   filter:none!important;
   image-rendering:auto!important;
 }
@@ -1833,6 +1833,33 @@ div[style*="padding:32px 36px"][style*="border:1px solid rgba(201,168,76,.1)"]{
     padding:14px 18px!important; font-size:.58rem!important;
     letter-spacing:.28em!important;
   }
+}
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ROUND 6 — hero swap · mobile zoom-out fix · Let's Begin navy
+═══════════════════════════════════════════════════════════════════════ */
+
+/* 1. "Let's Begin." on the client page → navy, not gold */
+.cf-lg{
+  color:#0F1729 !important;
+  text-shadow:0 1px 0 rgba(255,255,255,.4) !important;
+  font-style:italic;
+}
+
+/* 2. EXTRA mobile-zoom guard: any element wider than viewport gets clipped at the
+      page-container level. We don't touch html/body (Lenis hates that). */
+@media (max-width: 880px){
+  /* Force every direct child of every page container to fit */
+  #client-page > *, #guest-page > *, #pp > *, #login-page > *, footer > *{
+    max-width:100vw;
+  }
+  /* Negative-inset hero backgrounds clipped to hero box */
+  .hero-atm{left:0!important; right:0!important}
+  /* Decorative absolutely-positioned art (e.g. hero overlays, particle stars)
+     should never push the page wide */
+  .c-hero *, .g-hero *, #pc{max-width:100vw}
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
