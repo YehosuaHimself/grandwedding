@@ -562,9 +562,10 @@ tbody tr:last-child td{border-bottom:none}
 .gsec-cream{position:relative;overflow:hidden}
 .gsec-cream::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;width:2px;height:2px;border-radius:50%;background:transparent;box-shadow:1679px 1416px rgba(201,168,76,0.12),62px 765px rgba(201,168,76,0.13),204px 161px rgba(201,168,76,0.09),1028px 295px rgba(201,168,76,0.14),388px 1033px rgba(201,168,76,0.07),364px 1029px rgba(201,168,76,0.09),2052px 1599px rgba(201,168,76,0.08),1198px 1255px rgba(201,168,76,0.11),1679px 725px rgba(201,168,76,0.07),1867px 63px rgba(201,168,76,0.14),934px 85px rgba(201,168,76,0.08),818px 1123px rgba(201,168,76,0.1),922px 23px rgba(201,168,76,0.17),684px 293px rgba(201,168,76,0.14),1419px 1360px rgba(201,168,76,0.18),1416px 766px rgba(201,168,76,0.18),1867px 585px rgba(201,168,76,0.16),1737px 985px rgba(201,168,76,0.13),1590px 957px rgba(201,168,76,0.16),2387px 954px rgba(201,168,76,0.16),788px 1555px rgba(201,168,76,0.1),336px 873px rgba(201,168,76,0.16),837px 321px rgba(201,168,76,0.17),126px 368px rgba(201,168,76,0.11),1405px 1486px rgba(201,168,76,0.16),434px 1571px rgba(201,168,76,0.11),352px 462px rgba(201,168,76,0.15),2222px 654px rgba(201,168,76,0.17),37px 1051px rgba(201,168,76,0.16),1386px 105px rgba(201,168,76,0.15),1983px 562px rgba(201,168,76,0.09),1392px 71px rgba(201,168,76,0.08),840px 1383px rgba(201,168,76,0.1),1983px 394px rgba(201,168,76,0.11),513px 331px rgba(201,168,76,0.16),1280px 870px rgba(201,168,76,0.16),932px 146px rgba(201,168,76,0.13),916px 542px rgba(201,168,76,0.1),126px 966px rgba(201,168,76,0.13),1454px 1027px rgba(201,168,76,0.13),240px 988px rgba(201,168,76,0.14),1040px 830px rgba(201,168,76,0.09),225px 797px rgba(201,168,76,0.1),2075px 783px rgba(201,168,76,0.08),2252px 386px rgba(201,168,76,0.14);animation:shimmer 8s ease-in-out 2s infinite alternate}
 .gsec-light .gsec,.gsec-light [style],.gsec-cream .gsec,.gsec-cream [style]{position:relative;z-index:1}
-.gsec-warm{background:linear-gradient(155deg,#1e170e 0%,#2c2011 100%);padding:100px 64px;position:relative}
-.gsec-light{background:var(--iv);padding:100px 64px}
-.gsec-cream{background:var(--w);padding:100px 64px}
+.gsec-warm{background:linear-gradient(155deg,#1e170e 0%,#2c2011 100%);padding:100px 64px;position:relative;overflow-x:hidden}
+.gsec-light{background:var(--iv);padding:100px 64px;overflow-x:hidden}
+.gsec-cream{background:var(--w);padding:100px 64px;overflow-x:hidden}
+.gsec-dark{overflow-x:hidden}
 @media(max-width:680px){
   .gsec-warm,.gsec-light,.gsec-cream,.gsec-dark{padding-left:22px!important;padding-right:22px!important;padding-top:72px!important;padding-bottom:72px!important}
   /* Dress code his & hers grid */
@@ -604,8 +605,9 @@ tbody tr:last-child td{border-bottom:none}
 .inv-sig{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:2.8rem;color:var(--g);margin-top:20px}
 .inv-sigsub{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(201,168,76,.62);margin-top:8px;font-family:'Montserrat',sans-serif;font-weight:500}
 /* Concept */
-.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1060px;margin:0 auto}
-@media(max-width:880px){.concept-grid{grid-template-columns:1fr;gap:40px}.concept-nr{display:none}.concept-r{margin-top:20px}}
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1060px;margin:0 auto;min-width:0}
+.concept-grid > *{min-width:0}
+@media(max-width:880px){.concept-grid{grid-template-columns:1fr;gap:40px}.concept-nr{display:none}.concept-r{margin-top:20px;width:100%}}
 .concept-words{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
 .cw-tag{padding:9px 22px;border:1px solid rgba(201,168,76,.2);font-family:'Cormorant Garamond',serif;font-size:1.06rem;font-style:italic;color:rgba(250,248,243,.65);position:relative;overflow:hidden;transition:all .4s var(--ease)}
 .cw-tag::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.09),transparent);transform:translateX(-100%);transition:transform .4s var(--ease)}
