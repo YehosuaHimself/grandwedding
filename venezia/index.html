@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+<title>La Proposta — Venezia · Toni &amp; Cote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@400;500;600;700&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g:#C9A84C;--gl:#E8D5A3;--gd:#8B6914;--gs:#F5E8A3;
+  --iv:#FAF8F3;--ivd:#F0EAD6;--w:#FFFEF9;
+  --dk:#0F1729;--dk2:#1F2A47;--mid:#3D4B6E;--lt:#6B7895;
+  --bgdk:#1A1410;--bgdk2:#2C2416;
+  --ease:cubic-bezier(.22,1,.36,1);--ease2:cubic-bezier(.4,0,.2,1);
+  --nb:#1A2744;--nbl:#243660;--nbm:#2E4070;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:'Montserrat',sans-serif;background:var(--iv);color:var(--dk2);overflow-x:hidden}
+h1,h2,h3,h4,h5{font-family:'Cormorant Garamond',serif}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--ivd)}
+::-webkit-scrollbar-thumb{background:var(--g);border-radius:2px}
+
+/* CURSOR */
+@media (hover:hover) and (pointer:fine){
+  html,body{cursor:none!important}
+  *,*::before,*::after{cursor:none!important}
+  #cd,#cr{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;will-change:transform;transition:width .22s var(--ease),height .22s var(--ease),border-color .3s;display:block;z-index:10000}
+  #cd{width:8px;height:8px;background:var(--g)}
+  #cr{width:44px;height:44px;border:2px solid rgba(201,168,76,.7);z-index:9999;box-shadow:0 0 10px rgba(201,168,76,.22)}
+  body.ch #cr{width:62px;height:62px;border-color:var(--g)}
+}
+@media (hover:none),(pointer:coarse){
+  #cd,#cr{display:none!important}
+}
+
+/* PARTICLES */
+#pc{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.45}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,backdrop-filter .4s,box-shadow .4s}
+nav.scrolled{background:rgba(26,20,16,.88);backdrop-filter:blur(18px);box-shadow:0 1px 0 rgba(201,168,76,.12)}
+.nav-logo{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.22em;color:var(--g);text-transform:uppercase}
+.nav-logo span{color:rgba(201,168,76,.45);font-size:.7rem;display:block;letter-spacing:.35em;margin-top:2px}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(201,168,76,.65);transition:color .3s}
+.nav-links a:hover{color:var(--g)}
+@media(max-width:768px){nav{padding:16px 24px}.nav-links{display:none}}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:radial-gradient(ellipse at 40% 60%,#1c1508 0%,#0e0c08 55%,#050403 100%)}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=1800&q=70') center/cover no-repeat;opacity:.18;z-index:0}
+.hero-content{position:relative;z-index:3;max-width:780px;padding:0 32px}
+.hero-label{font-size:.55rem;letter-spacing:.55em;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:24px;display:block}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,6.5rem);font-weight:300;color:var(--iv);line-height:1.05;margin-bottom:12px}
+.hero-title em{font-style:italic;color:var(--g)}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,2.5vw,1.6rem);font-style:italic;color:rgba(232,213,163,.65);margin-bottom:48px}
+.divider{display:flex;align-items:center;gap:16px;justify-content:center;margin:0 auto 48px}
+.divider::before,.divider::after{content:'';height:1px;width:80px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.45))}
+.divider-icon{color:var(--g);font-size:1.1rem}
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(201,168,76,.35);font-size:.5rem;letter-spacing:.35em;text-transform:uppercase;z-index:3}
+.scroll-line{width:1px;height:60px;background:linear-gradient(180deg,rgba(201,168,76,.5),transparent);animation:scrollpulse 2s ease-in-out infinite}
+@keyframes scrollpulse{0%,100%{transform:scaleY(1);opacity:.5}50%{transform:scaleY(1.3);opacity:1}}
+
+/* SECTIONS */
+.section{position:relative;padding:96px 0;z-index:2}
+.section-inner{max-width:1100px;margin:0 auto;padding:0 48px}
+@media(max-width:768px){.section-inner{padding:0 24px}.section{padding:64px 0}}
+.section-tag{font-size:.5rem;letter-spacing:.5em;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:16px;display:block}
+.section-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:300;color:var(--dk);margin-bottom:12px;line-height:1.15}
+.section-title em{font-style:italic;color:var(--g)}
+.section-lead{font-size:.95rem;line-height:1.85;color:var(--mid);max-width:640px;margin-bottom:48px}
+.gold-line{width:60px;height:1px;background:var(--g);margin:24px 0 40px}
+
+/* DARK SECTION */
+.dark-section{background:var(--bgdk);color:var(--iv)}
+.dark-section .section-title{color:var(--iv)}
+.dark-section .section-lead{color:rgba(250,248,243,.6)}
+
+/* CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;margin-top:48px}
+.card{position:relative;background:var(--w);border:1px solid rgba(201,168,76,.15);padding:36px 32px;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s}
+.card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.08);border-color:rgba(201,168,76,.4)}
+.card-icon{font-size:2rem;margin-bottom:16px;display:block}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--dk);margin-bottom:10px}
+.card-body{font-size:.82rem;line-height:1.75;color:var(--mid)}
+.card-tag{display:inline-block;font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--g);border:1px solid rgba(201,168,76,.3);padding:5px 14px;margin-top:20px}
+.card.gold-card{background:linear-gradient(135deg,#1a1410 0%,#2c2416 100%);border-color:rgba(201,168,76,.3)}
+.card.gold-card .card-title{color:var(--g)}
+.card.gold-card .card-body{color:rgba(250,248,243,.65)}
+.card.gold-card .card-tag{border-color:rgba(201,168,76,.5);color:var(--gl)}
+.rec-badge{position:absolute;top:-12px;right:24px;background:var(--g);color:var(--bgdk);font-size:.48rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;padding:6px 14px}
+
+/* COMPARISON TABLE */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(201,168,76,.15);margin:48px 0;border:1px solid rgba(201,168,76,.15)}
+@media(max-width:640px){.compare{grid-template-columns:1fr}}
+.compare-col{background:var(--w);padding:36px 32px}
+.compare-col.dark{background:linear-gradient(160deg,#1a1410,#2c2416);color:var(--iv)}
+.compare-head{font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:6px}
+.compare-head.gold{color:var(--g)}
+.compare-sub{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:28px}
+.compare-list{list-style:none}
+.compare-list li{display:flex;gap:12px;align-items:flex-start;font-size:.82rem;line-height:1.65;padding:8px 0;border-bottom:1px solid rgba(201,168,76,.08);color:var(--mid)}
+.compare-col.dark .compare-list li{color:rgba(250,248,243,.65)}
+.compare-list li .ico{flex-shrink:0;font-size:.9rem;margin-top:1px}
+
+/* HOTELS */
+.hotels-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;margin-top:48px}
+.hotel-card{position:relative;overflow:hidden;background:var(--w);border:1px solid rgba(201,168,76,.15);transition:box-shadow .35s var(--ease),transform .35s var(--ease)}
+.hotel-card:hover{transform:translateY(-5px);box-shadow:0 24px 64px rgba(0,0,0,.1)}
+.hotel-img{width:100%;height:210px;object-fit:cover;background:linear-gradient(135deg,#1a1410,#3a2d1a);display:flex;align-items:center;justify-content:center;font-size:3rem;color:rgba(201,168,76,.3)}
+.hotel-body{padding:28px 28px 24px}
+.hotel-stars{color:var(--g);font-size:.75rem;letter-spacing:.15em;margin-bottom:8px}
+.hotel-name{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--dk);margin-bottom:6px;line-height:1.2}
+.hotel-loc{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--lt);margin-bottom:16px}
+.hotel-desc{font-size:.82rem;line-height:1.75;color:var(--mid);margin-bottom:20px}
+.hotel-price{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--g)}
+.hotel-price span{font-family:'Montserrat',sans-serif;font-size:.58rem;color:var(--lt);letter-spacing:.2em}
+.hotel-cta{display:inline-flex;align-items:center;gap:8px;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--g);border:1px solid rgba(201,168,76,.3);padding:10px 22px;margin-top:16px;transition:all .3s var(--ease)}
+.hotel-cta:hover{background:rgba(201,168,76,.08);border-color:var(--g)}
+.hotel-badge{position:absolute;top:16px;left:16px;background:var(--g);color:var(--bgdk);font-size:.48rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;padding:6px 14px}
+
+/* ITINERARY TABS */
+.tabs{display:flex;gap:4px;margin-bottom:0;flex-wrap:wrap}
+.tab-btn{font-size:.55rem;letter-spacing:.28em;text-transform:uppercase;padding:12px 24px;background:transparent;border:1px solid rgba(201,168,76,.2);color:rgba(201,168,76,.5);cursor:pointer;transition:all .3s;font-family:'Montserrat',sans-serif}
+.tab-btn.active{background:var(--g);border-color:var(--g);color:var(--bgdk);font-weight:700}
+.tab-content{display:none;background:var(--w);border:1px solid rgba(201,168,76,.2);border-top:none;padding:40px 36px;animation:fadein .4s var(--ease)}
+.tab-content.active{display:block}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.timeline{list-style:none}
+.tl-item{display:grid;grid-template-columns:90px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid rgba(201,168,76,.08)}
+.tl-item:last-child{border-bottom:none}
+.tl-time{font-family:'Cinzel',serif;font-size:.9rem;color:var(--g);padding-top:2px}
+.tl-body h4{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--dk);margin-bottom:5px}
+.tl-body p{font-size:.82rem;line-height:1.7;color:var(--mid)}
+.tl-body .tip{font-size:.75rem;font-style:italic;color:var(--g);margin-top:6px}
+@media(max-width:600px){.tl-item{grid-template-columns:1fr}.tl-time{font-size:.8rem}}
+
+/* PROPOSAL BOX */
+.proposal-box{background:linear-gradient(135deg,#1a1410 0%,#2c2416 60%,#1a1410 100%);border:1px solid rgba(201,168,76,.3);padding:56px 52px;position:relative;overflow:hidden;margin:48px 0}
+.proposal-box::before{content:'';position:absolute;inset:-1px;background:linear-gradient(135deg,rgba(201,168,76,.2),transparent,rgba(201,168,76,.1));pointer-events:none}
+.pb-corners .c{position:absolute;width:28px;height:28px;border-color:rgba(201,168,76,.5);border-style:solid}
+.pb-corners .c.tl{top:12px;left:12px;border-width:2px 0 0 2px}
+.pb-corners .c.tr{top:12px;right:12px;border-width:2px 2px 0 0}
+.pb-corners .c.bl{bottom:12px;left:12px;border-width:0 0 2px 2px}
+.pb-corners .c.br{bottom:12px;right:12px;border-width:0 2px 2px 0}
+.pb-title{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--g);margin-bottom:8px;line-height:1.1}
+.pb-sub{font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(201,168,76,.4);margin-bottom:32px}
+.pb-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:32px}
+@media(max-width:640px){.pb-grid{grid-template-columns:1fr}}
+.pb-item{border-left:2px solid rgba(201,168,76,.3);padding-left:20px}
+.pb-item-label{font-size:.5rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(201,168,76,.45);margin-bottom:6px}
+.pb-item-val{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--iv);line-height:1.3}
+.pb-item-note{font-size:.72rem;color:rgba(250,248,243,.45);margin-top:4px;line-height:1.5}
+@media(max-width:640px){.proposal-box{padding:36px 28px}}
+
+/* SERVICES */
+.services-list{margin-top:40px;display:flex;flex-direction:column;gap:20px}
+.service-item{display:grid;grid-template-columns:60px 1fr auto;gap:20px;align-items:center;padding:24px 28px;background:var(--w);border:1px solid rgba(201,168,76,.15);transition:border-color .3s,box-shadow .3s}
+.service-item:hover{border-color:rgba(201,168,76,.4);box-shadow:0 8px 32px rgba(0,0,0,.06)}
+.si-icon{font-size:1.6rem;text-align:center}
+.si-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--dk);margin-bottom:4px}
+.si-desc{font-size:.78rem;color:var(--mid);line-height:1.6}
+.si-price{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--g);text-align:right;white-space:nowrap}
+.si-price span{display:block;font-family:'Montserrat',sans-serif;font-size:.5rem;color:var(--lt);letter-spacing:.2em;text-transform:uppercase}
+@media(max-width:640px){.service-item{grid-template-columns:1fr}.si-price{text-align:left}}
+
+/* CHECKLIST */
+.checklist{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.check-item{display:flex;align-items:flex-start;gap:16px;padding:20px 24px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);cursor:pointer;transition:background .25s,border-color .25s;user-select:none}
+.check-item.done{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.3)}
+.check-item.done .chk{background:var(--g);border-color:var(--g)}
+.check-item.done .chk::after{opacity:1}
+.chk{width:22px;height:22px;border:2px solid rgba(201,168,76,.3);flex-shrink:0;margin-top:1px;position:relative;transition:all .25s}
+.chk::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--bgdk);font-weight:700;opacity:0;transition:opacity .2s}
+.check-label{font-size:.82rem;color:var(--mid);line-height:1.55}
+.check-item.done .check-label{color:var(--dk);text-decoration:line-through;text-decoration-color:rgba(201,168,76,.4)}
+
+/* FOOTER */
+footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px solid rgba(201,168,76,.1)}
+.foot-logo{font-family:'Cinzel',serif;font-size:1.2rem;letter-spacing:.25em;color:rgba(201,168,76,.5);margin-bottom:12px}
+.foot-names{font-family:'Cormorant Garamond',serif;font-size:2rem;font-style:italic;color:var(--g);margin-bottom:8px}
+.foot-note{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(201,168,76,.25)}
+
+/* PROGRESS BAR */
+.progress-bar{position:fixed;top:0;left:0;height:2px;background:var(--g);z-index:600;width:0%;transition:width .1s linear}
+
+/* SECTION DIVIDER */
+.ornament{text-align:center;padding:16px 0;color:rgba(201,168,76,.3);font-size:1.4rem;letter-spacing:.5em}
+
+/* TOOLTIP */
+.tooltip{position:relative;cursor:help}
+.tooltip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1a1410;border:1px solid rgba(201,168,76,.3);color:rgba(250,248,243,.8);font-size:.65rem;letter-spacing:.06em;padding:8px 14px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .25s;z-index:100}
+.tooltip:hover::after{opacity:1}
+
+/* BACK TO TOP */
+.btt{position:fixed;bottom:32px;right:32px;width:48px;height:48px;background:rgba(26,20,16,.9);border:1px solid rgba(201,168,76,.3);color:var(--g);display:flex;align-items:center;justify-content:center;font-size:1.2rem;z-index:400;opacity:0;transform:translateY(12px);transition:opacity .35s,transform .35s,background .3s;pointer-events:none}
+.btt.show{opacity:1;transform:none;pointer-events:all}
+.btt:hover{background:rgba(201,168,76,.12)}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cd"></div>
+<div id="cr"></div>
+
+<!-- Progress bar -->
+<div class="progress-bar" id="pb"></div>
+
+<!-- Particles -->
+<canvas id="pc"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">
+    La Cerimonia Perfetta
+    <span>Venezia · Toni &amp; Cote</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#antrag">Der Antrag</a></li>
+    <li><a href="#hotels">Hotels</a></li>
+    <li><a href="#reise">Reiseplan</a></li>
+    <li><a href="#checklist">Checkliste</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-label">Eine Stadt. Ein Moment. Für immer.</span>
+    <h1 class="hero-title">La Proposta<br><em>di Venezia</em></h1>
+    <p class="hero-sub">Toni &amp; Cote — Ein unvergesslicher Antrag auf dem Wasser</p>
+    <div class="divider">
+      <span class="divider-icon">◆</span>
+    </div>
+    <p style="font-size:.78rem;letter-spacing:.18em;color:rgba(232,213,163,.5);line-height:1.85">
+      Alles, was Toni braucht, um Cote in Venedig<br>auf das schönste Ja aller Zeiten vorzubereiten.
+    </p>
+  </div>
+  <div class="scroll-hint">
+    <span>Entdecken</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- WHY VENICE -->
+<section class="section" id="warum">
+  <div class="section-inner">
+    <span class="section-tag">La Scena Perfetta</span>
+    <h2 class="section-title">Warum Venedig das<br><em>perfekte Bühnenbild</em> ist</h2>
+    <div class="gold-line"></div>
+    <p class="section-lead">Kein anderer Ort der Welt verbindet Romantik, Architektur und das Gefühl der Zeitlosigkeit so wie Venedig. Ein Antrag auf dem Wasser — mit dem Rauschen der Kanäle, dem Schein der Laternen und dem Atem der Geschichte — wird zu einem Moment, der nie verblasst.</p>
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">🌊</span>
+        <h3 class="card-title">Das Wasser trägt den Moment</h3>
+        <p class="card-body">Kein Verkehrslärm, keine Hektik — auf einem Boot sind Toni und Cote allein mit dem Geräusch des Wassers und dem Gesang der Gondolieri. Die Umgebung verstärkt den Moment auf natürliche Weise.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🏛️</span>
+        <h3 class="card-title">Die schönste Kulisse der Welt</h3>
+        <p class="card-body">Zwischen dem Palazzo Ducale, der Seufzerbrücke und dem goldenen Abendhimmel über dem Canal Grande entsteht automatisch das ikonische Foto — ganz ohne Aufwand.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎵</span>
+        <h3 class="card-title">Musik, die berührt</h3>
+        <p class="card-body">Ein Gondoliere singt „O Sole Mio" — oder ein gebuchter Musiker spielt einen besonderen Song. Venedig bietet eine emotionale Klangebene, die keinen anderen Ort hat.</p>
+      </div>
+      <div class="card gold-card">
+        <div class="rec-badge">Empfehlung</div>
+        <span class="card-icon">✨</span>
+        <h3 class="card-title">Goldene Stunde im Boot</h3>
+        <p class="card-body">Die schönste Zeit: 30–60 Minuten vor Sonnenuntergang. Das Licht auf dem Wasser ist unbeschreiblich. Für Fotos und Atmosphäre die mit Abstand magischste Tageszeit in Venedig.</p>
+        <span class="card-tag">Bester Zeitpunkt</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament">◆ ◇ ◆</div>
+
+<!-- SELBST VS SERVICE -->
+<section class="section dark-section" id="antrag">
+  <div class="section-inner">
+    <span class="section-tag" style="color:rgba(201,168,76,.5)">Pianificazione</span>
+    <h2 class="section-title" style="color:var(--iv)">Selbst planen oder<br><em>professionellen Service</em> buchen?</h2>
+    <div class="gold-line"></div>
+    <p class="section-lead" style="color:rgba(250,248,243,.6)">Diese Frage entscheidet über Nerven vs. Genuss. Hier der ehrliche Vergleich — und eine klare Empfehlung.</p>
+    <div class="compare">
+      <div class="compare-col">
+        <h3 class="compare-head">Selbst organisieren</h3>
+        <p class="compare-sub">DIY · Mehr Arbeit, mehr Risiko</p>
+        <ul class="compare-list">
+          <li><span class="ico">✓</span>Günstiger (ca. 90–180 €)</li>
+          <li><span class="ico">✓</span>Flexibel in Route & Zeit</li>
+          <li><span class="ico">⚠️</span>Kein festes Photoshooting dabei</li>
+          <li><span class="ico">⚠️</span>Kommunikation nur auf Italienisch</li>
+          <li><span class="ico">⚠️</span>Kein garantierter Geheimkanal</li>
+          <li><span class="ico">⚠️</span>Kein Backup bei schlechtem Wetter</li>
+          <li><span class="ico">❌</span>Stressiger für Toni — er muss koordinieren und gleichzeitig entspannt wirken</li>
+        </ul>
+      </div>
+      <div class="compare-col dark">
+        <h3 class="compare-head gold">Professioneller Service</h3>
+        <p class="compare-sub">Empfohlen · Entspannter & unvergesslicher</p>
+        <ul class="compare-list">
+          <li><span class="ico">✓</span>Alles aus einer Hand geplant</li>
+          <li><span class="ico">✓</span>Professionelle Fotos & Video inklusive</li>
+          <li><span class="ico">✓</span>Geheime Kanäle ohne Touristen</li>
+          <li><span class="ico">✓</span>Deutscher/englischer Ansprechpartner</li>
+          <li><span class="ico">✓</span>Musik, Blumen, Champagner buchbar</li>
+          <li><span class="ico">✓</span>Wetter-Backup & Ersatztermin</li>
+          <li><span class="ico">✓</span>Toni kann vollständig bei Cote sein</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PROPOSAL DETAIL BOX -->
+    <div class="proposal-box">
+      <div class="pb-corners">
+        <div class="c tl"></div><div class="c tr"></div>
+        <div class="c bl"></div><div class="c br"></div>
+      </div>
+      <p class="pb-sub">Der ideale Antrag · Auf dem Boot</p>
+      <h3 class="pb-title">Die Bühne für<br>Toni &amp; Cote</h3>
+      <p style="font-size:.85rem;line-height:1.8;color:rgba(250,248,243,.65);max-width:600px;margin-top:16px">
+        Ein privates Holzboot (nicht die überfüllte Standard-Gondel) in einem ruhigen Kanal — idealerweise im Viertel <strong style="color:var(--gl)">Dorsoduro</strong> oder zwischen <strong style="color:var(--gl)">San Polo</strong> und dem kleinen Rio di San Barnaba. Kein Tourist. Nur das Wasser, venezianische Paläste und der Ring.
+      </p>
+      <div class="pb-grid">
+        <div class="pb-item">
+          <p class="pb-item-label">Bestes Viertel</p>
+          <p class="pb-item-val">Dorsoduro / Cannaregio</p>
+          <p class="pb-item-note">Ruhig, keine Touristenmassen, fotogen</p>
+        </div>
+        <div class="pb-item">
+          <p class="pb-item-label">Bester Zeitpunkt</p>
+          <p class="pb-item-val">18:30 – 20:00 Uhr</p>
+          <p class="pb-item-note">Goldene Stunde, wenig Verkehr auf den Kanälen</p>
+        </div>
+        <div class="pb-item">
+          <p class="pb-item-label">Bootstyp</p>
+          <p class="pb-item-val">Private Gondola / Sandalo</p>
+          <p class="pb-item-note">Kein geteiltes Boot — Privatfahrt ist Pflicht</p>
+        </div>
+        <div class="pb-item">
+          <p class="pb-item-label">Dauer</p>
+          <p class="pb-item-val">45 – 60 Minuten</p>
+          <p class="pb-item-note">Genug Zeit für den Antrag, Fotos & Champagner</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <span class="section-tag" style="color:rgba(201,168,76,.5);margin-top:24px;display:block">Empfohlene Anbieter</span>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--iv);margin-bottom:8px">Geprüfte <em style="color:var(--g)">Proposal Services</em></h3>
+    <div class="services-list">
+      <div class="service-item">
+        <div class="si-icon">💍</div>
+        <div>
+          <p class="si-name">Lore Venice — Proposal Specialist</p>
+          <p class="si-desc">Venedigs bekanntester Antrag-Service. Komplettpaket mit privater Gondola, verstecktem Fotografen, Champagner, Rosenblättern & deutschsprachiger Koordination. <strong>Sehr empfohlen.</strong></p>
+          <a href="https://lorevenice.com/venice-gondola-proposal/" target="_blank" style="font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--g);border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:2px;margin-top:8px;display:inline-block">lorevenice.com ↗</a>
+        </div>
+        <div class="si-price">ab 450 €<span>Komplett-Paket</span></div>
+      </div>
+      <div class="service-item">
+        <div class="si-icon">🚤</div>
+        <div>
+          <p class="si-name">Gondolieri Travel — Romantic Services</p>
+          <p class="si-desc">Spezialisiert auf romantische Gondolfahrten und Antragsmomente. Private Routen, Serenade buchbar, Prosecco an Bord. Flexible Pakete für jedes Budget.</p>
+          <a href="https://gondolieritravel.com/en/romantic-gondola-services/" target="_blank" style="font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--g);border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:2px;margin-top:8px;display:inline-block">gondolieritravel.com ↗</a>
+        </div>
+        <div class="si-price">ab 280 €<span>Private Gondola</span></div>
+      </div>
+      <div class="service-item">
+        <div class="si-icon">📸</div>
+        <div>
+          <p class="si-name">Vivo Venetia — Fotograf + Gondola Paket</p>
+          <p class="si-desc">Professioneller venezianischer Fotograf + private Gondola-Buchung. Ideal wenn Toni möchte, dass der Antrag professionell fotografiert wird, ohne dass Cote den Fotografen bemerkt.</p>
+          <a href="https://www.vivovenetia.com/gondola-proposal-venice/" target="_blank" style="font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--g);border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:2px;margin-top:8px;display:inline-block">vivovenetia.com ↗</a>
+        </div>
+        <div class="si-price">ab 380 €<span>Inkl. Fotograf</span></div>
+      </div>
+      <div class="service-item">
+        <div class="si-icon">🎵</div>
+        <div>
+          <p class="si-name">Serenade-Upgrade — Gondoliere singt</p>
+          <p class="si-desc">Klassische Serenade auf dem Boot: Ein Sänger oder Akkordeonist begleitet die Fahrt. Kann bei jedem Anbieter als Zusatz gebucht werden. Absoluter Emotionsverstärker.</p>
+          <span style="font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(201,168,76,.4);display:inline-block;margin-top:8px">Zusatzbuchung bei jedem Anbieter</span>
+        </div>
+        <div class="si-price">ca. 180 €<span>Upgrade</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament">◆ ◇ ◆</div>
+
+<!-- HOTELS -->
+<section class="section" id="hotels">
+  <div class="section-inner">
+    <span class="section-tag">Soggiorno di Lusso</span>
+    <h2 class="section-title">Hotels für<br><em>Toni &amp; Cote</em></h2>
+    <div class="gold-line"></div>
+    <p class="section-lead">Venedig ist voller Luxushotels — aber für einen Antrag zählen drei Faktoren besonders: privater Bootsanleger, romantische Atmosphäre und ein unvergessliches Frühstück am nächsten Morgen, wenn die Antwort „Ja" heißt.</p>
+    <div class="hotels-grid">
+
+      <div class="hotel-card">
+        <div class="hotel-badge">Top-Empfehlung</div>
+        <div class="hotel-img" style="background:linear-gradient(135deg,#1c150a,#2e2010);font-size:3.5rem">🏛️</div>
+        <div class="hotel-body">
+          <div class="hotel-stars">★★★★★</div>
+          <h3 class="hotel-name">The Gritti Palace</h3>
+          <p class="hotel-loc">Campo Santa Maria del Giglio · Grand Canal</p>
+          <p class="hotel-desc">Das romantischste Hotel Venedigs — ein Renaissancepalast direkt am Grand Canal. Viele Suiten mit eigenem Balkon über dem Wasser. Eigener Gondel-Anleger. Wird oft für Hochzeitsanträge gewählt. Das Restaurant „Club del Doge" mit Kanalblick ist ideal für das Abendessen nach dem Antrag.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+            <div>
+              <div class="hotel-price">ab 1.400 € <span>/ Nacht</span></div>
+              <p style="font-size:.65rem;color:var(--lt);margin-top:4px">Canal Suite empfohlen</p>
+            </div>
+            <a href="https://www.marriott.com/hotels/travel/vcegr-the-gritti-palace-a-luxury-collection-hotel-venice/" target="_blank" class="hotel-cta">Anfragen ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-img" style="background:linear-gradient(135deg,#0e1520,#1a2540);font-size:3.5rem">🌊</div>
+        <div class="hotel-body">
+          <div class="hotel-stars">★★★★★</div>
+          <h3 class="hotel-name">Hotel Danieli</h3>
+          <p class="hotel-loc">Riva degli Schiavoni · Dogenpalast-Nähe</p>
+          <p class="hotel-desc">Drei gotische Paläste — Venedigs bekanntestes Luxushotel. Nach umfassender Renovierung 2026 wiedereröffnet. Die Dachterrasse „Terrazza Danieli" mit Panoramablick auf die Lagune ist ideal für ein romantisches Dinner am Abend des Antrags. Instagram-bekanntestes Hotel der Stadt.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+            <div>
+              <div class="hotel-price">ab 1.100 € <span>/ Nacht</span></div>
+              <p style="font-size:.65rem;color:var(--lt);margin-top:4px">Lagoon-View empfohlen</p>
+            </div>
+            <a href="https://www.fourseasons.com/venice/" target="_blank" class="hotel-cta">Anfragen ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-img" style="background:linear-gradient(135deg,#0a1a10,#12281a);font-size:3.5rem">🌿</div>
+        <div class="hotel-body">
+          <div class="hotel-stars">★★★★★</div>
+          <h3 class="hotel-name">Belmond Hotel Cipriani</h3>
+          <p class="hotel-loc">Isola della Giudecca · Privatinsel</p>
+          <p class="hotel-desc">Ultimative Privatsphäre auf der Insel Giudecca — per Privatboot-Transfer erreichbar. Der einzige Olympia-Pool Venedigs. Michelin-Küche. Gärten mit Blick auf die Lagune. Für Paare, die abseits der Touristen etwas wirklich Einzigartiges suchen. Einer der besten Orte für den Morgen nach dem Antrag.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+            <div>
+              <div class="hotel-price">ab 1.800 € <span>/ Nacht</span></div>
+              <p style="font-size:.65rem;color:var(--lt);margin-top:4px">Garden Suite empfohlen</p>
+            </div>
+            <a href="https://www.belmond.com/hotels/europe/italy/venice/belmond-hotel-cipriani/" target="_blank" class="hotel-cta">Anfragen ↗</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOUTIQUE TIP -->
+    <div style="margin-top:32px;padding:28px 32px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.12)">
+      <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--dk);margin-bottom:8px">💡 Boutique-Alternative: Hotel Metropole</h4>
+      <p style="font-size:.82rem;line-height:1.75;color:var(--mid)">Wer etwas weniger bekanntes sucht: Das <strong>Hotel Metropole</strong> (Riva degli Schiavoni) ist ein exzentrisches 5-Sterne-Haus mit eklektischer Kunst-Atmosphäre, Nähe zum Markusplatz und günstigerem Preis (ab ~500 €/Nacht). Ideal für Paare, die Charme über Ruhm stellen.</p>
+    </div>
+  </div>
+</section>
+
+<div class="ornament">◆ ◇ ◆</div>
+
+<!-- ITINERARY -->
+<section class="section dark-section" id="reise">
+  <div class="section-inner">
+    <span class="section-tag" style="color:rgba(201,168,76,.5)">Il Viaggio Perfetto</span>
+    <h2 class="section-title" style="color:var(--iv)">Der <em>perfekte Aufenthalt</em><br>für Toni &amp; Cote</h2>
+    <div class="gold-line"></div>
+    <p style="font-size:.9rem;line-height:1.8;color:rgba(250,248,243,.6);margin-bottom:40px;max-width:620px">3 Tage in Venedig — strukturiert, romantisch, unvergesslich. Der Antrag findet am zweiten Abend statt, wenn beide die Stadt bereits spüren und Cote entspannt ist.</p>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab('tag1',this)">Tag 1 — Ankommen</button>
+      <button class="tab-btn" onclick="showTab('tag2',this)">Tag 2 — Der Antrag</button>
+      <button class="tab-btn" onclick="showTab('tag3',this)">Tag 3 — Feiern</button>
+    </div>
+
+    <div class="tab-content active" id="tag1">
+      <ul class="timeline">
+        <li class="tl-item">
+          <div class="tl-time">14:00</div>
+          <div class="tl-body">
+            <h4>Ankunft & Check-in im Hotel</h4>
+            <p>Per Vaporetto oder privatem Wassertaxi vom Bahnhof Santa Lucia oder Flughafen Marco Polo direkt zum Hotel. Das Wassertaxi ist die romantischere Wahl — erster Venedig-Eindruck auf dem Wasser.</p>
+            <p class="tip">💡 Privates Wassertaxi buchen: Alilaguna oder Consorzio Motoscafi Venezia</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time">16:30</div>
+          <div class="tl-body">
+            <h4>Erste Erkundung: Dorsoduro &amp; Rialto</h4>
+            <p>Flanieren durch die ruhigeren Gassen von Dorsoduro — die schönste Seite Venedigs ohne Touristenmassen. Über die Rialtobrücke zum Abendmarkt.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time">19:30</div>
+          <div class="tl-body">
+            <h4>Aperitivo &amp; Abendessen</h4>
+            <p>Spritz Aperol bei Harry's Bar oder im Bacaro (typische venezianische Weinbar). Abendessen im <strong>Osteria alle Testiere</strong> (bestes Meeresfrüchte-Restaurant der Stadt, Reservierung nötig) oder <strong>Ristorante Quadri</strong> am Markusplatz.</p>
+            <p class="tip">💡 Testiere unbedingt Wochen vorher reservieren — nur 22 Plätze</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time">22:00</div>
+          <div class="tl-body">
+            <h4>Abendspaziergang über den leeren Markusplatz</h4>
+            <p>Abends um 22 Uhr ist der Markusplatz fast menschenleer — eines der schönsten Erlebnisse Venedigs. Café Florian für einen Absacker.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tab-content" id="tag2">
+      <ul class="timeline">
+        <li class="tl-item">
+          <div class="tl-time">09:00</div>
+          <div class="tl-body">
+            <h4>Entspanntes Frühstück</h4>
+            <p>Im Hotel oder in einer typischen Pasticceria: Cornetto und Cappuccino. Den Tag langsam beginnen — Cote soll entspannt und ahnungslos sein.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time">10:30</div>
+          <div class="tl-body">
+            <h4>Besuch der Gallerie dell'Accademia</h4>
+            <p>Venedigs bedeutendstes Kunstmuseum — romantisch und beeindruckend. Danach Spaziergang über die Accademia-Brücke mit dem besten Blick auf den Grand Canal.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time">13:00</div>
+          <div class="tl-body">
+            <h4>Mittagessen in San Polo</h4>
+            <p>Leichtes Mittagessen in einer kleinen Bacaro — typische Cichetti (venezianische Tapas). Nachmittag frei für Flanieren und Shoppen.</p>
+          </div>
+        </li>
+        <li class="tl-item" style="border-left: 3px solid var(--g); margin-left: -3px; padding-left: 3px;">
+          <div class="tl-time" style="color:var(--g);font-weight:700">18:30</div>
+          <div class="tl-body">
+            <h4 style="color:var(--g)">⭐ Der Antrag — Private Gondola</h4>
+            <p>Toni führt Cote zum vereinbarten Einstiegspunkt in Dorsoduro. Die private Gondola wartet bereits — Rosenblätter im Boot, Champagner auf Eis. Der versteckte Fotograf positioniert sich 10 Minuten vorher. Toni hat den Ring in der Innentasche. Kurs: ruhige Kanäle zwischen San Barnaba und Rio Marin.</p>
+            <p class="tip">💍 Empfohlener Moment: nach ca. 15 Minuten Fahrt, wenn Cote vollständig entspannt ist und das Licht am schönsten ist</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time">20:30</div>
+          <div class="tl-body">
+            <h4>Champagner-Dinner zur Feier</h4>
+            <p>Vorab reserviertes romantisches Dinner im <strong>Club del Doge</strong> (Gritti Palace) direkt am Grand Canal — oder im <strong>Terrazza Danieli</strong> auf dem Dach mit Panoramablick. Der Moment, den Cote nie vergessen wird.</p>
+            <p class="tip">💡 Hotel am Tag der Ankunft informieren — oft dekorieren sie das Zimmer kostenlos mit Rosen</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time">23:00</div>
+          <div class="tl-body">
+            <h4>Rückkehr ins Hotel</h4>
+            <p>Das Hotel wurde vorab informiert — Zimmer mit Rosenblättern, Champagner und einer persönlichen Nachricht. Der perfekte Abschluss eines unvergesslichen Abends.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tab-content" id="tag3">
+      <ul class="timeline">
+        <li class="tl-item">
+          <div class="tl-time">09:30</div>
+          <div class="tl-body">
+            <h4>Ausschlafen &amp; Champagner-Frühstück</h4>
+            <p>Frühstück im Hotel oder Room Service. Den Morgen langsam genießen — es gibt jetzt alles zu feiern.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time">11:00</div>
+          <div class="tl-body">
+            <h4>Bootstour zur Insel Murano</h4>
+            <p>Per Vaporetto zur Glasinsel Murano — die perfekte Gelegenheit, ein venezianisches Glas-Souvenir als Erinnerung an den Antrag zu kaufen. Viele Werkstätten bieten personalisierte Stücke an.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time">14:30</div>
+          <div class="tl-body">
+            <h4>Cicchetti-Tour durch Cannaregio</h4>
+            <p>Das echte Venedig: durch Cannaregio schlendern — das Viertel, in dem die Venezianer wohnen. Bacaro-Hopping, Spritz, lokale Atmosphäre abseits der Touristenpfade.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time">18:00</div>
+          <div class="tl-body">
+            <h4>Sonnenuntergang bei der Punta della Dogana</h4>
+            <p>Die Spitze des Dorsoduro-Viertels — der schönste Aussichtspunkt in ganz Venedig. Grand Canal trifft Giudecca — goldenes Licht, perfekte Fotos als frisch Verlobte.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time">20:00</div>
+          <div class="tl-body">
+            <h4>Abschluss-Dinner &amp; Abreise vorbereiten</h4>
+            <p>Letztes Dinner in Venedig im gewählten Restaurant. Am Abend oder nächsten Morgen Abreise — die Erinnerung bleibt für immer.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="ornament">◆ ◇ ◆</div>
+
+<!-- CHECKLIST -->
+<section class="section" id="checklist">
+  <div class="section-inner">
+    <span class="section-tag">Lista di Controllo</span>
+    <h2 class="section-title">Checkliste für <em>Toni</em></h2>
+    <div class="gold-line"></div>
+    <p class="section-lead">Klicke die Punkte ab, sobald sie erledigt sind. Alles, was vor der Reise organisiert sein muss.</p>
+    <div class="checklist" id="chk">
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="chk"></div>
+        <p class="check-label"><strong>Ring kaufen</strong> — rechtzeitig Ringmaß von Cote herausfinden (linker Ringfinger)</p>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="chk"></div>
+        <p class="check-label"><strong>Proposal-Service buchen</strong> — Lore Venice oder Gondolieri Travel kontaktieren (min. 6–8 Wochen vorher)</p>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="chk"></div>
+        <p class="check-label"><strong>Hotel reservieren</strong> — Gritti Palace, Danieli oder Cipriani (je nach Budget)</p>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="chk"></div>
+        <p class="check-label"><strong>Hotel informieren</strong> — Zimmer mit Blumen/Champagner für die Antragssnacht vorbereiten lassen</p>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="chk"></div>
+        <p class="check-label"><strong>Antragsdinner reservieren</strong> — Club del Doge oder Terrazza Danieli (sehr früh buchen!)</p>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="chk"></div>
+        <p class="check-label"><strong>Osteria alle Testiere</strong> reservieren — für Tag 1 oder 3 (Tel. direkt)</p>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="chk"></div>
+        <p class="check-label"><strong>Flüge / Zugreise</strong> buchen — Venedig Flughafen Marco Polo oder Zug Santa Lucia</p>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="chk"></div>
+        <p class="check-label"><strong>Wassertaxi vorbuchen</strong> — vom Flughafen / Bahnhof direkt zum Hotel (romantischer Start)</p>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="chk"></div>
+        <p class="check-label"><strong>Serenade buchen</strong> — optional, aber emotional sehr wirkungsvoll (+180 €)</p>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="chk"></div>
+        <p class="check-label"><strong>Fotograf-Briefing</strong> — mit dem Fotografen genauen Standort und Signal besprechen</p>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="chk"></div>
+        <p class="check-label"><strong>Ring-Kästchen sichern</strong> — klein genug für Innentasche (kein Sakkostaschen-Päckchen)</p>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="chk"></div>
+        <p class="check-label"><strong>Worte üben</strong> — auch auf Spanisch/Englisch falls Cote das mag 💬</p>
+      </div>
+    </div>
+
+    <!-- BUDGET OVERVIEW -->
+    <div style="margin-top:56px">
+      <span class="section-tag">Budgetübersicht</span>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--dk);margin-bottom:32px">Gesamtkosten <em>im Überblick</em></h3>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+          <thead>
+            <tr style="border-bottom:2px solid rgba(201,168,76,.3)">
+              <th style="text-align:left;padding:12px 16px;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--lt);font-weight:600">Posten</th>
+              <th style="text-align:right;padding:12px 16px;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--lt);font-weight:600">Budget</th>
+              <th style="text-align:right;padding:12px 16px;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--lt);font-weight:600">Luxury</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(201,168,76,.08)"><td style="padding:14px 16px;color:var(--mid)">Hotel (3 Nächte)</td><td style="padding:14px 16px;text-align:right;color:var(--dk)">1.500 €</td><td style="padding:14px 16px;text-align:right;color:var(--g)">5.400 €</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,168,76,.08)"><td style="padding:14px 16px;color:var(--mid)">Proposal-Service (Gondola + Foto)</td><td style="padding:14px 16px;text-align:right;color:var(--dk)">450 €</td><td style="padding:14px 16px;text-align:right;color:var(--g)">800 €</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,168,76,.08)"><td style="padding:14px 16px;color:var(--mid)">Antragsdinner</td><td style="padding:14px 16px;text-align:right;color:var(--dk)">180 €</td><td style="padding:14px 16px;text-align:right;color:var(--g)">350 €</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,168,76,.08)"><td style="padding:14px 16px;color:var(--mid)">Wassertaxi + Transfers</td><td style="padding:14px 16px;text-align:right;color:var(--dk)">80 €</td><td style="padding:14px 16px;text-align:right;color:var(--g)">200 €</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,168,76,.08)"><td style="padding:14px 16px;color:var(--mid)">Serenade (optional)</td><td style="padding:14px 16px;text-align:right;color:var(--dk)">—</td><td style="padding:14px 16px;text-align:right;color:var(--g)">180 €</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,168,76,.08)"><td style="padding:14px 16px;color:var(--mid)">Restaurants, Aperitivo, Shopping</td><td style="padding:14px 16px;text-align:right;color:var(--dk)">300 €</td><td style="padding:14px 16px;text-align:right;color:var(--g)">600 €</td></tr>
+            <tr style="background:rgba(201,168,76,.05)">
+              <td style="padding:16px;font-weight:700;color:var(--dk);letter-spacing:.04em">GESAMT (ohne Ring &amp; Flüge)</td>
+              <td style="padding:16px;text-align:right;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--dk)">ca. 2.500 €</td>
+              <td style="padding:16px;text-align:right;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--g)">ca. 7.500 €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="foot-logo">La Cerimonia Perfetta</p>
+  <p class="foot-names">Toni &amp; Cote</p>
+  <p style="color:rgba(201,168,76,.3);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;margin:8px 0">Venezia — La città dell'amore eterno</p>
+  <p class="foot-note">Erstellt mit ♥ für den schönsten Moment</p>
+</footer>
+
+<!-- Back to top -->
+<div class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<script>
+// Cursor
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.transform=`translate(${mx-4}px,${my-4}px)`;});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.transform=`translate(${rx-22}px,${ry-22}px)`;requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button,.hotel-cta,.check-item,.tab-btn,.service-item,.card').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));});
+
+// Particles
+const canvas=document.getElementById('pc'),ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+function initP(){particles=[];for(let i=0;i<80;i++){particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+.3,o:Math.random()*.5+.1});}}
+initP();
+function drawP(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(201,168,76,${p.o})`;ctx.fill();});requestAnimationFrame(drawP);}
+drawP();
+
+// Nav scroll
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY;
+  document.getElementById('nav').classList.toggle('scrolled',s>60);
+  // Progress bar
+  const h=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('pb').style.width=(s/h*100)+'%';
+  // Back to top
+  document.getElementById('btt').classList.toggle('show',s>400);
+});
+
+// Tabs
+function showTab(id,btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Checklist
+function toggleCheck(el){el.classList.toggle('done');}
+</script>
+</body>
+</html>
