@@ -49,7 +49,7 @@ nav.scrolled{background:rgba(26,20,16,.88);backdrop-filter:blur(18px);box-shadow
 .nav-links{display:flex;gap:32px;list-style:none}
 .nav-links a{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(201,168,76,.65);transition:color .3s}
 .nav-links a:hover{color:var(--g)}
-@media(max-width:768px){nav{padding:16px 24px}.nav-links{display:none}}
+@media(max-width:768px){nav{padding:16px 24px}.nav-links{display:none!important}}
 
 /* HERO */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:radial-gradient(ellipse at 40% 60%,#1c1508 0%,#0e0c08 55%,#050403 100%)}
@@ -106,7 +106,7 @@ nav.scrolled{background:rgba(26,20,16,.88);backdrop-filter:blur(18px);box-shadow
 .compare-list{list-style:none}
 .compare-list li{display:flex;gap:12px;align-items:flex-start;font-size:.82rem;line-height:1.65;padding:8px 0;border-bottom:1px solid rgba(201,168,76,.08);color:var(--mid)}
 .compare-col.dark .compare-list li{color:rgba(250,248,243,.65)}
-.compare-list li .ico{flex-shrink:0;width:18px;height:18px;margin-top:2px;display:flex;align-items:center}
+.compare-list li .ico{flex-shrink:0;width:18px;height:18px;margin-top:1px;display:inline-flex;align-items:center;justify-content:center}
 
 /* HOTELS */
 .hotels-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;margin-top:48px}
@@ -258,6 +258,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
   .nav-gw{font-size:.38rem;letter-spacing:.3em}
 }
 
+.ico-svg{width:16px;height:16px;flex-shrink:0;display:block}
 .ico-check{color:var(--g)}.ico-warn{color:rgba(201,168,76,.55)}.ico-cross{color:rgba(180,80,80,.75)}
 .si-svg{width:30px;height:30px;color:var(--g)}
 .tip-ico{width:14px;height:14px;margin-right:5px;vertical-align:middle;color:var(--g);display:inline-block;flex-shrink:0}
@@ -450,7 +451,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
         <div>
           <p class="si-name">Lore Venice — Proposal Specialist</p>
           <p class="si-desc">Venedigs bekanntester Antrag-Service. Komplettpaket mit privater Gondola, verstecktem Fotografen, Champagner, Rosenblättern & deutschsprachiger Koordination. <strong>Sehr empfohlen.</strong></p>
-          <a href="https://lorevenice.com/venice-gondola-proposal/" target="_blank" style="font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--g);border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:2px;margin-top:8px;display:inline-block">lorevenice.com ↗</a>
+          <a href="https://lorevenice.com/venice-gondola-proposal/" target="_blank" style="font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--g);border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:2px;margin-top:8px;display:inline-block">lorevenice.com <svg style="width:10px;height:10px;display:inline-block;vertical-align:middle;margin-left:4px;flex-shrink:0" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><line x1="2" y1="8" x2="8" y2="2"/><polyline points="3.5,2 8,2 8,6.5"/></svg></a>
         </div>
         <div class="si-price">ab 450 €<span>Komplett-Paket</span></div>
       </div>
@@ -459,7 +460,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
         <div>
           <p class="si-name">Gondolieri Travel — Romantic Services</p>
           <p class="si-desc">Spezialisiert auf romantische Gondolfahrten und Antragsmomente. Private Routen, Serenade buchbar, Prosecco an Bord. Flexible Pakete für jedes Budget.</p>
-          <a href="https://gondolieritravel.com/en/romantic-gondola-services/" target="_blank" style="font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--g);border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:2px;margin-top:8px;display:inline-block">gondolieritravel.com ↗</a>
+          <a href="https://gondolieritravel.com/en/romantic-gondola-services/" target="_blank" style="font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--g);border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:2px;margin-top:8px;display:inline-block">gondolieritravel.com <svg style="width:10px;height:10px;display:inline-block;vertical-align:middle;margin-left:4px;flex-shrink:0" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><line x1="2" y1="8" x2="8" y2="2"/><polyline points="3.5,2 8,2 8,6.5"/></svg></a>
         </div>
         <div class="si-price">ab 280 €<span>Private Gondola</span></div>
       </div>
@@ -468,7 +469,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
         <div>
           <p class="si-name">Vivo Venetia — Fotograf + Gondola Paket</p>
           <p class="si-desc">Professioneller venezianischer Fotograf + private Gondola-Buchung. Ideal wenn Toni möchte, dass der Antrag professionell fotografiert wird, ohne dass Cote den Fotografen bemerkt.</p>
-          <a href="https://www.vivovenetia.com/gondola-proposal-venice/" target="_blank" style="font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--g);border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:2px;margin-top:8px;display:inline-block">vivovenetia.com ↗</a>
+          <a href="https://www.vivovenetia.com/gondola-proposal-venice/" target="_blank" style="font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--g);border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:2px;margin-top:8px;display:inline-block">vivovenetia.com <svg style="width:10px;height:10px;display:inline-block;vertical-align:middle;margin-left:4px;flex-shrink:0" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><line x1="2" y1="8" x2="8" y2="2"/><polyline points="3.5,2 8,2 8,6.5"/></svg></a>
         </div>
         <div class="si-price">ab 380 €<span>Inkl. Fotograf</span></div>
       </div>
@@ -543,7 +544,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
               <div class="hotel-price">ab 1.400 € <span>/ Nacht</span></div>
               <p style="font-size:.65rem;color:var(--lt);margin-top:4px">Canal Suite empfohlen</p>
             </div>
-            <a href="https://www.marriott.com/hotels/travel/vcegr-the-gritti-palace-a-luxury-collection-hotel-venice/" target="_blank" class="hotel-cta">Anfragen ↗</a>
+            <a href="https://www.marriott.com/hotels/travel/vcegr-the-gritti-palace-a-luxury-collection-hotel-venice/" target="_blank" class="hotel-cta">Anfragen <svg style="width:10px;height:10px;display:inline-block;vertical-align:middle;margin-left:4px;flex-shrink:0" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><line x1="2" y1="8" x2="8" y2="2"/><polyline points="3.5,2 8,2 8,6.5"/></svg></a>
           </div>
         </div>
       </div>
@@ -583,7 +584,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
               <div class="hotel-price">ab 1.100 € <span>/ Nacht</span></div>
               <p style="font-size:.65rem;color:var(--lt);margin-top:4px">Lagoon-View empfohlen</p>
             </div>
-            <a href="https://www.fourseasons.com/venice/" target="_blank" class="hotel-cta">Anfragen ↗</a>
+            <a href="https://www.fourseasons.com/venice/" target="_blank" class="hotel-cta">Anfragen <svg style="width:10px;height:10px;display:inline-block;vertical-align:middle;margin-left:4px;flex-shrink:0" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><line x1="2" y1="8" x2="8" y2="2"/><polyline points="3.5,2 8,2 8,6.5"/></svg></a>
           </div>
         </div>
       </div>
@@ -629,7 +630,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
               <div class="hotel-price">ab 1.800 € <span>/ Nacht</span></div>
               <p style="font-size:.65rem;color:var(--lt);margin-top:4px">Garden Suite empfohlen</p>
             </div>
-            <a href="https://www.belmond.com/hotels/europe/italy/venice/belmond-hotel-cipriani/" target="_blank" class="hotel-cta">Anfragen ↗</a>
+            <a href="https://www.belmond.com/hotels/europe/italy/venice/belmond-hotel-cipriani/" target="_blank" class="hotel-cta">Anfragen <svg style="width:10px;height:10px;display:inline-block;vertical-align:middle;margin-left:4px;flex-shrink:0" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><line x1="2" y1="8" x2="8" y2="2"/><polyline points="3.5,2 8,2 8,6.5"/></svg></a>
           </div>
         </div>
       </div>
@@ -899,8 +900,20 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 const burger=document.getElementById('navBurger');
 const mob=document.getElementById('mobMenu');
 const mobClose=document.getElementById('mobClose');
-function openMenu(){burger.classList.add('open');mob.classList.add('open');document.body.style.overflow='hidden';}
-function closeMenu(){burger.classList.remove('open');mob.classList.remove('open');document.body.style.overflow='';}
+function openMenu(){
+  burger.classList.add('open');
+  mob.classList.add('open');
+  document.body.style.overflow='hidden';
+  document.body.style.position='fixed';
+  document.body.style.width='100%';
+}
+function closeMenu(){
+  burger.classList.remove('open');
+  mob.classList.remove('open');
+  document.body.style.overflow='';
+  document.body.style.position='';
+  document.body.style.width='';
+}
 burger.addEventListener('click',()=>mob.classList.contains('open')?closeMenu():openMenu());
 mobClose.addEventListener('click',closeMenu);
 document.querySelectorAll('.mob-link').forEach(a=>a.addEventListener('click',closeMenu));
