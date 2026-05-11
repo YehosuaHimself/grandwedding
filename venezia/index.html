@@ -85,7 +85,7 @@ nav.scrolled{background:rgba(26,20,16,.88);backdrop-filter:blur(18px);box-shadow
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;margin-top:48px}
 .card{position:relative;background:var(--w);border:1px solid rgba(201,168,76,.15);padding:36px 32px;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s}
 .card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.08);border-color:rgba(201,168,76,.4)}
-.card-icon{font-size:2rem;margin-bottom:16px;display:block}
+.card-icon{width:36px;height:36px;margin-bottom:20px;display:block;color:var(--g)}
 .card-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--dk);margin-bottom:10px}
 .card-body{font-size:.82rem;line-height:1.75;color:var(--mid)}
 .card-tag{display:inline-block;font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--g);border:1px solid rgba(201,168,76,.3);padding:5px 14px;margin-top:20px}
@@ -106,7 +106,7 @@ nav.scrolled{background:rgba(26,20,16,.88);backdrop-filter:blur(18px);box-shadow
 .compare-list{list-style:none}
 .compare-list li{display:flex;gap:12px;align-items:flex-start;font-size:.82rem;line-height:1.65;padding:8px 0;border-bottom:1px solid rgba(201,168,76,.08);color:var(--mid)}
 .compare-col.dark .compare-list li{color:rgba(250,248,243,.65)}
-.compare-list li .ico{flex-shrink:0;font-size:.9rem;margin-top:1px}
+.compare-list li .ico{flex-shrink:0;width:18px;height:18px;margin-top:2px;display:flex;align-items:center}
 
 /* HOTELS */
 .hotels-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;margin-top:48px}
@@ -162,7 +162,7 @@ nav.scrolled{background:rgba(26,20,16,.88);backdrop-filter:blur(18px);box-shadow
 .services-list{margin-top:40px;display:flex;flex-direction:column;gap:20px}
 .service-item{display:grid;grid-template-columns:60px 1fr auto;gap:20px;align-items:center;padding:24px 28px;background:var(--w);border:1px solid rgba(201,168,76,.15);transition:border-color .3s,box-shadow .3s}
 .service-item:hover{border-color:rgba(201,168,76,.4);box-shadow:0 8px 32px rgba(0,0,0,.06)}
-.si-icon{font-size:1.6rem;text-align:center}
+.si-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--g);flex-shrink:0}
 .si-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--dk);margin-bottom:4px}
 .si-desc{font-size:.78rem;color:var(--mid);line-height:1.6}
 .si-price{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--g);text-align:right;white-space:nowrap}
@@ -201,6 +201,14 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 .btt{position:fixed;bottom:32px;right:32px;width:48px;height:48px;background:rgba(26,20,16,.9);border:1px solid rgba(201,168,76,.3);color:var(--g);display:flex;align-items:center;justify-content:center;font-size:1.2rem;z-index:400;opacity:0;transform:translateY(12px);transition:opacity .35s,transform .35s,background .3s;pointer-events:none}
 .btt.show{opacity:1;transform:none;pointer-events:all}
 .btt:hover{background:rgba(201,168,76,.12)}
+.ico-check{color:var(--g)}.ico-warn{color:rgba(201,168,76,.55)}.ico-cross{color:rgba(180,80,80,.75)}
+.si-svg{width:30px;height:30px;color:var(--g)}
+.tip-ico{width:14px;height:14px;margin-right:5px;vertical-align:middle;color:var(--g);display:inline-block;flex-shrink:0}
+.prop-star{width:18px;height:18px;vertical-align:middle;color:var(--g);margin-right:6px}
+.ring-ico{width:16px;height:16px;vertical-align:middle;color:var(--g);margin-right:5px}
+.chat-ico{width:15px;height:15px;vertical-align:middle;color:rgba(201,168,76,.5);display:inline-block}
+.foot-heart{width:13px;height:13px;color:rgba(201,168,76,.5);vertical-align:middle;display:inline-block}
+.tl-body .tip{display:flex;align-items:flex-start;gap:6px;line-height:1.6}
 </style>
 </head>
 <body>
@@ -258,23 +266,23 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
     <p class="section-lead">Kein anderer Ort der Welt verbindet Romantik, Architektur und das Gefühl der Zeitlosigkeit so wie Venedig. Ein Antrag auf dem Wasser — mit dem Rauschen der Kanäle, dem Schein der Laternen und dem Atem der Geschichte — wird zu einem Moment, der nie verblasst.</p>
     <div class="cards-grid">
       <div class="card">
-        <span class="card-icon">🌊</span>
+        <svg class="card-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg"><path d="M2 15 C6 9 10 9 14 15 S22 21 26 15 S30 9 34 15"/><path d="M2 22 C6 16 10 16 14 22 S22 28 26 22 S30 16 34 22"/></svg>
         <h3 class="card-title">Das Wasser trägt den Moment</h3>
         <p class="card-body">Kein Verkehrslärm, keine Hektik — auf einem Boot sind Toni und Cote allein mit dem Geräusch des Wassers und dem Gesang der Gondolieri. Die Umgebung verstärkt den Moment auf natürliche Weise.</p>
       </div>
       <div class="card">
-        <span class="card-icon">🏛️</span>
+        <svg class="card-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><line x1="3" y1="31" x2="33" y2="31"/><rect x="7" y="11" width="3" height="20"/><rect x="16.5" y="11" width="3" height="20"/><rect x="26" y="11" width="3" height="20"/><polygon points="18,3 33,10 3,10 18,3"/><line x1="3" y1="10" x2="33" y2="10"/></svg>
         <h3 class="card-title">Die schönste Kulisse der Welt</h3>
         <p class="card-body">Zwischen dem Palazzo Ducale, der Seufzerbrücke und dem goldenen Abendhimmel über dem Canal Grande entsteht automatisch das ikonische Foto — ganz ohne Aufwand.</p>
       </div>
       <div class="card">
-        <span class="card-icon">🎵</span>
+        <svg class="card-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><ellipse cx="11" cy="28" rx="5" ry="3.5"/><path d="M16 28V10l16-4v13"/><ellipse cx="27" cy="23" rx="5" ry="3.5"/></svg>
         <h3 class="card-title">Musik, die berührt</h3>
         <p class="card-body">Ein Gondoliere singt „O Sole Mio" — oder ein gebuchter Musiker spielt einen besonderen Song. Venedig bietet eine emotionale Klangebene, die keinen anderen Ort hat.</p>
       </div>
       <div class="card gold-card">
         <div class="rec-badge">Empfehlung</div>
-        <span class="card-icon">✨</span>
+        <svg class="card-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg"><circle cx="18" cy="18" r="6"/><line x1="18" y1="3" x2="18" y2="8"/><line x1="18" y1="28" x2="18" y2="33"/><line x1="3" y1="18" x2="8" y2="18"/><line x1="28" y1="18" x2="33" y2="18"/><line x1="7.8" y1="7.8" x2="11.4" y2="11.4"/><line x1="24.6" y1="24.6" x2="28.2" y2="28.2"/><line x1="28.2" y1="7.8" x2="24.6" y2="11.4"/><line x1="11.4" y1="24.6" x2="7.8" y2="28.2"/></svg>
         <h3 class="card-title">Goldene Stunde im Boot</h3>
         <p class="card-body">Die schönste Zeit: 30–60 Minuten vor Sonnenuntergang. Das Licht auf dem Wasser ist unbeschreiblich. Für Fotos und Atmosphäre die mit Abstand magischste Tageszeit in Venedig.</p>
         <span class="card-tag">Bester Zeitpunkt</span>
@@ -297,26 +305,26 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
         <h3 class="compare-head">Selbst organisieren</h3>
         <p class="compare-sub">DIY · Mehr Arbeit, mehr Risiko</p>
         <ul class="compare-list">
-          <li><span class="ico">✓</span>Günstiger (ca. 90–180 €)</li>
-          <li><span class="ico">✓</span>Flexibel in Route & Zeit</li>
-          <li><span class="ico">⚠️</span>Kein festes Photoshooting dabei</li>
-          <li><span class="ico">⚠️</span>Kommunikation nur auf Italienisch</li>
-          <li><span class="ico">⚠️</span>Kein garantierter Geheimkanal</li>
-          <li><span class="ico">⚠️</span>Kein Backup bei schlechtem Wetter</li>
-          <li><span class="ico">❌</span>Stressiger für Toni — er muss koordinieren und gleichzeitig entspannt wirken</li>
+          <li><span class="ico"><svg class="ico-svg ico-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polyline points="2,8 6,12 14,4"/></svg></span>Günstiger (ca. 90–180 €)</li>
+          <li><span class="ico"><svg class="ico-svg ico-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polyline points="2,8 6,12 14,4"/></svg></span>Flexibel in Route & Zeit</li>
+          <li><span class="ico"><svg class="ico-svg ico-warn" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M8 2L14.5 13.5H1.5Z"/><line x1="8" y1="6.5" x2="8" y2="9.5"/><circle cx="8" cy="11.5" r=".7" fill="currentColor" stroke="none"/></svg></span>Kein festes Photoshooting dabei</li>
+          <li><span class="ico"><svg class="ico-svg ico-warn" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M8 2L14.5 13.5H1.5Z"/><line x1="8" y1="6.5" x2="8" y2="9.5"/><circle cx="8" cy="11.5" r=".7" fill="currentColor" stroke="none"/></svg></span>Kommunikation nur auf Italienisch</li>
+          <li><span class="ico"><svg class="ico-svg ico-warn" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M8 2L14.5 13.5H1.5Z"/><line x1="8" y1="6.5" x2="8" y2="9.5"/><circle cx="8" cy="11.5" r=".7" fill="currentColor" stroke="none"/></svg></span>Kein garantierter Geheimkanal</li>
+          <li><span class="ico"><svg class="ico-svg ico-warn" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M8 2L14.5 13.5H1.5Z"/><line x1="8" y1="6.5" x2="8" y2="9.5"/><circle cx="8" cy="11.5" r=".7" fill="currentColor" stroke="none"/></svg></span>Kein Backup bei schlechtem Wetter</li>
+          <li><span class="ico"><svg class="ico-svg ico-cross" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg></span>Stressiger für Toni — er muss koordinieren und gleichzeitig entspannt wirken</li>
         </ul>
       </div>
       <div class="compare-col dark">
         <h3 class="compare-head gold">Professioneller Service</h3>
         <p class="compare-sub">Empfohlen · Entspannter & unvergesslicher</p>
         <ul class="compare-list">
-          <li><span class="ico">✓</span>Alles aus einer Hand geplant</li>
-          <li><span class="ico">✓</span>Professionelle Fotos & Video inklusive</li>
-          <li><span class="ico">✓</span>Geheime Kanäle ohne Touristen</li>
-          <li><span class="ico">✓</span>Deutscher/englischer Ansprechpartner</li>
-          <li><span class="ico">✓</span>Musik, Blumen, Champagner buchbar</li>
-          <li><span class="ico">✓</span>Wetter-Backup & Ersatztermin</li>
-          <li><span class="ico">✓</span>Toni kann vollständig bei Cote sein</li>
+          <li><span class="ico"><svg class="ico-svg ico-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polyline points="2,8 6,12 14,4"/></svg></span>Alles aus einer Hand geplant</li>
+          <li><span class="ico"><svg class="ico-svg ico-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polyline points="2,8 6,12 14,4"/></svg></span>Professionelle Fotos & Video inklusive</li>
+          <li><span class="ico"><svg class="ico-svg ico-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polyline points="2,8 6,12 14,4"/></svg></span>Geheime Kanäle ohne Touristen</li>
+          <li><span class="ico"><svg class="ico-svg ico-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polyline points="2,8 6,12 14,4"/></svg></span>Deutscher/englischer Ansprechpartner</li>
+          <li><span class="ico"><svg class="ico-svg ico-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polyline points="2,8 6,12 14,4"/></svg></span>Musik, Blumen, Champagner buchbar</li>
+          <li><span class="ico"><svg class="ico-svg ico-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polyline points="2,8 6,12 14,4"/></svg></span>Wetter-Backup & Ersatztermin</li>
+          <li><span class="ico"><svg class="ico-svg ico-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polyline points="2,8 6,12 14,4"/></svg></span>Toni kann vollständig bei Cote sein</li>
         </ul>
       </div>
     </div>
@@ -361,7 +369,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
     <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--iv);margin-bottom:8px">Geprüfte <em style="color:var(--g)">Proposal Services</em></h3>
     <div class="services-list">
       <div class="service-item">
-        <div class="si-icon">💍</div>
+        <div class="si-icon"><svg class="si-svg" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M15 27 L2 13 L7 4 H23 L28 13 Z"/><line x1="2" y1="13" x2="15" y2="27"/><line x1="28" y1="13" x2="15" y2="27"/><line x1="7" y1="4" x2="11" y2="13"/><line x1="23" y1="4" x2="19" y2="13"/><line x1="11" y1="13" x2="19" y2="13"/></svg></div>
         <div>
           <p class="si-name">Lore Venice — Proposal Specialist</p>
           <p class="si-desc">Venedigs bekanntester Antrag-Service. Komplettpaket mit privater Gondola, verstecktem Fotografen, Champagner, Rosenblättern & deutschsprachiger Koordination. <strong>Sehr empfohlen.</strong></p>
@@ -370,7 +378,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
         <div class="si-price">ab 450 €<span>Komplett-Paket</span></div>
       </div>
       <div class="service-item">
-        <div class="si-icon">🚤</div>
+        <div class="si-icon"><svg class="si-svg" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M3 21 Q15 28 27 21"/><path d="M6 21 L8 14 H22 L24 21"/><line x1="15" y1="14" x2="15" y2="5"/><path d="M15 5 L23 10 L15 14"/></svg></div>
         <div>
           <p class="si-name">Gondolieri Travel — Romantic Services</p>
           <p class="si-desc">Spezialisiert auf romantische Gondolfahrten und Antragsmomente. Private Routen, Serenade buchbar, Prosecco an Bord. Flexible Pakete für jedes Budget.</p>
@@ -379,7 +387,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
         <div class="si-price">ab 280 €<span>Private Gondola</span></div>
       </div>
       <div class="service-item">
-        <div class="si-icon">📸</div>
+        <div class="si-icon"><svg class="si-svg" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="10" width="24" height="17" rx="1.5"/><circle cx="15" cy="19" r="5"/><path d="M10 10 L12 5 H18 L20 10"/><circle cx="24" cy="14" r="1.5" fill="currentColor" stroke="none"/></svg></div>
         <div>
           <p class="si-name">Vivo Venetia — Fotograf + Gondola Paket</p>
           <p class="si-desc">Professioneller venezianischer Fotograf + private Gondola-Buchung. Ideal wenn Toni möchte, dass der Antrag professionell fotografiert wird, ohne dass Cote den Fotografen bemerkt.</p>
@@ -388,7 +396,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
         <div class="si-price">ab 380 €<span>Inkl. Fotograf</span></div>
       </div>
       <div class="service-item">
-        <div class="si-icon">🎵</div>
+        <div class="si-icon"><svg class="si-svg" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><ellipse cx="9" cy="25" rx="4" ry="3"/><path d="M13 25V9l14-3v12"/><ellipse cx="23" cy="21" rx="4" ry="3"/></svg></div>
         <div>
           <p class="si-name">Serenade-Upgrade — Gondoliere singt</p>
           <p class="si-desc">Klassische Serenade auf dem Boot: Ein Sänger oder Akkordeonist begleitet die Fahrt. Kann bei jedem Anbieter als Zusatz gebucht werden. Absoluter Emotionsverstärker.</p>
@@ -413,7 +421,41 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 
       <div class="hotel-card">
         <div class="hotel-badge">Top-Empfehlung</div>
-        <div class="hotel-img" style="background:linear-gradient(135deg,#1c150a,#2e2010);font-size:3.5rem">🏛️</div>
+        <div class="hotel-img" style="background:transparent;font-size:0"><svg width="100%" height="100%" viewBox="0 0 400 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="210" fill="url(#g1)"/>
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="400" y2="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1c150a"/><stop offset="100%" stop-color="#2e2010"/>
+    </linearGradient>
+  </defs>
+  <!-- Water reflection lines -->
+  <path d="M0 180 Q100 172 200 180 Q300 188 400 180" stroke="rgba(201,168,76,0.08)" stroke-width="1"/>
+  <path d="M0 190 Q100 183 200 190 Q300 197 400 190" stroke="rgba(201,168,76,0.06)" stroke-width="1"/>
+  <path d="M0 200 Q100 193 200 200 Q300 207 400 200" stroke="rgba(201,168,76,0.05)" stroke-width="1"/>
+  <!-- Palace silhouette -->
+  <rect x="60" y="80" width="280" height="100" stroke="rgba(201,168,76,0.18)" stroke-width="1" fill="none"/>
+  <!-- Central arch -->
+  <path d="M170 180 L170 110 Q200 88 230 110 L230 180" stroke="rgba(201,168,76,0.22)" stroke-width="1" fill="none"/>
+  <!-- Side arches -->
+  <path d="M90 180 L90 125 Q110 108 130 125 L130 180" stroke="rgba(201,168,76,0.15)" stroke-width="1" fill="none"/>
+  <path d="M270 180 L270 125 Q290 108 310 125 L310 180" stroke="rgba(201,168,76,0.15)" stroke-width="1" fill="none"/>
+  <!-- Columns -->
+  <line x1="100" y1="80" x2="100" y2="180" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
+  <line x1="140" y1="80" x2="140" y2="180" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
+  <line x1="160" y1="80" x2="160" y2="180" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
+  <line x1="240" y1="80" x2="240" y2="180" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
+  <line x1="260" y1="80" x2="260" y2="180" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
+  <line x1="300" y1="80" x2="300" y2="180" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
+  <!-- Roofline -->
+  <path d="M50 80 L200 40 L350 80" stroke="rgba(201,168,76,0.2)" stroke-width="1" fill="none"/>
+  <!-- Finial -->
+  <line x1="200" y1="20" x2="200" y2="40" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+  <circle cx="200" cy="18" r="3" stroke="rgba(201,168,76,0.35)" stroke-width="1" fill="none"/>
+  <!-- Grand Canal line -->
+  <line x1="0" y1="175" x2="400" y2="175" stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
+  <!-- Label -->
+  <text x="200" y="155" text-anchor="middle" font-family="Cinzel, serif" font-size="11" fill="rgba(201,168,76,0.35)" letter-spacing="4">GRITTI PALACE</text>
+</svg></div>
         <div class="hotel-body">
           <div class="hotel-stars">★★★★★</div>
           <h3 class="hotel-name">The Gritti Palace</h3>
@@ -430,7 +472,30 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
       </div>
 
       <div class="hotel-card">
-        <div class="hotel-img" style="background:linear-gradient(135deg,#0e1520,#1a2540);font-size:3.5rem">🌊</div>
+        <div class="hotel-img" style="background:transparent;font-size:0"><svg width="100%" height="100%" viewBox="0 0 400 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="210" fill="url(#g2)"/>
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="400" y2="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0e1520"/><stop offset="100%" stop-color="#1a2540"/>
+    </linearGradient>
+  </defs>
+  <!-- Lagoon water -->
+  <path d="M0 185 Q80 178 160 185 Q240 192 320 185 Q360 181 400 185" stroke="rgba(201,168,76,0.09)" stroke-width="1"/>
+  <path d="M0 195 Q80 188 160 195 Q240 202 320 195 Q360 191 400 195" stroke="rgba(201,168,76,0.06)" stroke-width="1"/>
+  <!-- Three gothic arches -->
+  <path d="M80 180 L80 100 Q80 70 110 70 Q140 70 140 100 L140 180" stroke="rgba(201,168,76,0.2)" stroke-width="1" fill="none"/>
+  <path d="M170 180 L170 90 Q170 55 200 55 Q230 55 230 90 L230 180" stroke="rgba(201,168,76,0.28)" stroke-width="1" fill="none"/>
+  <path d="M260 180 L260 100 Q260 70 290 70 Q320 70 320 100 L320 180" stroke="rgba(201,168,76,0.2)" stroke-width="1" fill="none"/>
+  <!-- Gothic tracery details -->
+  <path d="M110 90 Q110 75 125 75 Q140 75 140 90" stroke="rgba(201,168,76,0.12)" stroke-width="1" fill="none"/>
+  <path d="M200 80 Q200 62 215 62 Q230 62 230 80" stroke="rgba(201,168,76,0.15)" stroke-width="1" fill="none"/>
+  <path d="M290 90 Q290 75 305 75 Q320 75 320 90" stroke="rgba(201,168,76,0.12)" stroke-width="1" fill="none"/>
+  <!-- Horizontal lines -->
+  <line x1="60" y1="60" x2="340" y2="60" stroke="rgba(201,168,76,0.08)" stroke-width="1"/>
+  <line x1="60" y1="180" x2="340" y2="180" stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
+  <!-- Label -->
+  <text x="200" y="160" text-anchor="middle" font-family="Cinzel, serif" font-size="11" fill="rgba(201,168,76,0.35)" letter-spacing="5">DANIELI</text>
+</svg></div>
         <div class="hotel-body">
           <div class="hotel-stars">★★★★★</div>
           <h3 class="hotel-name">Hotel Danieli</h3>
@@ -447,7 +512,36 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
       </div>
 
       <div class="hotel-card">
-        <div class="hotel-img" style="background:linear-gradient(135deg,#0a1a10,#12281a);font-size:3.5rem">🌿</div>
+        <div class="hotel-img" style="background:transparent;font-size:0"><svg width="100%" height="100%" viewBox="0 0 400 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="210" fill="url(#g3)"/>
+  <defs>
+    <linearGradient id="g3" x1="0" y1="0" x2="400" y2="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a1a10"/><stop offset="100%" stop-color="#12281a"/>
+    </linearGradient>
+  </defs>
+  <!-- Cypress trees -->
+  <ellipse cx="80" cy="120" rx="14" ry="70" stroke="rgba(201,168,76,0.15)" stroke-width="1" fill="none"/>
+  <ellipse cx="320" cy="120" rx="14" ry="70" stroke="rgba(201,168,76,0.15)" stroke-width="1" fill="none"/>
+  <ellipse cx="130" cy="135" rx="10" ry="52" stroke="rgba(201,168,76,0.1)" stroke-width="1" fill="none"/>
+  <ellipse cx="270" cy="135" rx="10" ry="52" stroke="rgba(201,168,76,0.1)" stroke-width="1" fill="none"/>
+  <!-- Villa silhouette -->
+  <rect x="145" y="100" width="110" height="75" stroke="rgba(201,168,76,0.18)" stroke-width="1" fill="none"/>
+  <path d="M135 100 L200 72 L265 100" stroke="rgba(201,168,76,0.2)" stroke-width="1" fill="none"/>
+  <!-- Windows -->
+  <rect x="163" y="115" width="18" height="22" stroke="rgba(201,168,76,0.15)" stroke-width="1" fill="none"/>
+  <path d="M163 115 Q172 108 181 115" stroke="rgba(201,168,76,0.12)" stroke-width="1" fill="none"/>
+  <rect x="219" y="115" width="18" height="22" stroke="rgba(201,168,76,0.15)" stroke-width="1" fill="none"/>
+  <path d="M219 115 Q228 108 237 115" stroke="rgba(201,168,76,0.12)" stroke-width="1" fill="none"/>
+  <!-- Door -->
+  <rect x="188" y="145" width="24" height="30" stroke="rgba(201,168,76,0.15)" stroke-width="1" fill="none"/>
+  <path d="M188 145 Q200 136 212 145" stroke="rgba(201,168,76,0.12)" stroke-width="1" fill="none"/>
+  <!-- Ground / garden line -->
+  <line x1="30" y1="175" x2="370" y2="175" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
+  <!-- Lagoon -->
+  <path d="M0 185 Q100 178 200 185 Q300 192 400 185" stroke="rgba(201,168,76,0.08)" stroke-width="1"/>
+  <!-- Label -->
+  <text x="200" y="158" text-anchor="middle" font-family="Cinzel, serif" font-size="11" fill="rgba(201,168,76,0.35)" letter-spacing="3">CIPRIANI</text>
+</svg></div>
         <div class="hotel-body">
           <div class="hotel-stars">★★★★★</div>
           <h3 class="hotel-name">Belmond Hotel Cipriani</h3>
@@ -467,7 +561,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 
     <!-- BOUTIQUE TIP -->
     <div style="margin-top:32px;padding:28px 32px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.12)">
-      <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--dk);margin-bottom:8px">💡 Boutique-Alternative: Hotel Metropole</h4>
+      <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--dk);margin-bottom:8px"><span style="display:inline-flex;align-items:center;gap:8px"><svg class="tip-ico" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a5 5 0 0 1 5 5c0 2.2-1.4 4-2.5 4.8V13H6.5v-1.2C5.4 11 4 9.2 4 7a5 5 0 0 1 5-5z"/><line x1="6.5" y1="16" x2="11.5" y2="16"/><line x1="7" y1="13" x2="11" y2="13"/></svg> Boutique-Alternative: Hotel Metropole</span></h4>
       <p style="font-size:.82rem;line-height:1.75;color:var(--mid)">Wer etwas weniger bekanntes sucht: Das <strong>Hotel Metropole</strong> (Riva degli Schiavoni) ist ein exzentrisches 5-Sterne-Haus mit eklektischer Kunst-Atmosphäre, Nähe zum Markusplatz und günstigerem Preis (ab ~500 €/Nacht). Ideal für Paare, die Charme über Ruhm stellen.</p>
     </div>
   </div>
@@ -496,7 +590,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
           <div class="tl-body">
             <h4>Ankunft & Check-in im Hotel</h4>
             <p>Per Vaporetto oder privatem Wassertaxi vom Bahnhof Santa Lucia oder Flughafen Marco Polo direkt zum Hotel. Das Wassertaxi ist die romantischere Wahl — erster Venedig-Eindruck auf dem Wasser.</p>
-            <p class="tip">💡 Privates Wassertaxi buchen: Alilaguna oder Consorzio Motoscafi Venezia</p>
+            <p class="tip"><svg class="tip-ico" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a5 5 0 0 1 5 5c0 2.2-1.4 4-2.5 4.8V13H6.5v-1.2C5.4 11 4 9.2 4 7a5 5 0 0 1 5-5z"/><line x1="6.5" y1="16" x2="11.5" y2="16"/><line x1="7" y1="13" x2="11" y2="13"/></svg><span>Privates Wassertaxi buchen: Alilaguna oder Consorzio Motoscafi Venezia</p>
           </div>
         </li>
         <li class="tl-item">
@@ -511,7 +605,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
           <div class="tl-body">
             <h4>Aperitivo &amp; Abendessen</h4>
             <p>Spritz Aperol bei Harry's Bar oder im Bacaro (typische venezianische Weinbar). Abendessen im <strong>Osteria alle Testiere</strong> (bestes Meeresfrüchte-Restaurant der Stadt, Reservierung nötig) oder <strong>Ristorante Quadri</strong> am Markusplatz.</p>
-            <p class="tip">💡 Testiere unbedingt Wochen vorher reservieren — nur 22 Plätze</p>
+            <p class="tip"><svg class="tip-ico" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a5 5 0 0 1 5 5c0 2.2-1.4 4-2.5 4.8V13H6.5v-1.2C5.4 11 4 9.2 4 7a5 5 0 0 1 5-5z"/><line x1="6.5" y1="16" x2="11.5" y2="16"/><line x1="7" y1="13" x2="11" y2="13"/></svg><span>Testiere unbedingt Wochen vorher reservieren — nur 22 Plätze</span></p>
           </div>
         </li>
         <li class="tl-item">
@@ -550,9 +644,9 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
         <li class="tl-item" style="border-left: 3px solid var(--g); margin-left: -3px; padding-left: 3px;">
           <div class="tl-time" style="color:var(--g);font-weight:700">18:30</div>
           <div class="tl-body">
-            <h4 style="color:var(--g)">⭐ Der Antrag — Private Gondola</h4>
+            <h4 style="color:var(--g);display:flex;align-items:center;gap:8px"><svg class="prop-star" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="10,2 12.4,7.2 18,7.8 14,11.6 15.1,17.2 10,14.4 4.9,17.2 6,11.6 2,7.8 7.6,7.2"/></svg> Der Antrag — Private Gondola</h4>
             <p>Toni führt Cote zum vereinbarten Einstiegspunkt in Dorsoduro. Die private Gondola wartet bereits — Rosenblätter im Boot, Champagner auf Eis. Der versteckte Fotograf positioniert sich 10 Minuten vorher. Toni hat den Ring in der Innentasche. Kurs: ruhige Kanäle zwischen San Barnaba und Rio Marin.</p>
-            <p class="tip">💍 Empfohlener Moment: nach ca. 15 Minuten Fahrt, wenn Cote vollständig entspannt ist und das Licht am schönsten ist</p>
+            <p class="tip"><svg class="ring-ico" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M9 16 L2 9 L5 3 H13 L16 9 Z"/><line x1="2" y1="9" x2="9" y2="16"/><line x1="16" y1="9" x2="9" y2="16"/><line x1="5" y1="3" x2="7.5" y2="9"/><line x1="13" y1="3" x2="10.5" y2="9"/><line x1="7.5" y1="9" x2="10.5" y2="9"/></svg><span>Empfohlener Moment: nach ca. 15 Minuten Fahrt, wenn Cote vollständig entspannt ist und das Licht am schönsten ist</span></p>
           </div>
         </li>
         <li class="tl-item">
@@ -560,7 +654,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
           <div class="tl-body">
             <h4>Champagner-Dinner zur Feier</h4>
             <p>Vorab reserviertes romantisches Dinner im <strong>Club del Doge</strong> (Gritti Palace) direkt am Grand Canal — oder im <strong>Terrazza Danieli</strong> auf dem Dach mit Panoramablick. Der Moment, den Cote nie vergessen wird.</p>
-            <p class="tip">💡 Hotel am Tag der Ankunft informieren — oft dekorieren sie das Zimmer kostenlos mit Rosen</p>
+            <p class="tip"><svg class="tip-ico" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a5 5 0 0 1 5 5c0 2.2-1.4 4-2.5 4.8V13H6.5v-1.2C5.4 11 4 9.2 4 7a5 5 0 0 1 5-5z"/><line x1="6.5" y1="16" x2="11.5" y2="16"/><line x1="7" y1="13" x2="11" y2="13"/></svg><span>Hotel am Tag der Ankunft informieren — oft dekorieren sie das Zimmer kostenlos mit Rosen</span></p>
           </div>
         </li>
         <li class="tl-item">
@@ -671,7 +765,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
       </div>
       <div class="check-item" onclick="toggleCheck(this)">
         <div class="chk"></div>
-        <p class="check-label"><strong>Worte üben</strong> — auch auf Spanisch/Englisch falls Cote das mag 💬</p>
+        <p class="check-label"><strong>Worte üben</strong> — auch auf Spanisch/Englisch falls Cote das mag <svg class="chat-ico" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M2 3h14v10H9l-4 3v-3H2z"/><line x1="5" y1="7" x2="13" y2="7"/><line x1="5" y1="10" x2="10" y2="10"/></svg></p>
       </div>
     </div>
 
@@ -712,11 +806,11 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
   <p class="foot-logo">La Cerimonia Perfetta</p>
   <p class="foot-names">Toni &amp; Cote</p>
   <p style="color:rgba(201,168,76,.3);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;margin:8px 0">Venezia — La città dell'amore eterno</p>
-  <p class="foot-note">Erstellt mit ♥ für den schönsten Moment</p>
+  <p class="foot-note">Erstellt mit <svg class="foot-heart" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 14S2 10 2 6a4 4 0 0 1 6-3.46A4 4 0 0 1 14 6c0 4-6 8-6 8z"/></svg> für den schönsten Moment</p>
 </footer>
 
 <!-- Back to top -->
-<div class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<div class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="14" x2="9" y2="4"/><polyline points="4,9 9,4 14,9"/></svg></div>
 
 <script>
 // Cursor
