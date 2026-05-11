@@ -201,6 +201,63 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 .btt{position:fixed;bottom:32px;right:32px;width:48px;height:48px;background:rgba(26,20,16,.9);border:1px solid rgba(201,168,76,.3);color:var(--g);display:flex;align-items:center;justify-content:center;font-size:1.2rem;z-index:400;opacity:0;transform:translateY(12px);transition:opacity .35s,transform .35s,background .3s;pointer-events:none}
 .btt.show{opacity:1;transform:none;pointer-events:all}
 .btt:hover{background:rgba(201,168,76,.12)}
+/* ── YH GRAND WEDDING BRANDING ──────────────────────── */
+.nav-yh{font-family:'Cinzel',serif;font-size:1.35rem;letter-spacing:.18em;
+  color:var(--g);display:block;line-height:1;
+  text-shadow:0 0 30px rgba(201,168,76,.35)}
+.nav-gw{font-family:'Montserrat',sans-serif;font-size:.48rem;font-weight:700;
+  letter-spacing:.45em;text-transform:uppercase;
+  color:rgba(201,168,76,.65);display:block;margin-top:3px}
+.nav-dwa{font-family:'Montserrat',sans-serif;font-size:.38rem;font-weight:400;
+  letter-spacing:.35em;text-transform:uppercase;
+  color:rgba(201,168,76,.32);display:block;margin-top:2px}
+
+/* ── FOOTER BRAND BLOCK ────────────────────────────── */
+.foot-brand{margin-bottom:20px}
+.foot-yh{font-family:'Cinzel',serif;font-size:2.6rem;letter-spacing:.2em;
+  color:var(--g);display:block;line-height:1;
+  text-shadow:0 0 60px rgba(201,168,76,.45),0 0 120px rgba(201,168,76,.15);
+  animation:lglow2 4s ease-in-out infinite}
+@keyframes lglow2{0%,100%{text-shadow:0 0 40px rgba(201,168,76,.35),0 0 80px rgba(201,168,76,.1)}
+  50%{text-shadow:0 0 70px rgba(201,168,76,.6),0 0 140px rgba(201,168,76,.2)}}
+.foot-gw{font-family:'Montserrat',sans-serif;font-size:.55rem;font-weight:700;
+  letter-spacing:.55em;text-transform:uppercase;
+  color:rgba(201,168,76,.55);display:block;margin-top:6px}
+.foot-dwa{font-family:'Montserrat',sans-serif;font-size:.42rem;font-weight:400;
+  letter-spacing:.42em;text-transform:uppercase;
+  color:rgba(201,168,76,.28);display:block;margin-top:4px}
+.foot-divider{display:flex;align-items:center;gap:16px;
+  justify-content:center;margin:20px 0 16px;color:rgba(201,168,76,.2);
+  font-size:.9rem;letter-spacing:.5em}
+.foot-divider::before,.foot-divider::after{content:'';height:1px;width:60px;
+  background:linear-gradient(90deg,transparent,rgba(201,168,76,.2))}
+
+/* ── MOBILE MENU BRAND ─────────────────────────────── */
+.mob-menu-brand{text-align:center;margin-top:32px;padding-top:24px;
+  border-top:1px solid rgba(201,168,76,.08)}
+.mob-yh{font-family:'Cinzel',serif;font-size:1.8rem;letter-spacing:.18em;
+  color:rgba(201,168,76,.5);display:block;line-height:1}
+.mob-gw{font-family:'Montserrat',sans-serif;font-size:.45rem;font-weight:700;
+  letter-spacing:.45em;text-transform:uppercase;
+  color:rgba(201,168,76,.25);display:block;margin-top:5px}
+.mob-dwa{font-family:'Montserrat',sans-serif;font-size:.36rem;
+  letter-spacing:.35em;text-transform:uppercase;
+  color:rgba(201,168,76,.15);display:block;margin-top:3px}
+
+/* ── MOBILE ADJUSTMENTS ─────────────────────────────── */
+@media(max-width:768px){
+  .nav-yh{font-size:1.1rem;letter-spacing:.14em}
+  .nav-gw{font-size:.42rem;letter-spacing:.36em}
+  .nav-dwa{display:none}
+  .foot-yh{font-size:2rem}
+  .foot-gw{font-size:.48rem;letter-spacing:.45em}
+  .foot-dwa{font-size:.36rem;letter-spacing:.35em}
+}
+@media(max-width:430px){
+  .nav-yh{font-size:1rem}
+  .nav-gw{font-size:.38rem;letter-spacing:.3em}
+}
+
 .ico-check{color:var(--g)}.ico-warn{color:rgba(201,168,76,.55)}.ico-cross{color:rgba(180,80,80,.75)}
 .si-svg{width:30px;height:30px;color:var(--g)}
 .tip-ico{width:14px;height:14px;margin-right:5px;vertical-align:middle;color:var(--g);display:inline-block;flex-shrink:0}
@@ -226,8 +283,9 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-logo">
-    La Cerimonia Perfetta
-    <span>Venezia · Toni &amp; Cote</span>
+    <span class="nav-yh">YH</span>
+    <span class="nav-gw">Grand Wedding</span>
+    <span class="nav-dwa">Destination Wedding Atelier</span>
   </div>
   <ul class="nav-links">
     <li><a href="#antrag">Der Antrag</a></li>
@@ -235,7 +293,26 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
     <li><a href="#reise">Reiseplan</a></li>
     <li><a href="#checklist">Checkliste</a></li>
   </ul>
+  <button class="nav-burger" id="navBurger" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE OVERLAY MENU -->
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-menu-close" id="mobClose" aria-label="Schließen">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg>
+  </button>
+  <a href="#antrag" class="mob-link">Der Antrag</a>
+  <a href="#hotels" class="mob-link">Hotels</a>
+  <a href="#reise" class="mob-link">Reiseplan</a>
+  <a href="#checklist" class="mob-link">Checkliste</a>
+  <div class="mob-menu-brand">
+    <span class="mob-yh">YH</span>
+    <span class="mob-gw">Grand Wedding</span>
+    <span class="mob-dwa">Destination Wedding Atelier</span>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -560,7 +637,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
     </div>
 
     <!-- BOUTIQUE TIP -->
-    <div style="margin-top:32px;padding:28px 32px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.12)">
+    <div class="boutique-tip" style="margin-top:32px;padding:28px 32px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.12)">
       <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--dk);margin-bottom:8px"><span style="display:inline-flex;align-items:center;gap:8px"><svg class="tip-ico" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a5 5 0 0 1 5 5c0 2.2-1.4 4-2.5 4.8V13H6.5v-1.2C5.4 11 4 9.2 4 7a5 5 0 0 1 5-5z"/><line x1="6.5" y1="16" x2="11.5" y2="16"/><line x1="7" y1="13" x2="11" y2="13"/></svg> Boutique-Alternative: Hotel Metropole</span></h4>
       <p style="font-size:.82rem;line-height:1.75;color:var(--mid)">Wer etwas weniger bekanntes sucht: Das <strong>Hotel Metropole</strong> (Riva degli Schiavoni) ist ein exzentrisches 5-Sterne-Haus mit eklektischer Kunst-Atmosphäre, Nähe zum Markusplatz und günstigerem Preis (ab ~500 €/Nacht). Ideal für Paare, die Charme über Ruhm stellen.</p>
     </div>
@@ -773,7 +850,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
     <div style="margin-top:56px">
       <span class="section-tag">Budgetübersicht</span>
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--dk);margin-bottom:32px">Gesamtkosten <em>im Überblick</em></h3>
-      <div style="overflow-x:auto">
+      <div class="budget-scroll" style="overflow-x:auto">
         <table style="width:100%;border-collapse:collapse;font-size:.82rem">
           <thead>
             <tr style="border-bottom:2px solid rgba(201,168,76,.3)">
@@ -803,7 +880,12 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 
 <!-- FOOTER -->
 <footer>
-  <p class="foot-logo">La Cerimonia Perfetta</p>
+  <div class="foot-brand">
+    <span class="foot-yh">YH</span>
+    <span class="foot-gw">Grand Wedding</span>
+    <span class="foot-dwa">Destination Wedding Atelier</span>
+  </div>
+  <div class="foot-divider"><span>◆</span></div>
   <p class="foot-names">Toni &amp; Cote</p>
   <p style="color:rgba(201,168,76,.3);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;margin:8px 0">Venezia — La città dell'amore eterno</p>
   <p class="foot-note">Erstellt mit <svg class="foot-heart" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 14S2 10 2 6a4 4 0 0 1 6-3.46A4 4 0 0 1 14 6c0 4-6 8-6 8z"/></svg> für den schönsten Moment</p>
@@ -813,6 +895,17 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 <div class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="14" x2="9" y2="4"/><polyline points="4,9 9,4 14,9"/></svg></div>
 
 <script>
+// Hamburger menu
+const burger=document.getElementById('navBurger');
+const mob=document.getElementById('mobMenu');
+const mobClose=document.getElementById('mobClose');
+function openMenu(){burger.classList.add('open');mob.classList.add('open');document.body.style.overflow='hidden';}
+function closeMenu(){burger.classList.remove('open');mob.classList.remove('open');document.body.style.overflow='';}
+burger.addEventListener('click',()=>mob.classList.contains('open')?closeMenu():openMenu());
+mobClose.addEventListener('click',closeMenu);
+document.querySelectorAll('.mob-link').forEach(a=>a.addEventListener('click',closeMenu));
+mob.addEventListener('click',e=>{if(e.target===mob)closeMenu();});
+
 // Cursor
 const cd=document.getElementById('cd'),cr=document.getElementById('cr');
 let mx=0,my=0,rx=0,ry=0;
@@ -825,7 +918,7 @@ const canvas=document.getElementById('pc'),ctx=canvas.getContext('2d');
 let W,H,particles=[];
 function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
 resize();window.addEventListener('resize',resize);
-function initP(){particles=[];for(let i=0;i<80;i++){particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+.3,o:Math.random()*.5+.1});}}
+function initP(){particles=[];const cnt=window.innerWidth<768?30:80;for(let i=0;i<cnt;i++){particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+.3,o:Math.random()*.5+.1});}}
 initP();
 function drawP(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(201,168,76,${p.o})`;ctx.fill();});requestAnimationFrame(drawP);}
 drawP();
@@ -851,6 +944,27 @@ function showTab(id,btn){
 
 // Checklist
 function toggleCheck(el){el.classList.toggle('done');}
+// Swipe tabs on mobile
+(function(){
+  let sx=0,sy=0;
+  const tabs=['tag1','tag2','tag3'];
+  document.querySelectorAll('.tab-content').forEach(el=>{
+    el.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+    el.addEventListener('touchend',e=>{
+      const dx=e.changedTouches[0].clientX-sx;
+      const dy=e.changedTouches[0].clientY-sy;
+      if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50){
+        const cur=tabs.findIndex(id=>document.getElementById(id).classList.contains('active'));
+        const next=dx<0?Math.min(cur+1,2):Math.max(cur-1,0);
+        if(next!==cur){
+          const btn=document.querySelectorAll('.tab-btn')[next];
+          showTab(tabs[next],btn);
+        }
+      }
+    },{passive:true});
+  });
+})();
+
 </script>
 </body>
 </html>
