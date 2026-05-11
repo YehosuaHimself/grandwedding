@@ -2,7 +2,7 @@
 <html lang="de" style="cursor:none">
 <head>
 <meta charset="UTF-8">
-<!-- venezia build: 2026-05-11 v3.4 — user images placed across page -->
+<!-- venezia build: 2026-05-11 v3.5 — ring emblem in nav logo -->
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
 <title>La Proposta — Venezia · Toni &amp; Cote</title>
 <meta name="description" content="Ein unvergesslicher Antrag in Venedig. Kuratiert von YH Grand Wedding — Destination Wedding Atelier.">
@@ -89,7 +89,10 @@ html.lenis,html.lenis body{height:auto}
 /* === NAV === */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:20px 56px;display:flex;align-items:center;justify-content:space-between;transition:background .5s var(--ease),backdrop-filter .5s,box-shadow .5s,padding .4s}
 nav.scrolled{background:rgba(21,17,11,.85);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);box-shadow:0 1px 0 rgba(201,162,78,.12),0 12px 40px rgba(0,0,0,.18);padding:14px 56px}
-.nav-logo{position:relative;text-decoration:none;display:flex;flex-direction:column;gap:2px}
+.nav-logo{position:relative;text-decoration:none;display:flex;flex-direction:row;align-items:center;gap:14px}
+.nav-text-stack{display:flex;flex-direction:column;gap:0}
+.nav-ring{transition:opacity .3s,filter .3s;opacity:.85;flex-shrink:0}
+.nav-logo:hover .nav-ring{opacity:1;filter:drop-shadow(0 0 6px rgba(201,162,78,.45))}
 .nav-yh{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:500;letter-spacing:.2em;color:var(--g);display:block;line-height:1;text-shadow:0 0 28px rgba(201,162,78,.4)}
 .nav-gw{font-family:'Inter',sans-serif;font-size:.48rem;font-weight:600;letter-spacing:.5em;text-transform:uppercase;color:rgba(201,162,78,.7);display:block;margin-top:5px}
 .nav-dwa{font-family:'Inter',sans-serif;font-size:.4rem;font-weight:400;letter-spacing:.4em;text-transform:uppercase;color:rgba(201,162,78,.35);display:block;margin-top:3px}
@@ -443,9 +446,23 @@ footer{background:#040608;padding:64px 56px;text-align:center;border-top:1px sol
 <!-- NAV -->
 <nav id="nav">
   <a class="nav-logo" href="#" onclick="if(window.lenis){lenis.scrollTo(0,{duration:1.4});}else{window.scrollTo({top:0,behavior:'smooth'});}return false;" aria-label="Zum Seitenanfang">
-    <span class="nav-yh">YH</span>
-    <span class="nav-gw">Grand Wedding</span>
-    <span class="nav-dwa">Destination Wedding Atelier</span>
+    <!-- Ring emblem — wedding ring with solitaire diamond dot -->
+    <svg class="nav-ring" width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Outer ring -->
+      <circle cx="22" cy="23" r="17.5" stroke="rgba(201,162,78,0.75)" stroke-width="1.1"/>
+      <!-- Inner ring — subtle second line -->
+      <circle cx="22" cy="23" r="14.5" stroke="rgba(201,162,78,0.22)" stroke-width="0.7"/>
+      <!-- Solitaire diamond setting at top -->
+      <circle cx="22" cy="5" r="2.2" fill="rgba(201,162,78,0.9)"/>
+      <circle cx="22" cy="5" r="1.1" fill="rgba(232,210,154,1)"/>
+      <!-- Small prong lines -->
+      <line x1="22" y1="7.2" x2="22" y2="5.6" stroke="rgba(201,162,78,0.6)" stroke-width="0.9"/>
+    </svg>
+    <div class="nav-text-stack">
+      <span class="nav-yh">YH</span>
+      <span class="nav-gw">Grand Wedding</span>
+      <span class="nav-dwa">Destination Wedding Atelier</span>
+    </div>
   </a>
   <ul class="nav-links">
     <li><a href="#antrag">Der Antrag</a></li>
