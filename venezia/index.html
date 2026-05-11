@@ -2,7 +2,7 @@
 <html lang="de" style="cursor:none">
 <head>
 <meta charset="UTF-8">
-<!-- venezia build: 2026-05-11 v3.3 — no photo images, cursor fix -->
+<!-- venezia build: 2026-05-11 v3.4 — user images placed across page -->
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
 <title>La Proposta — Venezia · Toni &amp; Cote</title>
 <meta name="description" content="Ein unvergesslicher Antrag in Venedig. Kuratiert von YH Grand Wedding — Destination Wedding Atelier.">
@@ -479,6 +479,7 @@ footer{background:#040608;padding:64px 56px;text-align:center;border-top:1px sol
 <!-- HERO — cinematic gradient backdrop, no image -->
 <section class="hero">
   <div class="hero-bg">
+    <img src="hero.webp" alt="Canal Grande bei Sonnenuntergang — Venedig im dramatischen Abendlicht" loading="eager" fetchpriority="high">
   </div>
   <div class="hero-content">
     <span class="hero-eyebrow">Una città · Un momento · Per sempre</span>
@@ -550,17 +551,18 @@ footer{background:#040608;padding:64px 56px;text-align:center;border-top:1px sol
 
 <!-- STRIP 1: Venice gondola on Grand Canal -->
 <div class="venice-strip">
-
+  <img src="strip1.webp" alt="Santa Maria della Salute im goldenen Sonnenuntergang vom Canal Grande" loading="lazy">
   <div class="venice-strip-overlay"></div>
   <div class="venice-strip-caption">
-    <em>Canal Grande al tramonto</em>
-    <small>Der Canal Grande in der goldenen Stunde</small>
+    <em>Il tramonto sul Canal Grande</em>
+    <small>Santa Maria della Salute · im Leuchten des Abends</small>
   </div>
 </div>
 
 <!-- PLANNING SECTION -->
-<section class="section dark-section" id="antrag">
-  <div class="section-inner">
+<section class="section dark-section" id="antrag" style="position:relative;overflow:hidden;">
+  <div class="antrag-bg-img" style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden"><img src="bg-antrag.webp" alt="" aria-hidden="true" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:.13;display:block"></div>
+  <div class="section-inner" style="position:relative;z-index:1;">
     <span class="section-tag reveal">Pianificazione</span>
     <h2 class="section-title reveal">Selbst planen oder<br><em>professionellen Service</em> buchen?</h2>
     <div class="gold-line reveal reveal-delay-1"></div>
@@ -665,11 +667,11 @@ footer{background:#040608;padding:64px 56px;text-align:center;border-top:1px sol
 
 <!-- STRIP 2: Venice at dusk, quiet canal -->
 <div class="venice-strip tall">
-
+  <img src="strip2.webp" alt="Gondolier auf dem Canal Grande, weiße venezianische Paläste im Hintergrund" loading="lazy">
   <div class="venice-strip-overlay"></div>
   <div class="venice-strip-caption">
     <em>La gondola — l'anima di Venezia</em>
-    <small>Auf stillen Kanälen · Nur ihr zwei</small>
+    <small>Auf dem Canal Grande · mit den Palästen als Kulisse</small>
   </div>
 </div>
 
@@ -1381,19 +1383,29 @@ footer{background:#040608;padding:64px 56px;text-align:center;border-top:1px sol
 
 <div class="ornament">◆ ◇ ◆</div>
 
-<!-- STRIP 3: Venice at dawn / morning light over lagoon -->
+<!-- STRIP 3: Aerial Venice panorama -->
 <div class="venice-strip">
-
+  <img src="strip3.webp" alt="Venezia dall'alto — Luftaufnahme von Venedig mit der Lagune" loading="lazy">
   <div class="venice-strip-overlay"></div>
   <div class="venice-strip-caption">
-    <em>L'alba sulla laguna</em>
-    <small>Der Morgen nach dem schönsten Abend</small>
+    <em>Venezia dall'alto</em>
+    <small>Die ewige Stadt auf dem Wasser · 118 Inseln · Eine Liebe</small>
   </div>
 </div>
 
 <!-- ITINERARY — navy background -->
 <section class="section navy-section" id="reise">
   <div class="section-inner">
+    <!-- Viaggio cinematic hero: wooden boat on Canal Grande at golden hour -->
+  <div class="viaggio-hero reveal">
+    <img src="viaggio.webp" alt="Holzboot auf dem Canal Grande in Venedig — goldene Stunde, Santa Maria della Salute im Hintergrund" loading="lazy">
+    <div class="viaggio-hero-overlay"></div>
+    <div class="viaggio-hero-caption">
+      <span>L'arrivo</span>
+      <em>Per acqua — Die Ankunft auf dem Wasser</em>
+    </div>
+  </div>
+
       <span class="section-tag reveal">Il Viaggio Perfetto</span>
     <h2 class="section-title reveal">Der <em>perfekte Aufenthalt</em><br>für Toni &amp; Cote</h2>
     <div class="gold-line reveal reveal-delay-1"></div>
@@ -1504,8 +1516,9 @@ footer{background:#040608;padding:64px 56px;text-align:center;border-top:1px sol
 </section>
 
 <!-- CONTACT -->
-<section class="contact-section" id="kontakt">
-  <div class="contact-inner">
+<section class="contact-section" id="kontakt" style="position:relative;overflow:hidden;">
+  <div class="contact-bg-img" style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden"><img src="bg-contact.webp" alt="" aria-hidden="true" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 35%;opacity:.18;display:block"></div>
+  <div class="contact-inner" style="position:relative;z-index:2;">
     <span class="contact-eyebrow reveal">YH Grand Wedding · Atelier</span>
     <h2 class="contact-title reveal reveal-delay-1">Bereit für das<br><em>schönste Ja</em> aller Zeiten?</h2>
     <p class="contact-body reveal reveal-delay-2">
