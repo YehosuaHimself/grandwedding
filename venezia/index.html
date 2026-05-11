@@ -226,7 +226,8 @@ nav.scrolled{background:rgba(26,20,16,.88);backdrop-filter:blur(18px);box-shadow
 .tier-desc{font-size:.75rem;color:var(--lt);margin-bottom:36px;letter-spacing:.04em}
 
 /* REVEAL ANIMATIONS */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.reveal{opacity:1;transform:none;transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.reveal.will-reveal{opacity:0;transform:translateY(28px)}
 .reveal.visible{opacity:1;transform:none}
 .reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.22s}.reveal-delay-3{transition-delay:.34s}.reveal-delay-4{transition-delay:.46s}
 
@@ -635,7 +636,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
       <div class="hotel-card">
         <div class="hotel-badge">Top-Empfehlung</div>
         <div class="hotel-img">
-          <img src="https://images.unsplash.com/photo-1519923834699-ef0b7cde4712?w=800&q=75" alt="Venice Grand Canal palace golden hour" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1491557345352-5929e343eb89?w=800&q=75" alt="Venice Grand Canal palace golden hour" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
         </div>
         <div class="hotel-body">
           <div class="hotel-stars">★★★★★</div>
@@ -839,7 +840,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 
 <!-- VENICE STRIP 3: Lagoon view at dawn -->
 <div class="venice-strip">
-  <img src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1800&q=80" alt="Venice lagoon at dawn" loading="lazy">
+  <img src="https://images.unsplash.com/photo-1556469559-b8c9cbc99f27?w=1800&q=80" alt="Venice lagoon at dawn" loading="lazy">
   <div class="venice-strip-overlay"></div>
   <div class="venice-strip-caption">
     <em>L'alba sulla laguna</em>
@@ -1267,10 +1268,18 @@ function toggleCheck(el){el.classList.toggle('done');}
 (function(){
   const els=document.querySelectorAll('.reveal');
   if(!els.length)return;
+  // Mark elements below fold as hidden before animating
+  const vh=window.innerHeight;
+  els.forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top>vh)el.classList.add('will-reveal');
+  });
   const io=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
-  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
-  els.forEach(el=>io.observe(el));
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('will-reveal');e.target.classList.add('visible');io.unobserve(e.target);}});
+  },{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+  els.forEach(el=>{if(el.classList.contains('will-reveal'))io.observe(el);});
+  // Fallback: reveal everything after 2s in case observer fails
+  setTimeout(()=>{document.querySelectorAll('.will-reveal').forEach(el=>el.classList.remove('will-reveal'));},2000);
 })();
 
 // Stagger reveal for grids
@@ -1281,14 +1290,14 @@ function toggleCheck(el){el.classList.toggle('done');}
       if(i===1)child.classList.add('reveal-delay-1');
       else if(i===2)child.classList.add('reveal-delay-2');
       else if(i===3)child.classList.add('reveal-delay-3');
+      const r=child.getBoundingClientRect();
+      if(r.top>window.innerHeight)child.classList.add('will-reveal');
     });
   });
-  const els=document.querySelectorAll('.reveal');
-  if(!els.length)return;
   const io=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
-  },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
-  els.forEach(el=>{if(!el.classList.contains('visible'))io.observe(el);});
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('will-reveal');e.target.classList.add('visible');io.unobserve(e.target);}});
+  },{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+  document.querySelectorAll('.reveal.will-reveal').forEach(el=>io.observe(el));
 })();
 
 
