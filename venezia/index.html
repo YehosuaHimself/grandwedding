@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<!-- venezia build: 2026-05-11 v3.0 — world-class refinement -->
+<!-- venezia build: 2026-05-11 v3.1 — local webp, cursor fix, viaggio hero -->
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
 <title>La Proposta — Venezia · Toni &amp; Cote</title>
 <meta name="description" content="Ein unvergesslicher Antrag in Venedig. Kuratiert von YH Grand Wedding — Destination Wedding Atelier.">
@@ -58,9 +58,19 @@ html.lenis,html.lenis body{height:auto}
 .lenis.lenis-stopped{overflow:hidden}
 .lenis.lenis-smooth iframe{pointer-events:none}
 
+/* === VIAGGIO HERO === */
+.viaggio-hero{position:relative;width:100%;height:520px;overflow:hidden;border-radius:4px;margin-bottom:64px}
+@media(max-width:768px){.viaggio-hero{height:320px;margin-bottom:40px}}
+.viaggio-hero img{width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block}
+.viaggio-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,8,5,.18) 0%,rgba(10,8,5,.0) 40%,rgba(10,8,5,.55) 100%)}
+.viaggio-hero-caption{position:absolute;bottom:36px;left:48px;right:48px;color:#fff;display:flex;flex-direction:column;gap:6px}
+.viaggio-hero-caption span{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(201,162,78,.9)}
+.viaggio-hero-caption em{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;font-style:italic;color:#fff;line-height:1.2}
+@media(max-width:768px){.viaggio-hero-caption{bottom:24px;left:24px;right:24px}.viaggio-hero-caption em{font-size:1.4rem}}
+
 /* === CURSOR === */
 @media (hover:hover) and (pointer:fine){
-  *{cursor:none!important}
+  html,body,*,*::before,*::after{cursor:none!important}
   #cd,#cr{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;will-change:transform;z-index:10000;display:block}
   #cd{width:6px;height:6px;background:var(--g);box-shadow:0 0 8px rgba(201,162,78,.6);transition:opacity .2s,transform .12s var(--ease)}
   #cr{width:40px;height:40px;border:1px solid rgba(201,162,78,.55);z-index:9999;transition:width .25s var(--ease-emph),height .25s var(--ease-emph),border-color .25s,opacity .2s,background .3s;box-shadow:0 0 16px rgba(201,162,78,.12),inset 0 0 12px rgba(201,162,78,.06)}
@@ -79,7 +89,7 @@ html.lenis,html.lenis body{height:auto}
 /* === NAV === */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:20px 56px;display:flex;align-items:center;justify-content:space-between;transition:background .5s var(--ease),backdrop-filter .5s,box-shadow .5s,padding .4s}
 nav.scrolled{background:rgba(21,17,11,.85);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);box-shadow:0 1px 0 rgba(201,162,78,.12),0 12px 40px rgba(0,0,0,.18);padding:14px 56px}
-.nav-logo{position:relative}
+.nav-logo{position:relative;text-decoration:none;display:flex;flex-direction:column;gap:2px}
 .nav-yh{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:500;letter-spacing:.2em;color:var(--g);display:block;line-height:1;text-shadow:0 0 28px rgba(201,162,78,.4)}
 .nav-gw{font-family:'Inter',sans-serif;font-size:.48rem;font-weight:600;letter-spacing:.5em;text-transform:uppercase;color:rgba(201,162,78,.7);display:block;margin-top:5px}
 .nav-dwa{font-family:'Inter',sans-serif;font-size:.4rem;font-weight:400;letter-spacing:.4em;text-transform:uppercase;color:rgba(201,162,78,.35);display:block;margin-top:3px}
@@ -432,11 +442,11 @@ footer{background:#040608;padding:64px 56px;text-align:center;border-top:1px sol
 
 <!-- NAV -->
 <nav id="nav">
-  <div class="nav-logo">
+  <a class="nav-logo" href="#" onclick="if(window.lenis){lenis.scrollTo(0,{duration:1.4});}else{window.scrollTo({top:0,behavior:'smooth'});}return false;" aria-label="Zum Seitenanfang">
     <span class="nav-yh">YH</span>
     <span class="nav-gw">Grand Wedding</span>
     <span class="nav-dwa">Destination Wedding Atelier</span>
-  </div>
+  </a>
   <ul class="nav-links">
     <li><a href="#antrag">Der Antrag</a></li>
     <li><a href="#hotels">Hotels</a></li>
@@ -469,7 +479,7 @@ footer{background:#040608;padding:64px 56px;text-align:center;border-top:1px sol
 <!-- HERO — Venice Grand Canal at golden hour -->
 <section class="hero">
   <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=2400&q=85&fit=crop&auto=format" alt="Venedig Canal Grande goldene Stunde mit Santa Maria della Salute" loading="eager" fetchpriority="high">
+    <img src="hero.webp" alt="Venedig Canal Grande goldene Stunde mit Santa Maria della Salute" loading="eager" fetchpriority="high">
   </div>
   <div class="hero-content">
     <span class="hero-eyebrow">Una città · Un momento · Per sempre</span>
@@ -541,7 +551,7 @@ footer{background:#040608;padding:64px 56px;text-align:center;border-top:1px sol
 
 <!-- STRIP 1: Venice gondola on Grand Canal -->
 <div class="venice-strip">
-  <img src="https://images.unsplash.com/photo-1534113416831-191a85019d2e?w=2000&q=85&fit=crop&auto=format" alt="Gondel auf dem Canal Grande in Venedig" loading="lazy">
+  <img src="strip1.webp" alt="Gondel auf dem Canal Grande in Venedig" loading="lazy">
   <div class="venice-strip-overlay"></div>
   <div class="venice-strip-caption">
     <em>Canal Grande al tramonto</em>
@@ -656,7 +666,7 @@ footer{background:#040608;padding:64px 56px;text-align:center;border-top:1px sol
 
 <!-- STRIP 2: Venice at dusk, quiet canal -->
 <div class="venice-strip tall">
-  <img src="https://images.unsplash.com/photo-1545158539-1709b8d5e6ee?w=2000&q=85&fit=crop&auto=format" alt="Venezianischer Kanal mit Gondel in der Abenddämmerung" loading="lazy">
+  <img src="strip2.webp" alt="Venezianischer Kanal mit Gondel in der Abenddämmerung" loading="lazy">
   <div class="venice-strip-overlay"></div>
   <div class="venice-strip-caption">
     <em>La gondola — l'anima di Venezia</em>
@@ -1374,7 +1384,7 @@ footer{background:#040608;padding:64px 56px;text-align:center;border-top:1px sol
 
 <!-- STRIP 3: Venice at dawn / morning light over lagoon -->
 <div class="venice-strip">
-  <img src="https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=2000&q=85&fit=crop&auto=format" alt="Venedig im Morgenlicht mit der Salute Kirche" loading="lazy">
+  <img src="strip3.webp" alt="Venedig im Morgenlicht mit der Salute Kirche" loading="lazy">
   <div class="venice-strip-overlay"></div>
   <div class="venice-strip-caption">
     <em>L'alba sulla laguna</em>
@@ -1385,7 +1395,17 @@ footer{background:#040608;padding:64px 56px;text-align:center;border-top:1px sol
 <!-- ITINERARY — navy background -->
 <section class="section navy-section" id="reise">
   <div class="section-inner">
-    <span class="section-tag reveal">Il Viaggio Perfetto</span>
+  <!-- Cinematic Venice canal hero — POV from gondola -->
+  <div class="viaggio-hero reveal">
+    <img src="viaggio.webp" alt="Cinematic POV from a gondola on a Venice canal — golden light on ancient palazzi" loading="lazy">
+    <div class="viaggio-hero-overlay"></div>
+    <div class="viaggio-hero-caption">
+      <span>Venezia</span>
+      <em>La città più romantica del mondo</em>
+    </div>
+  </div>
+
+      <span class="section-tag reveal">Il Viaggio Perfetto</span>
     <h2 class="section-title reveal">Der <em>perfekte Aufenthalt</em><br>für Toni &amp; Cote</h2>
     <div class="gold-line reveal reveal-delay-1"></div>
     <p class="section-lead reveal reveal-delay-2">3 Tage in Venedig — strukturiert, romantisch, unvergesslich. Der Antrag findet am zweiten Abend statt, wenn beide die Stadt bereits spüren und Cote entspannt ist.</p>
