@@ -48,6 +48,8 @@ nav.scrolled{background:rgba(26,20,16,.88);backdrop-filter:blur(18px);box-shadow
 .nav-links{display:flex;gap:32px;list-style:none}
 .nav-links a{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(201,168,76,.65);transition:color .3s}
 .nav-links a:hover{color:var(--g)}
+.nav-cta-link{color:var(--g)!important;border:1px solid rgba(201,168,76,.3);padding:8px 18px!important;letter-spacing:.25em!important;transition:all .3s var(--ease)!important}
+.nav-cta-link:hover{background:rgba(201,168,76,.1)!important;border-color:var(--g)!important}
 /* NAV BURGER */
 .nav-burger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:40px;height:40px;background:transparent;border:1px solid rgba(201,168,76,.25);padding:8px;cursor:pointer;transition:border-color .3s,background .3s;flex-shrink:0}
 .nav-burger span{display:block;width:18px;height:1px;background:var(--g);transition:transform .3s var(--ease),opacity .3s,width .3s}
@@ -222,6 +224,50 @@ nav.scrolled{background:rgba(26,20,16,.88);backdrop-filter:blur(18px);box-shadow
 .tier-line{flex:1;height:1px;background:rgba(201,168,76,.12)}
 .tier-desc{font-size:.75rem;color:var(--lt);margin-bottom:36px;letter-spacing:.04em}
 
+/* REVEAL ANIMATIONS */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.22s}.reveal-delay-3{transition-delay:.34s}.reveal-delay-4{transition-delay:.46s}
+
+/* LETTER SECTION */
+.letter-section{background:var(--bgdk);padding:80px 0;position:relative;overflow:hidden;z-index:2}
+.letter-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent)}
+.letter-section::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent)}
+.letter-inner{max-width:680px;margin:0 auto;padding:0 48px;text-align:center}
+@media(max-width:768px){.letter-inner{padding:0 28px}}
+.letter-greeting{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-style:italic;color:var(--g);margin-bottom:8px;line-height:1.2}
+.letter-date{font-size:.5rem;letter-spacing:.55em;text-transform:uppercase;color:rgba(201,168,76,.28);margin-bottom:36px;display:block}
+.letter-body{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.8vw,1.25rem);line-height:2.1;color:rgba(250,248,243,.65);font-style:italic;font-weight:300}
+.letter-body strong{color:var(--gl);font-style:normal;font-weight:400}
+.letter-sig{margin-top:36px;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.45em;text-transform:uppercase;color:rgba(201,168,76,.3)}
+.letter-rule{width:40px;height:1px;background:rgba(201,168,76,.22);margin:20px auto}
+
+/* TRUST STATS */
+.trust-section{background:var(--w);padding:56px 0;border-top:1px solid rgba(201,168,76,.08);border-bottom:1px solid rgba(201,168,76,.08);z-index:2;position:relative}
+.trust-inner{max-width:1100px;margin:0 auto;padding:0 48px}
+@media(max-width:768px){.trust-inner{padding:0 24px}}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(201,168,76,.1);margin-top:32px;border:1px solid rgba(201,168,76,.1)}
+@media(max-width:640px){.trust-grid{grid-template-columns:repeat(2,1fr)}}
+.trust-item{background:var(--w);padding:32px 20px;text-align:center}
+.trust-number{font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:var(--g);line-height:1;display:block}
+.trust-label{font-size:.48rem;letter-spacing:.45em;text-transform:uppercase;color:var(--lt);margin-top:8px;display:block;line-height:1.7}
+
+/* CONTACT SECTION */
+.contact-section{background:linear-gradient(160deg,#100d08 0%,#1f1810 50%,#100d08 100%);padding:96px 0;position:relative;overflow:hidden;z-index:2}
+.contact-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(201,168,76,.07),transparent);pointer-events:none}
+.contact-inner{max-width:700px;margin:0 auto;padding:0 48px;text-align:center}
+@media(max-width:768px){.contact-inner{padding:0 28px}}
+.contact-eyebrow{font-size:.5rem;letter-spacing:.6em;text-transform:uppercase;color:rgba(201,168,76,.38);margin-bottom:20px;display:block}
+.contact-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);color:var(--iv);font-weight:300;line-height:1.15;margin-bottom:18px}
+.contact-title em{font-style:italic;color:var(--g)}
+.contact-body{font-size:.82rem;color:rgba(250,248,243,.45);line-height:2;margin-bottom:40px}
+.contact-cta-group{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.cta-primary{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.32em;text-transform:uppercase;color:var(--bgdk);background:var(--g);padding:16px 36px;transition:all .35s var(--ease);display:inline-flex;align-items:center;gap:10px;text-decoration:none}
+.cta-primary:hover{background:var(--gl);transform:translateY(-2px);box-shadow:0 14px 48px rgba(201,168,76,.28)}
+.cta-secondary{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(201,168,76,.75);border:1px solid rgba(201,168,76,.28);padding:16px 36px;transition:all .35s var(--ease);display:inline-flex;align-items:center;gap:10px;text-decoration:none}
+.cta-secondary:hover{border-color:var(--g);color:var(--g);background:rgba(201,168,76,.06);transform:translateY(-2px)}
+.contact-note{margin-top:28px;font-size:.6rem;color:rgba(201,168,76,.2);letter-spacing:.12em}
+
 /* FOOTER */
 footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px solid rgba(201,168,76,.1)}
 .foot-logo{font-family:'Cinzel',serif;font-size:1.2rem;letter-spacing:.25em;color:rgba(201,168,76,.5);margin-bottom:12px}
@@ -335,6 +381,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
     <li><a href="#hotels">Hotels</a></li>
     <li><a href="#reise">Reiseplan</a></li>
     <li><a href="#checklist">Checkliste</a></li>
+    <li><a href="#kontakt" class="nav-cta-link">Anfragen ◆</a></li>
   </ul>
   <button class="nav-burger" id="navBurger" aria-label="Menü öffnen">
     <span></span><span></span><span></span>
@@ -361,19 +408,35 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 <section class="hero">
   <div class="hero-bg"><img src="https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=1920&q=80" alt="Venice canal at golden hour" loading="eager"></div>
   <div class="hero-content">
-    <span class="hero-label">Eine Stadt. Ein Moment. Für immer.</span>
+    <span class="hero-label">Una città. Un momento. Per sempre.</span>
     <h1 class="hero-title">La Proposta<br><em>di Venezia</em></h1>
     <p class="hero-sub">Toni &amp; Cote — Ein unvergesslicher Antrag auf dem Wasser</p>
     <div class="divider">
       <span class="divider-icon">◆</span>
     </div>
-    <p style="font-size:.78rem;letter-spacing:.18em;color:rgba(232,213,163,.5);line-height:1.85">
-      Alles, was Toni braucht, um Cote in Venedig<br>auf das schönste Ja aller Zeiten vorzubereiten.
+    <p style="font-size:.78rem;letter-spacing:.2em;color:rgba(232,213,163,.45);line-height:2">
+      Kuratiert von YH Grand Wedding —<br>für den schönsten Moment eures Lebens.
     </p>
   </div>
   <div class="scroll-hint">
     <span>Entdecken</span>
     <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- PRIVATE LETTER -->
+<section class="letter-section" id="brief">
+  <div class="letter-inner">
+    <p class="letter-date reveal">Venezia · La Proposta</p>
+    <h2 class="letter-greeting reveal reveal-delay-1">Caro Toni,</h2>
+    <div class="letter-rule reveal reveal-delay-2"></div>
+    <p class="letter-body reveal reveal-delay-2">
+      Es gibt Städte, die für den Alltag gemacht sind — und dann gibt es <strong>Venedig</strong>.<br><br>
+      Venedig wurde gebaut für Momente wie diesen. Für den Atem, den man anhält, kurz bevor man die wichtigsten Worte seines Lebens spricht. Für das Licht um 19 Uhr, das auf dem Wasser tanzt und nichts weiter braucht als einen Ring und zwei Menschen, die sich lieben.<br><br>
+      Dieses Dokument ist <strong>dein persönlicher Leitfaden</strong> — kuratiert von YH Grand Wedding, damit du keinen Gedanken an Logistik verschwenden musst. Nur an <strong>Cote</strong>.
+    </p>
+    <div class="letter-rule reveal reveal-delay-3"></div>
+    <p class="letter-sig reveal reveal-delay-3">YH Grand Wedding · Destination Wedding Atelier</p>
   </div>
 </section>
 
@@ -570,7 +633,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
       <div class="hotel-card">
         <div class="hotel-badge">Top-Empfehlung</div>
         <div class="hotel-img">
-          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=75" alt="Gritti Palace Venice" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=75" alt="Grand Canal Venice palace view" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
         </div>
         <div class="hotel-body">
           <div class="hotel-stars">★★★★★</div>
@@ -589,7 +652,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 
       <div class="hotel-card">
         <div class="hotel-img">
-          <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=75" alt="Aman Venice luxury hotel" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800&q=75" alt="Venice canal palazzo at dusk" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
         </div>
         <div class="hotel-body">
           <div class="hotel-stars">★★★★★</div>
@@ -608,7 +671,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 
       <div class="hotel-card">
         <div class="hotel-img">
-          <img src="https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?w=800&q=75" alt="Belmond Cipriani Venice" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=800&q=75" alt="Venice lagoon golden light" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
         </div>
         <div class="hotel-body">
           <div class="hotel-stars">★★★★★</div>
@@ -640,7 +703,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 
       <div class="hotel-card">
         <div class="hotel-img">
-          <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=75" alt="Hotel Danieli Venice" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=75" alt="Venice waterfront romantic view" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
         </div>
         <div class="hotel-body">
           <div class="hotel-stars">★★★★★</div>
@@ -659,7 +722,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 
       <div class="hotel-card">
         <div class="hotel-img">
-          <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=75" alt="Four Seasons Venice San Giorgio" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1590073844006-33379778ae09?w=800&q=75" alt="Venice historic garden courtyard" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
         </div>
         <div class="hotel-body">
           <div class="hotel-stars">★★★★★</div>
@@ -678,7 +741,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 
       <div class="hotel-card">
         <div class="hotel-img">
-          <img src="https://images.unsplash.com/photo-1549294413-26f195200c16?w=800&q=75" alt="Palazzo Venart Venice luxury hotel" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&q=75" alt="Venice canal at night romantic" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
         </div>
         <div class="hotel-body">
           <div class="hotel-stars">★★★★★</div>
@@ -710,7 +773,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 
       <div class="hotel-card">
         <div class="hotel-img">
-          <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=75" alt="Hotel Metropole Venice boutique" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1541614101331-1a5a3a194e92?w=800&q=75" alt="Venice canal view luxury room" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
         </div>
         <div class="hotel-body">
           <div class="hotel-stars">★★★★★</div>
@@ -729,7 +792,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 
       <div class="hotel-card">
         <div class="hotel-img">
-          <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800&q=75" alt="Ca Sagredo Hotel Venice" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=75&crop=entropy&fit=crop&h=420&w=700&fp-x=0.5&fp-y=0.3" alt="Venice Grand Canal palazzo facade" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
         </div>
         <div class="hotel-body">
           <div class="hotel-stars">★★★★★</div>
@@ -748,7 +811,7 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
 
       <div class="hotel-card">
         <div class="hotel-img">
-          <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&q=75" alt="Boutique hotel Venice canal view room" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=75" alt="Venice narrow canal morning light" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
         </div>
         <div class="hotel-body">
           <div class="hotel-stars">★★★★</div>
@@ -1047,6 +1110,54 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
   </div>
 </section>
 
+<!-- TRUST STATS -->
+<section class="trust-section">
+  <div class="trust-inner">
+    <span class="section-tag" style="text-align:center;display:block">YH Grand Wedding</span>
+    <h2 class="section-title" style="text-align:center;font-size:clamp(1.6rem,3vw,2.4rem)" class="reveal">Das Atelier hinter <em>diesem Moment</em></h2>
+    <div class="trust-grid">
+      <div class="trust-item reveal">
+        <span class="trust-number">100%</span>
+        <span class="trust-label">Maßgeschneiderte<br>Planung</span>
+      </div>
+      <div class="trust-item reveal reveal-delay-1">
+        <span class="trust-number">3</span>
+        <span class="trust-label">Kontinente ·<br>Eine Atelier-Seele</span>
+      </div>
+      <div class="trust-item reveal reveal-delay-2">
+        <span class="trust-number">∞</span>
+        <span class="trust-label">Erinnert für<br>immer</span>
+      </div>
+      <div class="trust-item reveal reveal-delay-3">
+        <span class="trust-number">1</span>
+        <span class="trust-label">Ziel: Das<br>perfekte Ja</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section class="contact-section" id="kontakt">
+  <div class="contact-inner">
+    <span class="contact-eyebrow reveal">YH Grand Wedding · Anfrage</span>
+    <h2 class="contact-title reveal reveal-delay-1">Bereit für das<br><em>schönste Ja</em> aller Zeiten?</h2>
+    <p class="contact-body reveal reveal-delay-2">
+      Unser Atelier begleitet euch von der ersten Idee bis zum letzten Champagner-Glas. Persönlich, diskret, unvergesslich. Jede Anfrage ist einzigartig — so wie dieser Moment.
+    </p>
+    <div class="contact-cta-group reveal reveal-delay-3">
+      <a href="mailto:hello@yhgrandwedding.love?subject=Anfrage%3A%20La%20Proposta%20Venezia%20%E2%80%94%20Toni%20%26%20Cote" class="cta-primary">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="3" width="12" height="9" rx="1"/><polyline points="1,3 7,8 13,3"/></svg>
+        Jetzt Anfragen
+      </a>
+      <a href="https://yhgrandwedding.love" target="_blank" class="cta-secondary">
+        Atelier entdecken
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><line x1="2" y1="10" x2="10" y2="2"/><polyline points="4,2 10,2 10,8"/></svg>
+      </a>
+    </div>
+    <p class="contact-note reveal">Persönliche Antwort innerhalb von 24 Stunden · Diskret & vertraulich</p>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="foot-brand">
@@ -1056,7 +1167,11 @@ footer{background:var(--bgdk);padding:56px 48px;text-align:center;border-top:1px
   </div>
   <div class="foot-divider"><span>◆</span></div>
   <p class="foot-names">Toni &amp; Cote</p>
-  <p style="color:rgba(201,168,76,.3);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;margin:8px 0">Venezia — La città dell'amore eterno</p>
+  <p style="color:rgba(201,168,76,.3);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;margin:8px 0 20px">Venezia — La città dell'amore eterno</p>
+  <div style="display:flex;gap:32px;justify-content:center;margin:20px 0;flex-wrap:wrap">
+    <a href="mailto:hello@yhgrandwedding.love" style="font-size:.5rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(201,168,76,.3);transition:color .3s" onmouseover="this.style.color='rgba(201,168,76,.7)'" onmouseout="this.style.color='rgba(201,168,76,.3)'">hello@yhgrandwedding.love</a>
+    <a href="https://yhgrandwedding.love" target="_blank" style="font-size:.5rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(201,168,76,.3);transition:color .3s" onmouseover="this.style.color='rgba(201,168,76,.7)'" onmouseout="this.style.color='rgba(201,168,76,.3)'">yhgrandwedding.love</a>
+  </div>
   <p class="foot-note">Erstellt mit <svg class="foot-heart" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 14S2 10 2 6a4 4 0 0 1 6-3.46A4 4 0 0 1 14 6c0 4-6 8-6 8z"/></svg> für den schönsten Moment</p>
 </footer>
 
@@ -1146,6 +1261,34 @@ function toggleCheck(el){el.classList.toggle('done');}
   });
 })();
 
-</script>
+// Reveal on scroll
+(function(){
+  const els=document.querySelectorAll('.reveal');
+  if(!els.length)return;
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+})();
+
+// Stagger reveal for grids
+(function(){
+  document.querySelectorAll('.cards-grid, .hotels-grid, .trust-grid').forEach(grid=>{
+    Array.from(grid.children).forEach((child,i)=>{
+      child.classList.add('reveal');
+      if(i===1)child.classList.add('reveal-delay-1');
+      else if(i===2)child.classList.add('reveal-delay-2');
+      else if(i===3)child.classList.add('reveal-delay-3');
+    });
+  });
+  const els=document.querySelectorAll('.reveal');
+  if(!els.length)return;
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+  },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+  els.forEach(el=>{if(!el.classList.contains('visible'))io.observe(el);});
+})();
+
+
 </body>
 </html>
